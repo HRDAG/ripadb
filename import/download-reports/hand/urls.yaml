@@ -1,0 +1,199 @@
+# RIPA Board Annual Reports download manifest
+# Source: https://oag.ca.gov/ab953/board/reports
+# URLs scraped on 2026-02-15
+#
+# Each year has a main report plus supplementary documents.
+# We download PDFs and XLSX files, organized by year.
+
+reports:
+  - year: 2026
+    files:
+      - name: ripa-board-report-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-board-report-2026.pdf
+        description: Main Report
+      - name: ripa-appendix-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-2026.pdf
+        description: Appendix
+      - name: ripa-appendix-table-2026.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-table-2026.xlsx
+        description: Appendix Tables
+      - name: ripa-exec-summary-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-exec-summary-2026.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-quick-facts-2026.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-best-practices-2026.pdf
+        description: Best Practices and Recommendations
+      - name: ripa-statutorily-mandated-tables-read-me-2026.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-read-me-2026.pdf
+        description: Statutorily Mandated Tables Read Me
+      - name: ripa-statutorily-mandated-tables-2026-counts.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2026-report-counts.xlsx
+        description: Statutorily Mandated Tables - Counts
+      - name: ripa-statutorily-mandated-tables-2026-percentages.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2026-report-percentages.xlsx
+        description: Statutorily Mandated Tables - Percentages
+
+  - year: 2025
+    files:
+      - name: ripa-board-report-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-board-report-2025.pdf
+        description: Main Report
+      - name: ripa-appendix-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-2025.pdf
+        description: Appendix
+      - name: ripa-appendix-tables-2025.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-tables-2025.xlsx
+        description: Appendix Tables
+      - name: ripa-appendix-tables-2025-table-g5.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-tables-2025-table-g5.xlsx
+        description: Appendix Tables - Table G5
+      - name: ripa-exec-summary-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-exec-summary-2025.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-quick-facts-2025.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-best-practices-2025.pdf
+        description: Best Practices and Recommendations
+      - name: ripa-statutorily-mandated-tables-read-me-2025.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-read-me-2025.pdf
+        description: Statutorily Mandated Tables Read Me
+      - name: ripa-statutorily-mandated-tables-2025-counts.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2025-report-counts.xlsx
+        description: Statutorily Mandated Tables - Counts
+      - name: ripa-statutorily-mandated-tables-2025-percentages.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2025-report-percentages.xlsx
+        description: Statutorily Mandated Tables - Percentages
+
+  - year: 2024
+    files:
+      - name: ripa-board-report-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-board-report-2024.pdf
+        description: Main Report
+      - name: ripa-appendix-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-2024.pdf
+        description: Appendix
+      - name: ripa-appendix-tables-2024.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-tables-2024.xlsx
+        description: Appendix Tables
+      - name: ripa-exec-summary-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-exec-summary-2024.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-quick-facts-2024.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-best-practices-2024.pdf
+        description: Best Practices and Recommendations
+      - name: ripa-statutorily-mandated-tables-read-me-2024.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-read-me-2024.pdf
+        description: Statutorily Mandated Tables Read Me
+      - name: ripa-statutorily-mandated-tables-2024-counts.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2024-report-counts.xlsx
+        description: Statutorily Mandated Tables - Counts
+      - name: ripa-statutorily-mandated-tables-2024-percentages.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-2024-report-percentages.xlsx
+        description: Statutorily Mandated Tables - Percentages
+
+  - year: 2023
+    files:
+      - name: ripa-board-report-2023.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-board-report-2023.pdf
+        description: Main Report
+      - name: ripa-appendix-2023.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-appendix-2023.pdf
+        description: Appendix
+      - name: ripa-exec-summary-2023.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-exec-summary-2023.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2023.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-quick-facts-2023.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2023.pdf
+        url: https://oag.ca.gov/system/files/media/2023-ripa-report-best-practices.pdf
+        description: Best Practices and Recommendations
+      - name: ripa-statutorily-mandated-tables-read-me-2023.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-read-me-2021.pdf
+        description: Statutorily Mandated Tables Read Me
+      - name: ripa-statutorily-mandated-tables-2023.xlsx
+        url: https://oag.ca.gov/system/files/media/ripa-statutorily-mandated-tables-20221212-rp.xlsx
+        description: Statutorily Mandated Tables
+
+  - year: 2022
+    files:
+      - name: ripa-board-report-2022.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-board-report-2022.pdf
+        description: Main Report
+      - name: ripa-appendices-2022.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-appendices-2022.pdf
+        description: Appendices
+      - name: ripa-exec-summary-2022.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-exec-summary-2022.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2022.pdf
+        url: https://oag.ca.gov/system/files/media/ripa-quick-facts-2022.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2022.pdf
+        url: https://oag.ca.gov/system/files/media/2022-ripa-report-best-practices.pdf
+        description: Best Practices and Recommendations
+
+  - year: 2021
+    files:
+      - name: ripa-board-report-2021.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-board-report-2021.pdf
+        description: Main Report
+      - name: ripa-appendices-2021.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-appendices-2021.pdf
+        description: Appendices
+      - name: ripa-exec-summary-2021.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-exec-summary-2021.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2021.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-quick-facts-2021-01.pdf
+        description: Quick Facts
+      - name: ripa-best-practices-2021.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-best-practices-2021.pdf
+        description: Best Practices and Recommendations
+
+  - year: 2020
+    files:
+      - name: ripa-board-report-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-board-report-2020.pdf
+        description: Main Report
+      - name: ripa-appendices-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-appendices-2020.pdf
+        description: Appendices
+      - name: ripa-exec-summary-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-exec-summary-2020.pdf
+        description: Executive Summary
+      - name: ripa-quick-facts-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-quick-facts-2020.pdf
+        description: Quick Facts
+      - name: ripa-tech-report-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-tech-report-2020.pdf
+        description: Technical Report
+      - name: ripa-best-practices-2020.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-best-practices-2020.pdf
+        description: Best Practices and Recommendations
+
+  - year: 2019
+    files:
+      - name: ripa-board-report-2019.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-board-report-2019.pdf
+        description: Main Report
+      - name: ripa-best-practices-2019.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-best-practices-2019.pdf
+        description: Best Practices and Recommendations
+
+  - year: 2018
+    files:
+      - name: ripa-board-report-2018.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-board-report-2018.pdf
+        description: Main Report
+      - name: ripa-data-dictionary-2018.pdf
+        url: https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/data-dictionary.pdf
+        description: Data Dictionary
