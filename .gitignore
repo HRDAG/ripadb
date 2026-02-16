@@ -1,0 +1,23 @@
+# Data files
+output/
+*.csv
+*.xlsx
+*.zip
+*.parquet
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# OS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+
+# uv
+uv.lock

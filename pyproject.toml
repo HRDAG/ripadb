@@ -1,0 +1,12 @@
+[project]
+name = "ripadb"
+version = "0.1.0"
+description = "Download, store, analyze, and visualize California RIPA stop data"
+requires-python = ">=3.11"
+dependencies = [
+    "requests",
+    "pyyaml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = []

@@ -1,0 +1,36 @@
+# RIPA Stop Data download manifest
+# URLs verified against data-openjustice.doj.ca.gov on 2026-02-15
+# The date segment in the URL path reflects when DOJ uploaded the file,
+# not the data year. These may change if DOJ re-uploads files.
+
+stops:
+  - year: 2018
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA-Stop-Data-2018.zip
+  - year: 2019
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA-Stop-Data-2019.zip
+  - year: 2020
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA-Stop-Data-2020.zip
+  - year: 2021
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA-Stop-Data-2021.zip
+  - year: 2022
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA-Stop-Data-2022.zip
+  - year: 2023
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA-Stop-Data-2023.zip
+  - year: 2024
+    zip_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-12/ripa-stop-data-2024.zip
+
+readmes:
+  - year: 2018
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202018%20Final.pdf
+  - year: 2019
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202019%20Final.pdf
+  - year: 2020
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202020%20Final.pdf
+  - year: 2021
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202021%20Final.pdf
+  - year: 2022
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA%20Dataset%20Read%20Me%202022.pdf
+  - year: 2023
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA%20Dataset%20Read%20Me%202023.pdf
+  - year: 2024
+    pdf_url: https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-12/ripa-stop-dataset-readme-2024.pdf
