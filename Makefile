@@ -1,6 +1,6 @@
-.PHONY: all import
+.PHONY: all individual
 
-all: import
+all: individual
 
-import:
-	$(MAKE) -C import
+individual:
+	$(MAKE) -C $@

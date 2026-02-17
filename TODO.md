@@ -1,16 +1,40 @@
 # ripadb — Project Checklist
 
-## Overall
+## Individual datasets
 
-- [x] Initialize git repo and CLAUDE.md
-- [x] Set up repo scaffolding (`.gitignore`, top-level Makefile, `pyproject.toml`)
-- [x] Import pipeline: download RIPA stop data (2018-2024)
-- [x] Import pipeline: download RIPA board annual reports (2018-2026)
-- [ ] **Clean pipeline: normalize and validate data** ← next
-- [ ] Database pipeline: Postgres schema, loading, indexes
-- [ ] API: simple query server
-- [ ] UI: web-based data explorer
-- [ ] Analysis: deeper-than-annual-report analyses
+### RIPA-statewide
+- [x] Download stop data (2018-2024, 7 years of XLSX)
+- [x] Download board annual reports (2018-2026, 55 files)
+- [ ] **Clean and normalize stop data** ← next
+- [ ] Clean/parse board report tables
+
+### RIPA jurisdiction-specific (planned)
+- [ ] RIPA-Berkeley
+- [ ] RIPA-San-Francisco
+- [ ] Others as identified / PRA responses received
+
+### Supplementary datasets (planned)
+- [ ] Census (daytime/nighttime demographics)
+- [ ] Arrests
+- [ ] Use-of-force
+- [ ] Court outcomes
+- [ ] CAD logs (via PRA)
+- [ ] Calls for service
+
+## Infrastructure
+- [x] Repo scaffolding (`.gitignore`, Makefiles, `pyproject.toml`)
+- [ ] `match/` — dataset linking
+- [ ] `database/` — Postgres schema, loading, indexes
+- [ ] `api/` — query server
+- [ ] `ui/` — web explorer
+
+## Analyses (planned)
+- [ ] Stop outcome analysis (linked arrest/UoF/court data)
+- [ ] Pretextual stop ban impact (diff-in-diff: SF, LAPD)
+- [ ] Consent search request/refusal rates (2024+ data)
+- [ ] Hierarchical modeling of disparities across jurisdictions
+- [ ] CAD comparison (underreporting detection)
+- [ ] Fraud detection (anomalous reporting patterns)
 
 ## Notes
 
