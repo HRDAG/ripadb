@@ -1,0 +1,149 @@
+{% if tab == "demographics" %}
+<div class="tab-panel">
+    <div class="year-filter">
+        <label>Year:</label>
+        <select hx-get="/agency/{{ ori }}/demographics"
+                hx-target="#tab-content"
+                hx-swap="innerHTML"
+                name="year">
+            <option value="" {% if not selected_year %}selected{% endif %}>All years</option>
+            {% for y in years %}
+            <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <h2>Race/Ethnicity</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Race/Ethnicity</th>
+                <th class="num">Person-Stops</th>
+                <th class="num">% Share</th>
+                <th>Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in race %}
+            <tr>
+                <td>{{ r.label }}</td>
+                <td class="num">{{ r.n_person_stops|commas }}</td>
+                <td class="num">{{ r.pct }}%</td>
+                <td><div class="bar" style="width: {{ r.pct }}%"></div></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Gender</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Gender</th>
+                <th class="num">Person-Stops</th>
+                <th class="num">% Share</th>
+                <th>Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in gender %}
+            <tr>
+                <td>{{ g.label }}</td>
+                <td class="num">{{ g.n_person_stops|commas }}</td>
+                <td class="num">{{ g.pct }}%</td>
+                <td><div class="bar" style="width: {{ g.pct }}%"></div></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Age Group</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Age Group</th>
+                <th class="num">Person-Stops</th>
+                <th class="num">% Share</th>
+                <th>Distribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in age %}
+            <tr>
+                <td>{{ a.label }}</td>
+                <td class="num">{{ a.n_person_stops|commas }}</td>
+                <td class="num">{{ a.pct }}%</td>
+                <td><div class="bar" style="width: {{ a.pct }}%"></div></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% elif tab == "disparities" %}
+<div class="tab-panel">
+    <div class="year-filter">
+        <label>Year:</label>
+        <select hx-get="/agency/{{ ori }}/disparities"
+                hx-target="#tab-content"
+                hx-swap="innerHTML"
+                name="year">
+            <option value="" {% if not selected_year %}selected{% endif %}>All years</option>
+            {% for y in years %}
+            <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <h2>Racial Disparities at Key Decision Points</h2>
+    <p class="note">Rates as % of person-stops. Disparity ratio = rate / White rate. Hit rate = contraband found / searches conducted.</p>
+
+    <div class="table-scroll">
+    <table class="data-table disparities">
+        <thead>
+            <tr>
+                <th>Race/Ethnicity</th>
+                <th class="num">Stops</th>
+                <th class="num">% Share</th>
+                <th class="num">Search Rate</th>
+                <th class="num">Disp.</th>
+                <th class="num">Hit Rate</th>
+                <th class="num">Disp.</th>
+                <th class="num">Force Rate</th>
+                <th class="num">Disp.</th>
+                <th class="num">Arrest Rate</th>
+                <th class="num">Disp.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in disparities %}
+            <tr {% if d.code == 7 %}class="ref-group"{% endif %}>
+                <td>{{ d.label }}</td>
+                <td class="num">{{ d.n_stops|commas }}</td>
+                <td class="num">{{ d.pct_share }}%</td>
+                <td class="num">{{ d.search_rate }}%</td>
+                <td class="num {{ 'high-disp' if d.search_disp and d.search_disp >= 2.0 else 'mod-disp' if d.search_disp and d.search_disp >= 1.5 else '' }}">
+                    {{ d.search_disp if d.search_disp is not none else '-' }}
+                </td>
+                <td class="num">{{ d.hit_rate if d.hit_rate is not none else '-' }}{% if d.hit_rate is not none %}%{% endif %}</td>
+                <td class="num">{{ d.hit_disp if d.hit_disp is not none else '-' }}</td>
+                <td class="num">{{ d.force_rate }}%</td>
+                <td class="num {{ 'high-disp' if d.force_disp and d.force_disp >= 2.0 else 'mod-disp' if d.force_disp and d.force_disp >= 1.5 else '' }}">
+                    {{ d.force_disp if d.force_disp is not none else '-' }}
+                </td>
+                <td class="num">{{ d.arrest_rate }}%</td>
+                <td class="num {{ 'high-disp' if d.arrest_disp and d.arrest_disp >= 2.0 else 'mod-disp' if d.arrest_disp and d.arrest_disp >= 1.5 else '' }}">
+                    {{ d.arrest_disp if d.arrest_disp is not none else '-' }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <div class="legend">
+        <span class="legend-item"><span class="swatch mod-disp-bg"></span> 1.5-2.0x White rate</span>
+        <span class="legend-item"><span class="swatch high-disp-bg"></span> 2.0x+ White rate</span>
+    </div>
+</div>
+{% endif %}

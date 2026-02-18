@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}RIPA Agency Explorer{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/htmx.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">RIPA Explorer</a>
+            <span class="subtitle">California Stop Data</span>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Data: <a href="https://openjustice.doj.ca.gov/data">CA DOJ OpenJustice</a> | RIPA Stop Data 2018-2024</p>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

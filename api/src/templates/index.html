@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}RIPA Agency Explorer{% endblock %}
+
+{% block content %}
+<h1>Agency Explorer</h1>
+<p class="intro">Search California law enforcement agencies and explore their RIPA stop data.</p>
+
+<div class="search-box">
+    <input type="search"
+           name="q"
+           placeholder="Search by agency name or ORI..."
+           hx-get="/search"
+           hx-trigger="input changed delay:300ms, search"
+           hx-target="#agency-results"
+           hx-indicator="#search-spinner"
+           autocomplete="off">
+    <span id="search-spinner" class="htmx-indicator">Searching...</span>
+</div>
+
+<div id="agency-results">
+    {% include "partials/agency_list.html" %}
+</div>
+{% endblock %}

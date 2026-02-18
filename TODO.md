@@ -5,7 +5,7 @@
 ### RIPA-statewide
 - [x] Download stop data (2018-2024, 7 years of XLSX)
 - [x] Download board annual reports (2018-2026, 55 files)
-- [ ] **Clean and normalize stop data** ← next
+- [x] Clean and normalize stop data (235-col union schema, 7 Parquet files, ~26.3M rows)
 - [ ] Clean/parse board report tables
 
 ### RIPA jurisdiction-specific (planned)
@@ -24,9 +24,10 @@
 ## Infrastructure
 - [x] Repo scaffolding (`.gitignore`, Makefiles, `pyproject.toml`)
 - [ ] `match/` — dataset linking
-- [ ] `database/` — Postgres schema, loading, indexes
-- [ ] `api/` — query server
-- [ ] `ui/` — web explorer
+- [ ] **`database/` — Postgres schema, loading, indexes** ← next
+- [ ] **`api/` — query server**
+- [ ] **`ui/` — agency explorer (MVP)**
+
 
 ## Analyses (planned)
 - [ ] Stop outcome analysis (linked arrest/UoF/court data)

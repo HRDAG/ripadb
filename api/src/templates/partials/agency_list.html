@@ -1,0 +1,26 @@
+{% if agencies %}
+<table class="agency-table">
+    <thead>
+        <tr>
+            <th>Agency Name</th>
+            <th>ORI</th>
+            <th>County</th>
+            <th>Years</th>
+            <th class="num">Total Stops</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in agencies %}
+        <tr class="clickable" onclick="window.location='/agency/{{ a.agency_ori }}'">
+            <td><a href="/agency/{{ a.agency_ori }}">{{ a.agency_name }}</a></td>
+            <td class="mono">{{ a.agency_ori }}</td>
+            <td>{{ a.county or '' }}</td>
+            <td>{{ a.first_year }}-{{ a.last_year }}</td>
+            <td class="num">{{ a.total_person_stops|commas }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="no-results">No agencies found.</p>
+{% endif %}

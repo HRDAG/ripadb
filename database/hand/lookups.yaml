@@ -1,0 +1,60 @@
+# Code-to-label mappings for RIPA categorical fields
+
+rae_full:
+  1: "Asian"
+  2: "Black/African American"
+  3: "Hispanic/Latino(a)"
+  4: "Middle Eastern/South Asian"
+  5: "Native American"
+  6: "Pacific Islander"
+  7: "White"
+  8: "Multiracial"
+
+g_full:
+  1: "Cisgender Man"
+  2: "Cisgender Woman"
+  3: "Transgender Man"
+  4: "Transgender Woman"
+  5: "Nonbinary Person"
+  6: "Multigender"
+
+reason_for_stop:
+  1: "Traffic violation"
+  2: "Reasonable suspicion"
+  3: "Known to be on parole/probation/PRCS/mandatory supervision"
+  4: "Knowledge of outstanding arrest warrant/wanted person"
+  5: "Investigation to determine whether student violated school policy"
+  6: "Consensual encounter resulting in a search"
+  7: "Possible conduct warranting discipline under Education Code"
+  8: "Determine whether to issue truancy-related document"
+  9: "Probable cause to arrest"        # 2024+
+  10: "Welfare & Institutions Code 5150"  # 2024+
+
+age_group:
+  1: "1-9"
+  2: "10-14"
+  3: "15-17"
+  4: "18-24"
+  5: "25-34"
+  6: "35-44"
+  7: "45-54"
+  8: "55-64"
+  9: "65+"
+
+pd_full:
+  1: "Deafness/Difficulty Hearing"
+  2: "Speech Impairment"
+  3: "Blind/Visual Impairment"
+  4: "Mental Health Condition"
+  5: "Intellectual/Developmental Disability"
+  6: "Hyperactivity Disorder"
+  7: "Other Disability"
+  8: "None"
+
+stop_duration:
+  # Ranges in minutes — raw data is an integer representing duration in minutes
+
+traffic_violation_type:
+  1: "Moving violation"
+  2: "Equipment violation"
+  3: "Non-moving violation, including registration"
