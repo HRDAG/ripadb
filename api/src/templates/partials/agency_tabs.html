@@ -87,17 +87,33 @@
         <select hx-get="/agency/{{ ori }}/disparities"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
+                hx-include="[name='stop_type']"
                 name="year">
             <option value="" {% if not selected_year %}selected{% endif %}>All years</option>
             {% for y in years %}
             <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
             {% endfor %}
         </select>
+
+        <label>Stop type:</label>
+        <select hx-get="/agency/{{ ori }}/disparities"
+                hx-target="#tab-content"
+                hx-swap="innerHTML"
+                hx-include="[name='year']"
+                name="stop_type">
+            {% for key, label in stop_types.items() %}
+            <option value="{{ key }}" {% if stop_type == key %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
     </div>
 
-    <h2>Racial Disparities at Key Decision Points</h2>
+    <h2>Racial Disparities at Key Decision Points{% if stop_type == 'equip' %} — Equipment Violations{% endif %}</h2>
+    {% if stop_type == 'equip' %}
+    <p class="note">Equipment violations (e.g. broken taillight, tinted windows) are high-discretion stops often used as a pretext for investigation. Disparities here may indicate pretextual policing patterns.</p>
+    {% endif %}
     <p class="note">Rates as % of person-stops. Disparity ratio = rate / White rate. Hit rate = contraband found / searches conducted.</p>
 
+    {% if disparities %}
     <div class="table-scroll">
     <table class="data-table disparities">
         <thead>
@@ -145,5 +161,8 @@
         <span class="legend-item"><span class="swatch mod-disp-bg"></span> 1.5-2.0x White rate</span>
         <span class="legend-item"><span class="swatch high-disp-bg"></span> 2.0x+ White rate</span>
     </div>
+    {% else %}
+    <p class="no-results">No data available for this stop type and year combination.</p>
+    {% endif %}
 </div>
 {% endif %}

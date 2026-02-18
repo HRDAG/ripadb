@@ -607,3 +607,93 @@ GROUP BY agency_ori, data_year, age_group;
 
 CREATE INDEX idx_mv_aya_agency ON mv_agency_year_age (agency_ori);
 
+-- ============================================================
+-- Materialized view: agency × year × race (equipment violations only)
+-- Equipment violations: reason_for_stop=1 (traffic) AND
+--   rfs_traffic_violation_type=2 (equipment)
+-- High-discretion stop type used as a pretextual stop indicator.
+-- ============================================================
+CREATE MATERIALIZED VIEW mv_agency_year_race_equip AS
+SELECT
+    agency_ori,
+    data_year,
+    rae_full AS race_code,
+    COUNT(*) AS n_person_stops,
+    COUNT(DISTINCT doj_record_id) AS n_stops,
+
+    SUM(CASE
+        WHEN data_year < 2024 THEN
+            GREATEST(COALESCE(ads_search_person, 0), COALESCE(ads_search_property, 0))
+        ELSE
+            GREATEST(COALESCE(nfa_search_person, 0), COALESCE(nfa_search_property, 0),
+                     COALESCE(nfa_terry_frisk, 0))
+    END) AS n_searched,
+
+    SUM(CASE
+        WHEN data_year < 2024 THEN GREATEST(
+            COALESCE(ads_handcuffed, 0), COALESCE(ads_firearm_point, 0),
+            COALESCE(ads_firearm_discharge, 0), COALESCE(ads_elect_device, 0),
+            COALESCE(ads_impact_discharge, 0), COALESCE(ads_canine_bite, 0),
+            COALESCE(ads_baton, 0), COALESCE(ads_chem_spray, 0),
+            COALESCE(ads_other_contact, 0))
+        ELSE GREATEST(
+            COALESCE(ofa_handcuffed, 0), COALESCE(ofa_firearm_point, 0),
+            COALESCE(ofa_firearm_discharge, 0), COALESCE(ofa_baton_used, 0),
+            COALESCE(ofa_chem_spray, 0), COALESCE(ofa_canine_bite, 0),
+            COALESCE(ofa_elect_device_stun, 0), COALESCE(ofa_elect_device_dart, 0),
+            COALESCE(ofa_impact_projectile_discharge, 0),
+            COALESCE(ofa_physical_compliance, 0), COALESCE(ofa_use_vehicle, 0),
+            COALESCE(ofa_removed_vehicle_phycontact, 0))
+    END) AS n_force_used,
+
+    SUM(GREATEST(COALESCE(ros_custodial_warrant, 0),
+                 COALESCE(ros_custodial_without_warrant, 0))) AS n_arrested,
+
+    SUM(GREATEST(COALESCE(ros_citation, 0),
+                 COALESCE(ros_in_field_cite_release, 0))) AS n_cited,
+
+    SUM(CASE
+        WHEN data_year < 2024 THEN COALESCE(ros_warning, 0)
+        ELSE GREATEST(COALESCE(ros_written_warning, 0),
+                      COALESCE(ros_verbal_warning, 0))
+    END) AS n_warned,
+
+    SUM(COALESCE(ros_no_action, 0)) AS n_no_action,
+
+    SUM(CASE
+        WHEN CASE
+            WHEN data_year < 2024 THEN
+                GREATEST(COALESCE(ads_search_person, 0), COALESCE(ads_search_property, 0))
+            ELSE
+                GREATEST(COALESCE(nfa_search_person, 0), COALESCE(nfa_search_property, 0),
+                         COALESCE(nfa_terry_frisk, 0))
+        END = 1
+        THEN GREATEST(
+            COALESCE(ced_firearm, 0), COALESCE(ced_ammunition, 0),
+            COALESCE(ced_weapon, 0), COALESCE(ced_drugs, 0),
+            COALESCE(ced_alcohol, 0), COALESCE(ced_money, 0),
+            COALESCE(ced_drug_paraphernalia, 0), COALESCE(ced_stolen_prop, 0),
+            COALESCE(ced_elect_device, 0), COALESCE(ced_other_contraband, 0))
+        ELSE 0
+    END) AS n_contraband_found,
+
+    SUM(CASE
+        WHEN CASE
+            WHEN data_year < 2024 THEN
+                GREATEST(COALESCE(ads_search_person, 0), COALESCE(ads_search_property, 0))
+            ELSE
+                GREATEST(COALESCE(nfa_search_person, 0), COALESCE(nfa_search_property, 0),
+                         COALESCE(nfa_terry_frisk, 0))
+        END = 1
+        THEN COALESCE(ced_none_contraband, 0)
+        ELSE 0
+    END) AS n_no_contraband
+
+FROM stops
+WHERE agency_ori IS NOT NULL AND rae_full IS NOT NULL
+  AND reason_for_stop = 1 AND rfs_traffic_violation_type = 2
+GROUP BY agency_ori, data_year, rae_full;
+
+CREATE INDEX idx_mv_ayre_agency ON mv_agency_year_race_equip (agency_ori);
+CREATE INDEX idx_mv_ayre_agency_year ON mv_agency_year_race_equip (agency_ori, data_year);
+

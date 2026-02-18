@@ -185,11 +185,25 @@ def get_agency_demographics_age(ori: str, year: int | None = None):
     ]
 
 
-def get_agency_disparities(ori: str, year: int | None = None):
+STOP_TYPE_VIEWS = {
+    "all": "mv_agency_year_race",
+    "equip": "mv_agency_year_race_equip",
+}
+
+STOP_TYPE_LABELS = {
+    "all": "All stops",
+    "equip": "Equipment violations",
+}
+
+
+def get_agency_disparities(ori: str, year: int | None = None,
+                           stop_type: str = "all"):
     """Disparity table: race × outcome rates with ratios vs White."""
+    view = STOP_TYPE_VIEWS.get(stop_type, "mv_agency_year_race")
+
     with get_conn() as conn:
         if year:
-            rows = conn.execute("""
+            rows = conn.execute(f"""
                 SELECT r.race_code, rl.label,
                        SUM(r.n_person_stops) AS n_person_stops,
                        SUM(r.n_searched) AS n_searched,
@@ -197,14 +211,14 @@ def get_agency_disparities(ori: str, year: int | None = None):
                        SUM(r.n_arrested) AS n_arrested,
                        SUM(r.n_contraband_found) AS n_contraband_found,
                        SUM(r.n_no_contraband) AS n_no_contraband
-                FROM mv_agency_year_race r
+                FROM {view} r
                 JOIN rae_labels rl ON r.race_code = rl.code
                 WHERE r.agency_ori = %s AND r.data_year = %s
                 GROUP BY r.race_code, rl.label
                 ORDER BY SUM(r.n_person_stops) DESC
             """, (ori, year)).fetchall()
         else:
-            rows = conn.execute("""
+            rows = conn.execute(f"""
                 SELECT r.race_code, rl.label,
                        SUM(r.n_person_stops) AS n_person_stops,
                        SUM(r.n_searched) AS n_searched,
@@ -212,7 +226,7 @@ def get_agency_disparities(ori: str, year: int | None = None):
                        SUM(r.n_arrested) AS n_arrested,
                        SUM(r.n_contraband_found) AS n_contraband_found,
                        SUM(r.n_no_contraband) AS n_no_contraband
-                FROM mv_agency_year_race r
+                FROM {view} r
                 JOIN rae_labels rl ON r.race_code = rl.code
                 WHERE r.agency_ori = %s
                 GROUP BY r.race_code, rl.label

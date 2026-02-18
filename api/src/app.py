@@ -74,14 +74,25 @@ async def agency_detail(request: Request, ori: str):
     })
 
 
+def _parse_year(year: str | None) -> int | None:
+    """Parse year query param — empty string or None → None."""
+    if not year:
+        return None
+    try:
+        return int(year)
+    except ValueError:
+        return None
+
+
 @app.get("/agency/{ori}/demographics", response_class=HTMLResponse)
 async def agency_demographics(
     request: Request, ori: str,
-    year: int | None = Query(default=None)
+    year: str = Query(default=""),
 ):
-    race = queries.get_agency_demographics_race(ori, year)
-    gender = queries.get_agency_demographics_gender(ori, year)
-    age = queries.get_agency_demographics_age(ori, year)
+    yr = _parse_year(year)
+    race = queries.get_agency_demographics_race(ori, yr)
+    gender = queries.get_agency_demographics_gender(ori, yr)
+    age = queries.get_agency_demographics_age(ori, yr)
     years = queries.get_agency_years(ori)
 
     return templates.TemplateResponse("partials/agency_tabs.html", {
@@ -91,7 +102,7 @@ async def agency_demographics(
         "gender": gender,
         "age": age,
         "years": years,
-        "selected_year": year,
+        "selected_year": yr,
         "ori": ori,
     })
 
@@ -99,9 +110,13 @@ async def agency_demographics(
 @app.get("/agency/{ori}/disparities", response_class=HTMLResponse)
 async def agency_disparities(
     request: Request, ori: str,
-    year: int | None = Query(default=None)
+    year: str = Query(default=""),
+    stop_type: str = Query(default="all"),
 ):
-    disparities = queries.get_agency_disparities(ori, year)
+    yr = _parse_year(year)
+    if stop_type not in queries.STOP_TYPE_VIEWS:
+        stop_type = "all"
+    disparities = queries.get_agency_disparities(ori, yr, stop_type)
     years = queries.get_agency_years(ori)
 
     return templates.TemplateResponse("partials/agency_tabs.html", {
@@ -109,7 +124,9 @@ async def agency_disparities(
         "tab": "disparities",
         "disparities": disparities,
         "years": years,
-        "selected_year": year,
+        "selected_year": yr,
+        "stop_type": stop_type,
+        "stop_types": queries.STOP_TYPE_LABELS,
         "ori": ori,
     })
 
