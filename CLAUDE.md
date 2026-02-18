@@ -128,6 +128,104 @@ demographics (https://sfstandard.com/2023/09/13/san-francisco-police-officer-mis
 and in Connecticut officers recorded "ghost" stops of White drivers. Develop
 statistical methods to detect such anomalies.
 
+## RIPA statewide data schema
+
+The schema evolved significantly across years. Each row is a person-stop
+(one DOJ_RECORD_ID can have multiple PERSON_NUMBERs if multiple people were
+involved in a single stop). Key structural differences by era:
+
+### Schema eras
+
+**2018-2023 (columns A-EL, ~142 columns)**
+- 2018: only 6 months (Jul-Dec), 8 agencies (wave 1: 1000+ officers)
+- 2019: wave 2 added (667+ officers)
+- 2020: same agencies as 2019
+- 2021: wave 3 added (334+ officers)
+- 2022-2023: all agencies reporting (wave 4: 1+ officers joined by 2022)
+- Gender: G_MALE, G_FEMALE, G_TRANSGENDER_MAN, G_TRANSGENDER_WOMAN,
+  G_GENDER_NONCONFORMING, G_MULTIGENDER; G_FULL values: 1-5
+- Sexual orientation: single LGBT field (0/1)
+- Actions taken: ADS_* prefix (combined force and non-force actions)
+- REASON_FOR_STOP: values 1-8 only
+- Result of stop: ROS_WARNING (combined verbal+written)
+- No type-of-stop fields (TOS_VEHICULAR, etc.)
+- No PERSON_UNHOUSED, PASSENGER_IN_VEHICLE, INSIDE_RESIDENCE,
+  WELFARE_WELLNESS_CHECK, NON_REPORTING_AGENCY
+- No "Reason Given" (RFS_RG_*) or "Probable Cause" (RFS_PC_*) columns
+- Disability multi: PD_DISAB_MULTI in 2018-2020 (values: 1/2/Blank),
+  PD_MULTI in 2021-2023 (values: 0/1/2)
+- AGE_GROUP bins: 2018-2022 use (1)1-9...(9)65+; 2023 uses different bins
+  with 10 groups: (1)1-7, (2)8-11, (3)12-14, (4)15-17, (5)18-24...(10)65+
+
+**2024 (columns A-GT, ~202 columns) — major schema overhaul**
+- Actions split: NFA_* (non-force) + OFA_* (force), many new subcategories
+- Added: NON_REPORTING_AGENCY, PERSON_UNHOUSED, PASSENGER_IN_VEHICLE,
+  INSIDE_RESIDENCE, WELFARE_WELLNESS_CHECK
+- Added: TOS_VEHICULAR, TOS_BICYCLE, TOS_PEDESTRIAN, CALL_FOR_SERVICE
+- Added: RFS_PC_* (Probable Cause) and RFS_RG_* (Reason Given) column groups
+- Gender renamed: G_CISGENDER_MAN, G_CISGENDER_WOMAN, G_NONBINARY_PERSON
+- Sexual orientation split: SOR_LGB, SOR_STRAIGHT (replacing single LGBT)
+- Race renamed: RAE_HISPANIC_LATINEX (was RAE_HISPANIC_LATINO)
+- Location renamed: LOC_CLOSEST_CITY (was CLOSEST_CITY)
+- Result split: ROS_WRITTEN_WARNING, ROS_VERBAL_WARNING (separate)
+- REASON_FOR_STOP expanded: values 1-10 (added 9=probable cause to arrest,
+  10=W&I Code 5150)
+- Disability multi: PD_MULTI (values: 0/1/2)
+- New consent fields: NFA_SEARCH_PERS_CONSENT, NFA_SEARCH_PROP_CONSENT,
+  CTP_VERBAL, CTP_WRITTEN, CTP_IMPLIED
+- AGE_GROUP field added
+
+### Common fields across all years
+- DOJ_RECORD_ID, PERSON_NUMBER (composite key for a person-stop)
+- AGENCY_ORI, AGENCY_NAME
+- TIME_OF_STOP, DATE_OF_STOP, STOP_DURATION
+- LOC_CLOSEST_CITY (called CLOSEST_CITY in 2018-2023)
+- SCHOOL_CODE, SCHOOL_NAME, STOP_STUDENT, K12_SCHOOL_GROUNDS
+- RAE_FULL + individual race flags (RAE_ASIAN through RAE_WHITE, RAE_MULTIRACIAL)
+- G_FULL + individual gender flags
+- AGE, LIMITED_ENGLISH_FLUENCY
+- PD_FULL + individual disability flags
+- REASON_FOR_STOP + reason subcategory fields
+- Basis for search (BFS_*), contraband/evidence (CED_*), property seizure
+  basis (BPS_*), type of property seized (TPS_*)
+- Result of stop (ROS_*) fields
+
+### File naming patterns
+- 2018-2019: `RIPA Stop Data _ {County} {Year}.xlsx` (note space-underscore-space)
+- 2020-2021: same pattern
+- 2022: `RIPA Stop Data _ {County} {Year} final.xlsx`
+- 2023: `RIPA Stop Data_{County} {Year}_Final.xlsx` (underscore, no spaces around it)
+- 2024: `RIPA Stop Data_{County} {Year}_final.xlsx` (lowercase "final")
+- Quarterly files: `...{County} {Year} Q{1-4}...`
+
+### Data notes
+- CJIS codes in RIPA do NOT have leading zeros (e.g. "3" not "00003")
+- Data is per-county: file contains all agencies with ORI in that county
+- CHP data is separate from county files due to statewide jurisdiction
+- ~1% of records have known errors that passed validation (per README)
+- 2018 had 28,148 cases of "consensual encounter resulting in search" with
+  no search indicated (likely a misunderstanding of the form by officers)
+
+## Implementation status
+
+### Completed
+- `individual/RIPA-statewide/download-stops/`: downloads 7 years (2018-2024)
+  of RIPA stop data ZIPs, extracts XLSX files to `output/data/{year}/`
+- `individual/RIPA-statewide/download-reports/`: downloads 55 board report
+  files (2018-2026) to `output/{year}/`
+- `individual/RIPA-statewide/clean/`: normalizes XLSX files into Parquet with
+  a common 235-column union schema across all years. Outputs one Parquet file
+  per year to `output/{year}.parquet`. Handles canonical column renames
+  (e.g. G_MALE→G_CISGENDER_MAN, LGBT→SOR_LGB), derives SOR_STRAIGHT from
+  SOR_LGB for 2018-2023, derives consistent AGE_GROUP from AGE, and remaps
+  PD_DISAB_MULTI→PD_MULTI for 2018-2020. Schema config in `hand/schema.yaml`.
+  Total: ~26.3M person-stop rows across 7 years.
+- All scripts are idempotent; dependencies managed via `pyproject.toml` + `uv`
+
+### Next step: `database/`
+- Design Postgres schema to load the cleaned Parquet files
+- Create loading scripts and indexes for efficient querying
+
 ## Tech stack
 
 - **Language**: Python (data processing, API), JavaScript/TypeScript (UI)

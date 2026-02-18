@@ -1,0 +1,332 @@
+# RIPA statewide stop data — target schema definition
+#
+# The target schema is the UNION of all columns across all years (2018-2024).
+# Columns that don't exist for a given year are filled with NULL.
+# Renamed columns are mapped to their canonical (2024) name.
+#
+# Schema eras:
+#   2018-2023: 142 columns, ADS_* actions, G_MALE/G_FEMALE, LGBT
+#   2024:      202 columns, NFA_*/OFA_* actions, G_CISGENDER_MAN/WOMAN, SOR_LGB/SOR_STRAIGHT
+
+# Columns that changed names between eras.
+# old_name -> canonical_name (using 2024 names where possible)
+renames:
+  CLOSEST_CITY: LOC_CLOSEST_CITY
+  G_MALE: G_CISGENDER_MAN
+  G_FEMALE: G_CISGENDER_WOMAN
+  G_GENDER_NONCONFORMING: G_NONBINARY_PERSON
+  RAE_HISPANIC_LATINO: RAE_HISPANIC_LATINEX
+  LGBT: SOR_LGB
+  PD_DISAB_MULTI: PD_MULTI  # 2018-2020 only; values: Blank->0, 1->1, 2->2
+
+# Columns to derive from existing data
+derive:
+  # For 2018-2023: SOR_STRAIGHT = 1 - SOR_LGB (where SOR_LGB is not null)
+  SOR_STRAIGHT:
+    from: SOR_LGB
+    formula: "1 - SOR_LGB"
+    years: [2018, 2019, 2020, 2021, 2022, 2023]
+
+# AGE_GROUP bins differ across years. Derive a consistent one from AGE.
+# 2018-2022, 2024: (1)1-9 (2)10-14 (3)15-17 (4)18-24 (5)25-34 (6)35-44 (7)45-54 (8)55-64 (9)65+
+# 2023:            (1)1-7 (2)8-11 (3)12-14 (4)15-17 (5)18-24 (6)25-34 (7)35-44 (8)45-54 (9)55-64 (10)65+
+age_group_bins:
+  # Consistent bins derived from AGE for all years (using 2024 convention)
+  edges: [0, 10, 15, 18, 25, 35, 45, 55, 65, 999]
+  # resulting groups: 1-9, 10-14, 15-17, 18-24, 25-34, 35-44, 45-54, 55-64, 65+
+  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Metadata columns added by clean step
+metadata:
+  - data_year      # int16, from directory name
+  - county         # str, parsed from filename
+  - quarter        # int8 nullable, parsed from filename (Q1-Q4) or null
+  - source_file    # str, original XLSX filename
+
+# Target column order. This is the full union schema.
+# All Parquet files will have these columns in this order.
+columns:
+  # === Metadata (added by clean) ===
+  - data_year
+  - county
+  - quarter
+  - source_file
+
+  # === Identifiers ===
+  - DOJ_RECORD_ID
+  - PERSON_NUMBER
+  - AGENCY_ORI
+  - AGENCY_NAME
+  - NON_REPORTING_AGENCY          # 2024 only
+
+  # === Stop context ===
+  - TIME_OF_STOP
+  - DATE_OF_STOP
+  - STOP_DURATION
+  - LOC_CLOSEST_CITY              # canonical name (was CLOSEST_CITY)
+
+  # === School ===
+  - SCHOOL_CODE
+  - SCHOOL_NAME
+  - STOP_STUDENT
+  - K12_SCHOOL_GROUNDS
+
+  # === Race/ethnicity ===
+  - RAE_FULL
+  - RAE_ASIAN
+  - RAE_BLACK_AFRICAN_AMERICAN
+  - RAE_HISPANIC_LATINEX          # canonical name (was RAE_HISPANIC_LATINO)
+  - RAE_MIDDLE_EASTERN_SOUTH_ASIAN
+  - RAE_NATIVE_AMERICAN
+  - RAE_PACIFIC_ISLANDER
+  - RAE_WHITE
+  - RAE_MULTIRACIAL
+
+  # === Gender ===
+  - G_FULL
+  - G_CISGENDER_MAN               # canonical name (was G_MALE)
+  - G_CISGENDER_WOMAN             # canonical name (was G_FEMALE)
+  - G_TRANSGENDER_MAN
+  - G_TRANSGENDER_WOMAN
+  - G_NONBINARY_PERSON            # canonical name (was G_GENDER_NONCONFORMING)
+  - G_MULTIGENDER
+
+  # === Sexual orientation ===
+  - SOR_LGB                       # canonical name (was LGBT)
+  - SOR_STRAIGHT                  # 2024 native; 2018-2023 derived from SOR_LGB
+
+  # === Age ===
+  - AGE
+  - AGE_GROUP                     # derived consistently from AGE for all years
+  - age_group_orig                # original AGE_GROUP value from source data
+
+  # === Other demographics ===
+  - LIMITED_ENGLISH_FLUENCY
+  - PD_FULL
+  - PD_DEAFNESS_HEARING
+  - PD_SPEECH_IMPAIR
+  - PD_BLIND
+  - PD_MENTAL_HEALTH
+  - PD_DEVEL_DISAB
+  - PD_HYPERACTIVITY_DISABILITY
+  - PD_OTHER
+  - PD_NONE_DISABILITY
+  - PD_MULTI                      # canonical name (was PD_DISAB_MULTI in 2018-2020)
+
+  # === Stop circumstances (2024 only) ===
+  - PERSON_UNHOUSED
+  - PASSENGER_IN_VEHICLE
+  - INSIDE_RESIDENCE
+  - WELFARE_WELLNESS_CHECK
+  - TOS_VEHICULAR
+  - TOS_BICYCLE
+  - TOS_PEDESTRIAN
+
+  # === Stop reason ===
+  - CALL_FOR_SERVICE
+  - REASON_FOR_STOP
+  - RFS_TRAFFIC_VIOLATION_TYPE
+  - RFS_TRAFFIC_VIOLATION_CODE
+
+  # === Reasonable suspicion subcategories ===
+  - RFS_RS_OFF_WITNESS
+  - RFS_RS_MATCH_SUSPECT
+  - RFS_RS_WITNESS_ID
+  - RFS_RS_CARRY_SUS_OBJECT
+  - RFS_RS_ACTIONS_INDICATIVE
+  - RFS_RS_SUSPECT_LOOK
+  - RFS_RS_DRUG_TRANS
+  - RFS_RS_VIOLENT_CRIME
+  - RFS_RS_REASON_SUSP
+  - RFS_RS_MATCH_VEHICLE          # 2024 only
+  - RFS_RS_CODE
+
+  # === Education code ===
+  - RFS_EC_DISCIPLINE_CODE
+  - RFS_EC_DISCIPLINE
+
+  # === Probable cause subcategories (2024 only) ===
+  - RFS_PC_OFF_WITNESS
+  - RFS_PC_MATCH_SUSPECT
+  - RFS_PC_WITNESS_ID
+  - RFS_PC_CARRY_SUS_OBJECT
+  - RFS_PC_ACTIONS_INDICATIVE
+  - RFS_PC_SUSPECT_LOOK
+  - RFS_PC_DRUG_TRANS
+  - RFS_PC_VIOLENT_CRIME
+  - RFS_PC_REASON_SUSP
+  - RFS_PC_MATCH_VEHICLE
+  - RFS_PC_CODE
+
+  # === Reason given subcategories (2024 only) ===
+  - RFS_RG_TRAFFIC_MOVING
+  - RFS_RG_TRAFFIC_EQUIPMENT
+  - RFS_RG_TRAFFIC_NON_MOVING
+  - RFS_RG_OFF_WITNESS
+  - RFS_RG_MATCH_SUSPECT
+  - RFS_RG_MATCH_VEHICLE
+  - RFS_RG_WITNESS_ID
+  - RFS_RG_CARRY_SUS_OBJECT
+  - RFS_RG_ACTIONS_INDICATIVE
+  - RFS_RG_SUSPECT_LOOK
+  - RFS_RG_DRUG_TRANS
+  - RFS_RG_VIOLENT_CRIME
+  - RFS_RG_REASON_SUSP
+  - RFS_RG_PROBABLE_CAUSE
+  - RFS_RG_WELFARE_AND_INST
+  - RFS_RG_KNOWN_PAROLE
+  - RFS_RG_OUTSTANDING_WARRANT
+  - RFS_RG_TRUANT
+  - RFS_RG_CONSENSUAL_SEARCH
+  - RFS_RG_DISCIPLINE
+  - RFS_RG_SCHOOL_POLICY
+  - RFS_RG_NOT_COMMUNICATED
+
+  # === Actions: combined ADS_* (2018-2023 only) ===
+  - ADS_REMOVED_VEHICLE_ORDER
+  - ADS_REMOVED_VEHICLE_PHYCONTACT
+  - ADS_SOBRIETY_TEST
+  - ADS_CURB_DETENT
+  - ADS_HANDCUFFED
+  - ADS_PATCAR_DETENT
+  - ADS_CANINE_SEARCH
+  - ADS_FIREARM_POINT
+  - ADS_FIREARM_DISCHARGE
+  - ADS_ELECT_DEVICE
+  - ADS_IMPACT_DISCHARGE
+  - ADS_CANINE_BITE
+  - ADS_BATON
+  - ADS_CHEM_SPRAY
+  - ADS_OTHER_CONTACT
+  - ADS_PHOTO
+  - ADS_ASKED_SEARCH_PER
+  - ADS_SEARCH_PERSON
+  - ADS_ASKED_SEARCH_PROP
+  - ADS_SEARCH_PROPERTY
+  - ADS_PROP_SEIZE
+  - ADS_VEHICLE_IMPOUND
+  - ADS_WRITTEN_STATEMENT
+  - ADS_NO_ACTIONS
+  - ADS_SEARCH_PERS_CONSEN
+  - ADS_SEARCH_PROP_CONSEN
+
+  # === Actions: non-force NFA_* (2024 only) ===
+  - NFA_WRITTEN_STATEMENT
+  - NFA_ASKED_SEARCH_PER
+  - NFA_ASKED_SEARCH_PROP
+  - NFA_ASKED_ID_PASSENGER
+  - NFA_ASKED_PAROLE
+  - NFA_CURB_DETENT
+  - NFA_SOBRIETY_TEST
+  - NFA_PATCAR_DETENT
+  - NFA_CANINE_SEARCH
+  - NFA_PHOTO
+  - NFA_REMOVED_VEHICLE_ORDER
+  - NFA_PROP_SEIZE
+  - NFA_RAN_NAME_PASSENGER
+  - NFA_SEARCH_PERSON
+  - NFA_SEARCH_PROPERTY
+  - NFA_TERRY_FRISK
+  - NFA_VEHICLE_IMPOUND
+  - NFA_NONE
+  - NFA_SEARCH_PERS_CONSENT
+  - NFA_SEARCH_PROP_CONSENT
+
+  # === Actions: force OFA_* (2024 only) ===
+  - OFA_HANDCUFFED
+  - OFA_BATON_DRAWN
+  - OFA_BATON_USED
+  - OFA_CHEM_SPRAY
+  - OFA_ELECT_DEVICE_POINT
+  - OFA_ELECT_DEVICE_STUN
+  - OFA_ELECT_DEVICE_DART
+  - OFA_FIREARM_UNHOLSTERED
+  - OFA_FIREARM_POINT
+  - OFA_FIREARM_DISCHARGE
+  - OFA_IMPACT_PROJECTILE_POINT
+  - OFA_IMPACT_PROJECTILE_DISCHARGE
+  - OFA_CANINE_COMPLIANCE
+  - OFA_CANINE_BITE
+  - OFA_REMOVED_VEHICLE_PHYCONTACT
+  - OFA_PHYSICAL_COMPLIANCE
+  - OFA_USE_VEHICLE
+  - OFA_NONE
+
+  # === Basis for search ===
+  - BFS_CONSENT_GIVEN
+  - BFS_OFFICER_SAFETY
+  - BFS_SEARCH_WARRANT
+  - BFS_PAROLE
+  - BFS_SUSPECT_WEAPON
+  - BFS_VISIBLE_CONTRABAND
+  - BFS_ODOR_CONTRABAND
+  - BFS_CANINE_DETECT
+  - BFS_EVIDENCE
+  - BFS_INCIDENT
+  - BFS_EXIGENT_CIRCUM
+  - BFS_VEHICLE_INVENT
+  - BFS_SCHOOL_POLICY
+
+  # === Consent type (2024 only) ===
+  - CTP_VERBAL
+  - CTP_WRITTEN
+  - CTP_IMPLIED
+
+  # === Contraband/evidence discovered ===
+  - CED_NONE_CONTRABAND
+  - CED_FIREARM
+  - CED_AMMUNITION
+  - CED_WEAPON
+  - CED_DRUGS
+  - CED_ALCOHOL
+  - CED_MONEY
+  - CED_DRUG_PARAPHERNALIA
+  - CED_STOLEN_PROP
+  - CED_ELECT_DEVICE
+  - CED_OTHER_CONTRABAND
+
+  # === Basis for property seizure ===
+  - BPS_SAFEKEEPING
+  - BPS_CONTRABAND
+  - BPS_EVIDENCE
+  - BPS_IMPOUND_VEHICLE
+  - BPS_ABANDON_PROP
+  - BPS_VIOLATE_SCHOOL
+
+  # === Type of property seized ===
+  - TPS_FIREARM
+  - TPS_AMMUNITION
+  - TPS_WEAPON
+  - TPS_DRUGS
+  - TPS_ALCOHOL
+  - TPS_MONEY
+  - TPS_DRUG_PARAPHERNALIA
+  - TPS_STOLEN_PROP
+  - TPS_CELLPHONE
+  - TPS_VEHICLE
+  - TPS_CONTRABAND
+
+  # === Result of stop ===
+  - ROS_NO_ACTION
+  - ROS_WARNING                   # 2018-2023 only (combined verbal+written)
+  - ROS_WRITTEN_WARNING           # 2024 only
+  - ROS_VERBAL_WARNING            # 2024 only
+  - ROS_CITATION
+  - ROS_IN_FIELD_CITE_RELEASE
+  - ROS_CUSTODIAL_WARRANT
+  - ROS_CUSTODIAL_WITHOUT_WARRANT
+  - ROS_FIELD_INTERVIEW_CARD
+  - ROS_NONCRIMINAL_TRANSPORT
+  - ROS_CONTACT_LEGAL_GUARDIAN
+  - ROS_PSYCH_HOLD
+  - ROS_US_HOMELAND
+  - ROS_REFERRAL_SCHOOL_ADMIN
+  - ROS_REFERRAL_SCHOOL_COUNSELOR
+
+  # === Result of stop: CJIS codes ===
+  - ROS_WARNING_CDS               # 2018-2023 only
+  - ROS_VERBAL_WARNING_CDS        # 2024 only
+  - ROS_WRITTEN_WARNING_CDS       # 2024 only
+  - ROS_CITATION_CDS
+  - ROS_IN_FIELD_CITE_RELEASE_CDS
+  - ROS_CUSTODIAL_WOUT_WARRANT_CDS
