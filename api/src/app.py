@@ -73,7 +73,18 @@ async def agency_detail(request: Request, ori: str):
     return templates.TemplateResponse("agency.html", {
         "request": request,
         "agency": agency,
+        "ori": ori,
         "years": years,
+        "stops_by_year": stops_by_year,
+    })
+
+
+@app.get("/agency/{ori}/overview", response_class=HTMLResponse)
+async def agency_overview(request: Request, ori: str):
+    stops_by_year = queries.get_agency_stops_by_year(ori)
+    return templates.TemplateResponse("partials/agency_overview.html", {
+        "request": request,
+        "ori": ori,
         "stops_by_year": stops_by_year,
     })
 

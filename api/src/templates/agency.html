@@ -22,7 +22,11 @@
 </div>
 
 <div class="tabs">
-    <button class="tab active" onclick="showTab(this, 'overview')">Overview</button>
+    <button class="tab active"
+            hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/overview"
+            hx-target="#tab-content"
+            hx-swap="innerHTML"
+            onclick="showTab(this)">Overview</button>
     <button class="tab"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/demographics"
             hx-target="#tab-content"
@@ -36,68 +40,15 @@
 </div>
 
 <div id="tab-content">
-    <!-- Overview tab (default) -->
-    <div class="tab-panel">
-        <h2>Stops per Year</h2>
-        <div class="chart-container">
-            <canvas id="stopsChart"></canvas>
-        </div>
-
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Year</th>
-                    <th class="num">Person-Stops</th>
-                    <th class="num">Unique Stops</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in stops_by_year %}
-                <tr>
-                    <td>{{ s.year }}</td>
-                    <td class="num">{{ s.n_person_stops|commas }}</td>
-                    <td class="num">{{ s.n_stops|commas }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {% include "partials/agency_overview.html" %}
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-function showTab(btn, tabName) {
+function showTab(btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
 }
-
-// Stops chart
-fetch('{{ root_path }}/api/agency/{{ agency.agency_ori }}/chart-data')
-    .then(r => r.json())
-    .then(data => {
-        const ctx = document.getElementById('stopsChart');
-        if (!ctx) return;
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: 'Person-Stops',
-                    data: data.person_stops,
-                    backgroundColor: '#4a7c9b'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, ticks: {
-                        callback: v => v.toLocaleString()
-                    }}
-                }
-            }
-        });
-    });
 </script>
 {% endblock %}
