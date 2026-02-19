@@ -23,10 +23,10 @@
 
 ## Infrastructure
 - [x] Repo scaffolding (`.gitignore`, Makefiles, `pyproject.toml`)
+- [x] `database/` — Postgres schema, loading, materialized views (26.3M rows, 555 agencies, 4 mat views)
+- [x] `api/` — FastAPI + htmx agency explorer (search, demographics, disparities, equipment violations filter)
+- [ ] Deploy to droplet (pg_dump/restore, systemd + nginx)
 - [ ] `match/` — dataset linking
-- [ ] **`database/` — Postgres schema, loading, indexes** ← next
-- [ ] **`api/` — query server**
-- [ ] **`ui/` — agency explorer (MVP)**
 
 
 ## Analyses (planned)

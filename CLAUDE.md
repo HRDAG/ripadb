@@ -76,11 +76,32 @@ individual/              # per-dataset import and cleaning
 ├── use-of-force/        # (planned) UoF records
 ├── court/               # (planned) court outcome data
 └── CAD/                 # (planned) CAD logs via PRA
-match/                   # linking datasets together
-database/                # Postgres schema, loading, indexes
-api/                     # API server for querying
-ui/                      # web UI for exploring and visualizing
-analysis/                # deeper analyses and writeups
+database/                # Load cleaned Parquet → Postgres, materialized views
+├── Makefile             # `make load`, `make refresh`, `make clean`
+├── src/
+│   ├── schema.sql       # DDL: tables, indexes, materialized views
+│   └── load.py          # Parquet → Postgres via polars + psycopg COPY
+└── hand/
+    └── lookups.yaml     # Code→label maps (RAE_FULL, G_FULL, etc.)
+api/                     # FastAPI app (API + htmx UI) — agency explorer
+├── Makefile             # `make run` starts uvicorn dev server on :8000
+├── src/
+│   ├── app.py           # FastAPI routes + startup
+│   ├── db.py            # psycopg connection pool
+│   ├── queries.py       # SQL queries for agency explorer
+│   └── templates/       # Jinja2 templates
+│       ├── base.html    # Layout (htmx + Chart.js includes)
+│       ├── index.html   # Agency search/list page
+│       ├── agency.html  # Agency detail page (overview tab + chart)
+│       └── partials/    # htmx fragments
+│           ├── agency_list.html  # Search results table
+│           └── agency_tabs.html  # Demographics + disparities tabs
+└── static/
+    ├── style.css
+    ├── htmx.min.js      # Vendored htmx 2.0.4
+    └── chart.umd.min.js # Vendored Chart.js 4.4.7
+match/                   # (planned) linking datasets together
+analysis/                # (planned) deeper analyses and writeups
 ```
 
 The `individual/` directory uses a `{dataset}/` subdirectory for each data
@@ -220,17 +241,47 @@ involved in a single stop). Key structural differences by era:
   SOR_LGB for 2018-2023, derives consistent AGE_GROUP from AGE, and remaps
   PD_DISAB_MULTI→PD_MULTI for 2018-2020. Schema config in `hand/schema.yaml`.
   Total: ~26.3M person-stop rows across 7 years.
+- `database/`: Loads all 7 Parquet files into Postgres (`ripadb` database).
+  `stops` table with all 235 columns (lowercased), `agencies` dimension table
+  (555 agencies), lookup tables for code→label mappings, and 4 materialized
+  views for pre-aggregated disparity analysis:
+  - `mv_agency_year_race` (12,273 rows) — all stops by agency × year × race
+  - `mv_agency_year_race_equip` (10,313 rows) — equipment violations only
+  - `mv_agency_year_gender` (6,892 rows) — by agency × year × gender
+  - `mv_agency_year_age` (13,735 rows) — by agency × year × age group
+  Materialized views harmonize era-split columns (ADS_* vs NFA_*/OFA_*,
+  ROS_WARNING vs ROS_WRITTEN/VERBAL_WARNING, etc.). Run `make -C database`
+  to load, `make -C database refresh` to refresh views.
+- `api/`: FastAPI + htmx agency explorer web app. Serves HTML with htmx for
+  interactivity and Chart.js for charts. Features:
+  - Agency search with live filtering (debounced htmx)
+  - Agency detail page: stops-per-year bar chart, year-over-year table
+  - Demographics tab: race, gender, age breakdowns with year filter
+  - Disparities tab: search/force/arrest/hit rates by race with disparity
+    ratios vs White as reference group, color-coded (1.5x, 2x thresholds)
+  - Stop-type filter on disparities: "All stops" or "Equipment violations"
+    (high-discretion pretextual stop indicator)
+  Run `make -C api run` to start on http://localhost:8000
 - All scripts are idempotent; dependencies managed via `pyproject.toml` + `uv`
 
-### Next step: `database/`
-- Design Postgres schema to load the cleaned Parquet files
-- Create loading scripts and indexes for efficient querying
+### Database connection
+Postgres via Unix socket (peer auth). Database: `ripadb`. Override with
+`DATABASE_URL` env var (e.g. `DATABASE_URL=postgresql://user:pass@host/ripadb`
+for remote deployment). Default: `dbname=ripadb` (libpq conninfo format).
+
+### Next steps
+- Deploy to droplet (pg_dump/restore, systemd + nginx)
+- Additional stop-type filters (moving violations, reasonable suspicion, etc.)
+- Jurisdiction-specific RIPA data imports (Berkeley, San Francisco)
+- Census data for benchmark comparisons
 
 ## Tech stack
 
-- **Language**: Python (data processing, API), JavaScript/TypeScript (UI)
-- **Database**: PostgreSQL
-- **Build**: Make (HRDAG-style Makefiles)
+- **Language**: Python (data processing, API)
+- **Database**: PostgreSQL (psycopg 3, psycopg-pool)
+- **Web**: FastAPI + Jinja2 + htmx (server-rendered HTML with dynamic updates)
+- **Charts**: Chart.js (vendored UMD bundle)
+- **Build**: Make (HRDAG-style Makefiles), uv (Python deps)
 - **Data formats**: XLSX (raw from DOJ), Parquet (intermediate), Postgres (final)
 
 ## Development conventions
