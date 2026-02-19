@@ -1,5 +1,6 @@
 """FastAPI application for the RIPA agency explorer."""
 
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -14,6 +15,8 @@ APP_DIR = Path(__file__).parent.parent
 TEMPLATES_DIR = APP_DIR / "src" / "templates"
 STATIC_DIR = APP_DIR / "static"
 
+ROOT_PATH = os.environ.get("ROOT_PATH", "").rstrip("/")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,9 +25,10 @@ async def lifespan(app: FastAPI):
     db.close_pool()
 
 
-app = FastAPI(title="RIPA Agency Explorer", lifespan=lifespan)
+app = FastAPI(title="RIPA Agency Explorer", root_path=ROOT_PATH, lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
+templates.env.globals["root_path"] = ROOT_PATH
 
 
 # -- Jinja2 filters --

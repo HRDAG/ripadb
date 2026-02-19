@@ -3,12 +3,12 @@
 {% block title %}{{ agency.agency_name }} - RIPA Explorer{% endblock %}
 
 {% block head %}
-<script src="/static/chart.umd.min.js"></script>
+<script src="{{ root_path }}/static/chart.umd.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="breadcrumb">
-    <a href="/">All Agencies</a> &rsaquo; {{ agency.agency_name }}
+    <a href="{{ root_path }}/">All Agencies</a> &rsaquo; {{ agency.agency_name }}
 </div>
 
 <div class="agency-header">
@@ -24,12 +24,12 @@
 <div class="tabs">
     <button class="tab active" onclick="showTab(this, 'overview')">Overview</button>
     <button class="tab"
-            hx-get="/agency/{{ agency.agency_ori }}/demographics"
+            hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/demographics"
             hx-target="#tab-content"
             hx-swap="innerHTML"
             onclick="showTab(this)">Demographics</button>
     <button class="tab"
-            hx-get="/agency/{{ agency.agency_ori }}/disparities"
+            hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/disparities"
             hx-target="#tab-content"
             hx-swap="innerHTML"
             onclick="showTab(this)">Disparities</button>
@@ -73,7 +73,7 @@ function showTab(btn, tabName) {
 }
 
 // Stops chart
-fetch('/api/agency/{{ agency.agency_ori }}/chart-data')
+fetch('{{ root_path }}/api/agency/{{ agency.agency_ori }}/chart-data')
     .then(r => r.json())
     .then(data => {
         const ctx = document.getElementById('stopsChart');

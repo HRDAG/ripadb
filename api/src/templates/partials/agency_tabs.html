@@ -2,7 +2,7 @@
 <div class="tab-panel">
     <div class="year-filter">
         <label>Year:</label>
-        <select hx-get="/agency/{{ ori }}/demographics"
+        <select hx-get="{{ root_path }}/agency/{{ ori }}/demographics"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
                 name="year">
@@ -84,7 +84,7 @@
 <div class="tab-panel">
     <div class="year-filter">
         <label>Year:</label>
-        <select hx-get="/agency/{{ ori }}/disparities"
+        <select hx-get="{{ root_path }}/agency/{{ ori }}/disparities"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
                 hx-include="[name='stop_type']"
@@ -96,7 +96,7 @@
         </select>
 
         <label>Stop type:</label>
-        <select hx-get="/agency/{{ ori }}/disparities"
+        <select hx-get="{{ root_path }}/agency/{{ ori }}/disparities"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
                 hx-include="[name='year']"

@@ -10,7 +10,7 @@
     <input type="search"
            name="q"
            placeholder="Search by agency name or ORI..."
-           hx-get="/search"
+           hx-get="{{ root_path }}/search"
            hx-trigger="input changed delay:300ms, search"
            hx-target="#agency-results"
            hx-indicator="#search-spinner"

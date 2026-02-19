@@ -11,8 +11,8 @@
     </thead>
     <tbody>
         {% for a in agencies %}
-        <tr class="clickable" onclick="window.location='/agency/{{ a.agency_ori }}'">
-            <td><a href="/agency/{{ a.agency_ori }}">{{ a.agency_name }}</a></td>
+        <tr class="clickable" onclick="window.location='{{ root_path }}/agency/{{ a.agency_ori }}'">
+            <td><a href="{{ root_path }}/agency/{{ a.agency_ori }}">{{ a.agency_name }}</a></td>
             <td class="mono">{{ a.agency_ori }}</td>
             <td>{{ a.county or '' }}</td>
             <td>{{ a.first_year }}-{{ a.last_year }}</td>

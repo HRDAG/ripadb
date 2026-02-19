@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}RIPA Agency Explorer{% endblock %}</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/static/htmx.min.js"></script>
+    <link rel="stylesheet" href="{{ root_path }}/static/style.css">
+    <script src="{{ root_path }}/static/htmx.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
-            <a href="/" class="logo">RIPA Explorer</a>
+            <a href="{{ root_path }}/" class="logo">RIPA Explorer</a>
             <span class="subtitle">California Stop Data</span>
         </nav>
     </header>
