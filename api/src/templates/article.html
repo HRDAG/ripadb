@@ -6,7 +6,73 @@
     <a href="{{ root_path }}/articles">Articles</a> &rsaquo; {{ article.title }}
 </div>
 
-<div class="article-content">
-    {{ content | safe }}
+<div class="article-layout">
+    <aside class="article-sidebar" id="article-sidebar"></aside>
+    <div class="article-content">
+        {{ content | safe }}
+    </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+    var toc = document.querySelector('.article-content .toc');
+    var sidebar = document.getElementById('article-sidebar');
+    if (!toc || !sidebar) return;
+
+    // Clone TOC into sidebar (skip the h1 wrapper — use its nested ul)
+    var inner = toc.querySelector('li > ul');
+    if (inner) {
+        sidebar.innerHTML = inner.outerHTML;
+    } else {
+        sidebar.innerHTML = toc.innerHTML;
+    }
+
+    // Build map of heading id -> sidebar link
+    var links = sidebar.querySelectorAll('a[href^="#"]');
+    var linkMap = {};
+    links.forEach(function(a) {
+        linkMap[a.getAttribute('href').slice(1)] = a;
+    });
+
+    // Collect headings that have TOC entries
+    var ids = Object.keys(linkMap);
+    var headings = ids.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+
+    var active = null;
+
+    function update() {
+        var current = null;
+        for (var i = 0; i < headings.length; i++) {
+            if (headings[i].getBoundingClientRect().top <= 120) {
+                current = headings[i].id;
+            }
+        }
+        var link = current ? linkMap[current] : null;
+        if (link === active) return;
+        if (active) active.classList.remove('active');
+        if (link) {
+            link.classList.add('active');
+            // Keep active link visible within scrollable sidebar
+            var linkTop = link.offsetTop;
+            var sTop = sidebar.scrollTop;
+            var sHeight = sidebar.clientHeight;
+            if (linkTop < sTop + 20 || linkTop > sTop + sHeight - 40) {
+                sidebar.scrollTop = linkTop - sHeight / 3;
+            }
+        }
+        active = link;
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() { update(); ticking = false; });
+            ticking = true;
+        }
+    });
+    update();
+})();
+</script>
 {% endblock %}
