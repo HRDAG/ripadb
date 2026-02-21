@@ -3,6 +3,7 @@
     <div class="chart-container">
         <canvas id="stopsChart"></canvas>
     </div>
+    <p id="chartFootnote" class="footnote" style="display:none;">* 2018 data covers Jul–Dec only (RIPA reporting began July 1, 2018).</p>
 
     <table class="data-table">
         <thead>
@@ -15,7 +16,7 @@
         <tbody>
             {% for s in stops_by_year %}
             <tr>
-                <td>{{ s.year }}</td>
+                <td>{% if s.year == 2018 %}2018 (Jul–Dec){% else %}{{ s.year }}{% endif %}</td>
                 <td class="num">{{ s.n_person_stops|commas }}</td>
                 <td class="num">{{ s.n_stops|commas }}</td>
             </tr>
@@ -30,10 +31,15 @@ fetch('{{ root_path }}/api/agency/{{ ori }}/chart-data')
     .then(data => {
         const ctx = document.getElementById('stopsChart');
         if (!ctx) return;
+        const has2018 = data.labels.includes(2018);
+        const labels = data.labels.map(y => y === 2018 ? '2018*' : String(y));
+        if (has2018) {
+            document.getElementById('chartFootnote').style.display = '';
+        }
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: data.labels,
+                labels: labels,
                 datasets: [{
                     label: 'Person-Stops',
                     data: data.person_stops,
@@ -42,7 +48,18 @@ fetch('{{ root_path }}/api/agency/{{ ori }}/chart-data')
             },
             options: {
                 responsive: true,
-                plugins: { legend: { display: false } },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: items => {
+                                const lbl = items[0].label;
+                                if (lbl === '2018*') return '2018 (Jul–Dec only)';
+                                return lbl;
+                            }
+                        }
+                    }
+                },
                 scales: {
                     y: { beginAtZero: true, ticks: {
                         callback: v => v.toLocaleString()
