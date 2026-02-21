@@ -331,6 +331,19 @@ racial disparities in equipment violation stops. In the 2022 report (covering
 2020 data), non-moving and equipment violation accounted for 31.3% of stops of
 people perceived as Black, compared to 19.9% for people perceived as White.
 
+The Board has called for eliminating pretextual stops since 2022 and has
+documented the effectiveness of pretextual stop bans:
+
+- **LAPD** (Policy 240.06, March 2022): The 2026 report noted reductions in
+  non-moving violations, decreases in searches, and increases in contraband
+  discovery rates following the policy's implementation.
+- **SFPD** (Policy 9.07.04(a), adopted 2023): The 2026 report (covering 2024
+  data) noted that the policy was still very recent, and the effects were
+  "difficult to ascertain." A [more recent
+  analysis](https://sfpublicdefender.org/2026/01/14/new-data-shows-pretext-stops-policy-has-reduced-racial-profiling-in-san-francisco/)
+  including data through September 2025 found reductions in stops of Black
+  drivers following the policy's going into effect.
+
 #### Reasonable suspicion subcategories (`RFS_RS_*`)
 
 When the reason for stop is reasonable suspicion (code 2), the officer
@@ -364,7 +377,8 @@ significantly between schema eras.
 In the earlier era, force and non-force actions are recorded in a single set
 of `ADS_*` (Actions During Stop) flags. Key columns:
 
-**Non-force actions:**
+**Non-force actions:**  
+
 - `ADS_ASKED_SEARCH_PER/PROP` --- asked to search person or property
 - `ADS_SEARCH_PERSON/PROPERTY` --- conducted search
 - `ADS_SEARCH_PERS_CONSEN/PROP_CONSEN` --- search with consent
@@ -378,6 +392,7 @@ of `ADS_*` (Actions During Stop) flags. Key columns:
 - `ADS_NO_ACTIONS` --- no actions taken
 
 **Force actions:**
+
 - `ADS_HANDCUFFED` --- handcuffed
 - `ADS_REMOVED_VEHICLE_ORDER/PHYCONTACT` --- removed from vehicle (by order / physical contact)
 - `ADS_FIREARM_POINT/DISCHARGE` --- firearm pointed or discharged
@@ -394,6 +409,7 @@ The 2024 schema separates actions into non-force actions (NFA) and officer
 force actions (OFA), with more granular subcategories.
 
 **Non-force actions (`NFA_*`)** add:
+
 - `NFA_TERRY_FRISK` --- Terry frisk (pat-down for weapons)
 - `NFA_ASKED_ID_PASSENGER` --- asked passenger for identification
 - `NFA_ASKED_PAROLE` --- asked about parole status
@@ -402,6 +418,7 @@ force actions (OFA), with more granular subcategories.
   property
 
 **Force actions (`OFA_*`)** split previously combined categories:
+
 - Conducted energy device split into `OFA_ELECT_DEVICE_POINT`,
   `OFA_ELECT_DEVICE_STUN`, and `OFA_ELECT_DEVICE_DART`
 - Baton split into `OFA_BATON_DRAWN` and `OFA_BATON_USED`
@@ -416,7 +433,9 @@ columns (2024). For example, "was searched" for 2018--2023 is
 `GREATEST(ADS_SEARCH_PERSON, ADS_SEARCH_PROPERTY)`, while for 2024 it is
 `GREATEST(NFA_SEARCH_PERSON, NFA_SEARCH_PROPERTY, NFA_TERRY_FRISK)`.
 
-### Consent searches
+### Searches and seizures
+
+#### Consent searches
 
 Officers may ask for consent to search a person or their property. Consent
 search data is spread across several column groups:
@@ -454,7 +473,7 @@ ending consent searches. By the 2023 report (covering 2021 data), the
 recommendation strengthened to prohibiting consent and supervision searches
 entirely and moving to a probable cause standard.
 
-### Basis for search (`BFS_*`)
+#### Basis for search (`BFS_*`)
 
 When a search is conducted, the officer records the legal basis:
 
@@ -476,7 +495,7 @@ When a search is conducted, the officer records the legal basis:
 
 Multiple bases can be indicated for a single search.
 
-### Contraband and evidence discovered (`CED_*`)
+#### Contraband and evidence discovered (`CED_*`)
 
 After a search, the officer records what was found:
 
@@ -496,13 +515,14 @@ After a search, the officer records what was found:
 
 The **discovery rate** (also called "hit rate") --- the proportion of searches
 that find contraband --- is a critical metric for assessing whether search
-decisions are applied equitably across racial groups. Every RIPA Board report
-since 2020 has documented the same pattern: Black and Hispanic individuals are
-searched at higher rates than White individuals, but contraband is found at
-*lower* rates. This pattern is consistent with a lower evidentiary threshold
-for searching people of color.
+decisions are applied equitably across racial groups. From the 2020 report:
 
-### Property seizure (`BPS_*`, `TPS_*`)
+> Yield rates were lower for all racial groups of color compared to White
+> individuals (1.8 to 5.6 percentage points lower). This shows that officers
+> were less successful at finding contraband or evidence of wrongdoing when
+> searching individuals of color than White individuals.
+
+#### Property seizure (`BPS_*`, `TPS_*`)
 
 When property is seized, the officer records the legal basis for seizure
 (`BPS_*`: safekeeping, contraband, evidence, vehicle impound, abandoned
@@ -591,75 +611,6 @@ A major overhaul that:
 - **Renamed** demographic columns to more inclusive terminology
   (e.g., `G_MALE` to `G_CISGENDER_MAN`, `RAE_HISPANIC_LATINO` to
   `RAE_HISPANIC_LATINEX`)
-
-### Unified schema (235 columns)
-
-The cleaned dataset uses a union of both eras. Columns that don't exist in a
-given year are filled with NULL. Column names use the 2024 canonical forms
-for all years.
-
-
-## Key findings from the RIPA Board
-
-The RIPA Board has published annual reports since 2018. Below are selected
-findings particularly relevant to data users.
-
-### Search rates and discovery rates
-
-Every report from 2020 onward documents the same pattern: Black and Hispanic
-individuals are searched at higher rates than White individuals, but
-contraband is found at lower rates. This is the empirical backbone of the
-Board's recommendations on search policy. The 2020 report stated:
-
-> Search discovery rate analyses showed that, when officers searched stopped
-> individuals, individuals of all racial or ethnic groups of color, with the
-> exception of Asian and Middle Eastern/South Asian individuals, had higher
-> search rates despite having lower rates of discovering contraband compared
-> to individuals perceived as White.
-
-### Pretextual stops
-
-The Board has called for eliminating pretextual stops since 2022 and has
-documented the effectiveness of pretextual stop bans:
-
-- **LAPD** (Policy 240.06, March 2022): The 2026 report noted reductions in
-  non-moving violations, decreases in searches, and increases in contraband
-  discovery rates following the policy's implementation.
-- **SFPD** (Policy 9.07.04(a), adopted 2023): The 2026 report (covering 2024
-  data) noted that the policy was still very recent, and the effects were
-  "difficult to ascertain." A [more recent
-  analysis](https://sfpublicdefender.org/2026/01/14/new-data-shows-pretext-stops-policy-has-reduced-racial-profiling-in-san-francisco/)
-  including data through September 2025 found reductions in stops of Black
-  drivers following the policy's going into effect.
-
-The 2023 report estimated that in 2019, officers spent approximately **80,000 hours** on traffic stops that yielded no enforcement action, and that for local agencies, 28,000 of those hours were spent on non-moving violations yielding no action.
-
-### Youth
-
-The 2025 and 2026 reports highlighted youth stop patterns:
-
-- 823,773 stops were of individuals perceived to be under 25 in 2023 (17.5% of
-  all stops)
-- Youth ages 12--14 experienced the highest rates of searches, handcuffing,
-  and curbside detention
-- Black youth 12--14: limited force used at a rate of 42.3%
-- The Board recommended convening an expert panel on youth policing and
-  expanding diversion programs
-
-### Disability
-
-The 2022 report found that people perceived to have a mental health condition
-were subjected to force at 5.2 times the rate of people with no disability,
-and searched at 4.8 times the rate. The Board recommended increased
-crisis-intervention training.
-
-### No-action stops
-
-Across all years, Black individuals have the highest rate of stops resulting
-in no enforcement action, suggesting that many stops lack justification. In
-the 2020 data, no action was taken in 13.1% of stops of Black individuals
-versus 5.6% of stops of White individuals.
-
 
 ## Additional resources
 
