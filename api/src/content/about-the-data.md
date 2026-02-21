@@ -299,7 +299,7 @@ Similarly, the `CALL_FOR_SERVICE` field is only available for 2024, though the
 2020 report noted that approximately 95% of stops were officer-initiated
 (not calls for service) in the early data.
 
-### Reason for stop (`REASON_FOR_STOP`, `RFS_*`)
+### Reason for stop (`RFS_*`)
 
 `REASON_FOR_STOP` codes the primary reason the officer initiated the stop:
 
@@ -316,7 +316,10 @@ Similarly, the `CALL_FOR_SERVICE` field is only available for 2024, though the
 | 9 | Probable cause to arrest | 2024 only |
 | 10 | Welfare & Institutions Code 5150 | 2024 only |
 
-#### Traffic violation subcategories (`RFS_TRAFFIC_VIOLATION_TYPE`)
+#### Traffic violation subcategories
+
+`RFS_TRAFFIC_VIOLATION_TYPE` further specifies the type of traffic violation
+when `REASON_FOR_STOP` is 1:
 
 | Code | Label |
 |------|-------|
