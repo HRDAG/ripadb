@@ -1,0 +1,9 @@
+articles:
+  - slug: about-the-data
+    title: "About the RIPA Stop Data"
+    date: "2026-02-20"
+    summary: >
+      A guide to the RIPA dataset: what it contains, how demographics
+      are recorded, variable definitions, schema changes, limitations,
+      and how to work with the data.
+    file: about-the-data.md

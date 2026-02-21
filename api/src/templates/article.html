@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} - RIPA Explorer{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ root_path }}/articles">Articles</a> &rsaquo; {{ article.title }}
+</div>
+
+<div class="article-content">
+    {{ content | safe }}
+</div>
+{% endblock %}

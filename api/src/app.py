@@ -4,6 +4,7 @@ import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+import yaml
 from fastapi import FastAPI, Request, Query
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -14,12 +15,23 @@ from . import db, queries
 APP_DIR = Path(__file__).parent.parent
 TEMPLATES_DIR = APP_DIR / "src" / "templates"
 STATIC_DIR = APP_DIR / "static"
+CONTENT_DIR = APP_DIR / "src" / "content"
+RENDERED_DIR = CONTENT_DIR / "rendered"
 
 ROOT_PATH = os.environ.get("ROOT_PATH", "").rstrip("/")
 
 
+def _load_articles():
+    """Load article metadata from YAML."""
+    yaml_path = CONTENT_DIR / "articles.yaml"
+    with open(yaml_path) as f:
+        data = yaml.safe_load(f)
+    return data.get("articles", [])
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    app.state.articles = _load_articles()
     db.init_pool()
     yield
     db.close_pool()
@@ -143,6 +155,35 @@ async def agency_disparities(
         "stop_type": stop_type,
         "stop_types": queries.STOP_TYPE_LABELS,
         "ori": ori,
+    })
+
+
+# -- Article routes --
+
+@app.get("/articles", response_class=HTMLResponse)
+async def article_list(request: Request):
+    return templates.TemplateResponse("articles.html", {
+        "request": request,
+        "articles": request.app.state.articles,
+    })
+
+
+@app.get("/articles/{slug}", response_class=HTMLResponse)
+async def article_detail(request: Request, slug: str):
+    articles = request.app.state.articles
+    article = next((a for a in articles if a["slug"] == slug), None)
+    if not article:
+        return HTMLResponse("<h1>Article not found</h1>", status_code=404)
+
+    html_path = RENDERED_DIR / f"{slug}.html"
+    if not html_path.exists():
+        return HTMLResponse("<h1>Article not built</h1>", status_code=404)
+
+    content = html_path.read_text()
+    return templates.TemplateResponse("article.html", {
+        "request": request,
+        "article": article,
+        "content": content,
     })
 
 
