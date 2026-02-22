@@ -119,20 +119,21 @@ if the officer stopped more than one person. The composite key is
 ## How demographics are recorded
 
 All demographic data reflects the **officer's perception** of the stopped
-person. The officer does not ask the person their race, gender, or age, and
-does not refer to identification documents. This is by design: RIPA aims to
-capture the officer's perception because profiling is based on what an officer
-believes about a person, not on the person's actual identity.
+person. From the RIPA Board's 2018 report:
 
-The RIPA Board's inaugural report (2018) established this methodology:
-
-> With respect to the person stopped, the officer must report his/her own
-> perception, based upon personal observation only (and not through any other
-> means, such as asking the person or referring to identification), regarding
-> the following: perceived race or ethnicity, perceived age, perceived gender,
-> whether the person is perceived to be LGBT, whether the person is perceived
-> to have limited or no English fluency, and whether the person is perceived
-> or known to have a disability.
+>With respect to the person stopped, the officer must report his/her own
+>perception, based upon personal observation only (and not through any other
+>means, such as asking the person or referring to identification), regarding
+>the following:
+>
+>1. Perceived race or ethnicity of the person stopped
+>2. Perceived age of the person stopped
+>3. Perceived gender of the person stopped
+>4. Whether the person stopped is perceived to be lesbian, gay, bisexual or
+>   transgender
+>5. Whether the person stopped is perceived to have limited or no English
+>   fluency
+>6. Whether the person stopped is perceived or known to have a disability
 
 ## Variable groups
 
@@ -205,9 +206,14 @@ they became `G_CISGENDER_MAN`, `G_CISGENDER_WOMAN`, and `G_NONBINARY_PERSON`.
 The cleaned dataset uses the 2024 canonical names for all years.
 
 The RIPA Board's 2022 report (covering 2020 data) included the first
-detailed analysis of stops of transgender individuals, finding that
-transgender people experienced higher rates of searches and use of force
-relative to cisgender individuals.
+detailed analysis of stops of transgender individuals. They found:
+
+- transgeneder men/boys were searched in over 40% of stops, the highest rate
+  among gender groups
+- transgender women/girls were handcuffed (42%) and subjected to detention
+  curbside or in a patrol car (35%) at higher rates than other groups
+- transgender people who were stopped were subjected to force at higher rates
+  than cisgender people
 
 ### Sexual orientation (`SOR_*`)
 
@@ -474,7 +480,7 @@ imbalance between officer and civilian. From the 2022 report:
 Starting with the 2022 report, the Board recommended severely limiting or
 ending consent searches. By the 2023 report (covering 2021 data), the
 recommendation strengthened to prohibiting consent and supervision searches
-entirely and moving to a probable cause standard.
+entirely.
 
 #### Basis for search (`BFS_*`)
 
