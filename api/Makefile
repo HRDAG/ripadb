@@ -9,4 +9,4 @@ build:
 	uv run python -m src.build_articles
 
 run: build
-	ROOT_PATH=$(ROOT_PATH) uv run uvicorn src.app:app --reload --host 0.0.0.0 --port 8000
+	ROOT_PATH=$(ROOT_PATH) uv run uvicorn src.app:app --reload --host 127.0.0.1 --port 8000
