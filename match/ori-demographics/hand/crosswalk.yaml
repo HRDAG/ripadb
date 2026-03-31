@@ -1,0 +1,3199 @@
+agencies:
+  CA0010000:
+    agency_name: ALAMEDA CO SO
+    geography_type: county
+    fips: '001'
+    geography_name: Alameda County
+    match_method: auto
+  CA0010040:
+    agency_name: ALAMEDA CO SO
+    geography_type: county
+    fips: '001'
+    geography_name: Alameda County
+    match_method: auto
+  CA0010100:
+    agency_name: ALAMEDA PD
+    geography_type: place
+    fips: '00562'
+    geography_name: Alameda city
+    match_method: auto
+  CA001013A:
+    agency_name: ALAMEDA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0010200:
+    agency_name: ALBANY PD
+    geography_type: place
+    fips: '00674'
+    geography_name: Albany city
+    match_method: auto
+  CA0010300:
+    agency_name: BERKELEY PD
+    geography_type: place
+    fips: '06000'
+    geography_name: Berkeley city
+    match_method: auto
+  CA0010400:
+    agency_name: EMERYVILLE PD
+    geography_type: place
+    fips: '22594'
+    geography_name: Emeryville city
+    match_method: auto
+  CA0010500:
+    agency_name: FREMONT PD
+    geography_type: place
+    fips: '26000'
+    geography_name: Fremont city
+    match_method: auto
+  CA0010600:
+    agency_name: HAYWARD PD
+    geography_type: place
+    fips: '33000'
+    geography_name: Hayward city
+    match_method: auto
+  CA0010700:
+    agency_name: LIVERMORE PD
+    geography_type: place
+    fips: '41992'
+    geography_name: Livermore city
+    match_method: auto
+  CA0010800:
+    agency_name: NEWARK PD
+    geography_type: place
+    fips: '50916'
+    geography_name: Newark city
+    match_method: auto
+  CA0010900:
+    agency_name: OAKLAND PD
+    geography_type: place
+    fips: '53000'
+    geography_name: Oakland city
+    match_method: auto
+  CA0011000:
+    agency_name: PIEDMONT PD
+    geography_type: place
+    fips: '56938'
+    geography_name: Piedmont city
+    match_method: auto
+  CA0011100:
+    agency_name: PLEASANTON PD
+    geography_type: place
+    fips: '57792'
+    geography_name: Pleasanton city
+    match_method: auto
+  CA0011200:
+    agency_name: SAN LEANDRO PD
+    geography_type: place
+    fips: '68084'
+    geography_name: San Leandro city
+    match_method: auto
+  CA0011300:
+    agency_name: UNION CITY PD
+    geography_type: place
+    fips: '81204'
+    geography_name: Union City city
+    match_method: auto
+  CA0011400:
+    agency_name: EAST BAY REG PARK PD
+    geography_type: place
+    fips: null
+    geography_name: East Bay Reg Park
+    match_method: unmatched
+  CA0011500:
+    agency_name: CSU-EAST BAY PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0012100:
+    agency_name: BART PD
+    geography_type: skip
+    skip_reason: transit
+    match_method: auto
+  CA0012600:
+    agency_name: OHLONE COMMUNITY COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0013300:
+    agency_name: OAKLAND HOUSING AUTHORITY
+    geography_type: skip
+    skip_reason: housing_authority
+    match_method: auto
+  CA0019700:
+    agency_name: UC BERKELEY PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0020000:
+    agency_name: ALPINE COUNTY SHERIFF'S OFFICE
+    geography_type: county
+    fips: '003'
+    geography_name: Alpine County
+    match_method: auto
+  CA0030000:
+    agency_name: AMADOR COUNTY SHERIFF'S OFFICE
+    geography_type: county
+    fips: '005'
+    geography_name: Amador County
+    match_method: auto
+  CA0030200:
+    agency_name: IONE PD
+    geography_type: place
+    fips: '36672'
+    geography_name: Ione city
+    match_method: auto
+  CA0030300:
+    agency_name: JACKSON PD
+    geography_type: place
+    fips: '36980'
+    geography_name: Jackson city
+    match_method: auto
+  CA0030500:
+    agency_name: SUTTER CREEK PD
+    geography_type: place
+    fips: '77392'
+    geography_name: Sutter Creek city
+    match_method: auto
+  CA0040000:
+    agency_name: BUTTE CO SO
+    geography_type: county
+    fips: '007'
+    geography_name: Butte County
+    match_method: auto
+  CA004013A:
+    agency_name: BUTTE CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0040200:
+    agency_name: CHICO PD
+    geography_type: place
+    fips: '13014'
+    geography_name: Chico city
+    match_method: auto
+  CA0040300:
+    agency_name: GRIDLEY PD
+    geography_type: place
+    fips: '31260'
+    geography_name: Gridley city
+    match_method: auto
+  CA0040400:
+    agency_name: OROVILLE PD
+    geography_type: place
+    fips: '54386'
+    geography_name: Oroville city
+    match_method: auto
+  CA0040500:
+    agency_name: PARADISE PD
+    geography_type: place
+    fips: '55528'
+    geography_name: Paradise CDP
+    match_method: auto
+  CA0041100:
+    agency_name: BUTTE COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0049700:
+    agency_name: CSU CHICO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0050000:
+    agency_name: CALAVERAS COUNTY SO
+    geography_type: county
+    fips: 009
+    geography_name: Calaveras County
+    match_method: auto
+  CA0050100:
+    agency_name: ANGELS CAMP PD
+    geography_type: place
+    fips: null
+    geography_name: Angels Camp
+    match_method: unmatched
+  CA005023A:
+    agency_name: CALAVERAS CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0060000:
+    agency_name: COLUSA CO SO
+    geography_type: county
+    fips: '011'
+    geography_name: Colusa County
+    match_method: auto
+  CA0060100:
+    agency_name: COLUSA PD
+    geography_type: place
+    fips: '14946'
+    geography_name: Colusa city
+    match_method: auto
+  CA006013A:
+    agency_name: COLUSA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0060200:
+    agency_name: WILLIAMS PD
+    geography_type: place
+    fips: '85586'
+    geography_name: Williams city
+    match_method: auto
+  CA0070000:
+    agency_name: CONTRA COSTA CO SO
+    geography_type: county
+    fips: '013'
+    geography_name: Contra Costa County
+    match_method: auto
+  CA0070100:
+    agency_name: ANTIOCH PD
+    geography_type: place
+    fips: '02252'
+    geography_name: Antioch city
+    match_method: auto
+  CA007013A:
+    agency_name: CONTRA COSTA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0070200:
+    agency_name: BRENTWOOD PD
+    geography_type: place
+    fips: 08142
+    geography_name: Brentwood city
+    match_method: auto
+  CA0070300:
+    agency_name: CLAYTON PD
+    geography_type: place
+    fips: '13882'
+    geography_name: Clayton city
+    match_method: auto
+  CA0070400:
+    agency_name: CONCORD PD
+    geography_type: place
+    fips: '16000'
+    geography_name: Concord city
+    match_method: auto
+  CA0070500:
+    agency_name: EL CERRITO PD
+    geography_type: place
+    fips: '21810'
+    geography_name: El Cerrito CDP
+    match_method: auto
+  CA0070600:
+    agency_name: HERCULES PD
+    geography_type: place
+    fips: '33308'
+    geography_name: Hercules city
+    match_method: auto
+  CA0070700:
+    agency_name: PINOLE PD
+    geography_type: place
+    fips: '57288'
+    geography_name: Pinole city
+    match_method: auto
+  CA0070800:
+    agency_name: PITTSBURG PD
+    geography_type: place
+    fips: '57456'
+    geography_name: Pittsburg city
+    match_method: auto
+  CA0070900:
+    agency_name: PLEASANT HILL PD
+    geography_type: place
+    fips: '57764'
+    geography_name: Pleasant Hill city
+    match_method: auto
+  CA0071000:
+    agency_name: RICHMOND PD
+    geography_type: place
+    fips: '60620'
+    geography_name: Richmond city
+    match_method: auto
+  CA0071100:
+    agency_name: SAN PABLO PD
+    geography_type: place
+    fips: '68294'
+    geography_name: San Pablo city
+    match_method: auto
+  CA0071200:
+    agency_name: WALNUT CREEK PD
+    geography_type: place
+    fips: '83346'
+    geography_name: Walnut Creek city
+    match_method: auto
+  CA0071300:
+    agency_name: KENSINGTON PD
+    geography_type: place
+    fips: '38086'
+    geography_name: Kensington CDP
+    match_method: auto
+  CA0071400:
+    agency_name: MARTINEZ PD
+    geography_type: place
+    fips: '46114'
+    geography_name: Martinez city
+    match_method: auto
+  CA0071600:
+    agency_name: MORAGA PD
+    geography_type: place
+    fips: '49187'
+    geography_name: Moraga town
+    match_method: auto
+  CA0072100:
+    agency_name: CONTRA COSTA CC PD
+    geography_type: place
+    fips: null
+    geography_name: Contra Costa Cc
+    match_method: unmatched
+  CA0073400:
+    agency_name: OAKLEY PD
+    geography_type: place
+    fips: '53070'
+    geography_name: Oakley city
+    match_method: auto
+  CA0074000:
+    agency_name: SAN RAMON PD
+    geography_type: place
+    fips: '68378'
+    geography_name: San Ramon city
+    match_method: auto
+  CA0080000:
+    agency_name: DEL NORTE CO SO
+    geography_type: county
+    fips: '015'
+    geography_name: Del Norte County
+    match_method: auto
+  CA0080100:
+    agency_name: CRESCENT CITY PD
+    geography_type: place
+    fips: '17022'
+    geography_name: Crescent City city
+    match_method: auto
+  CA0090000:
+    agency_name: EL DORADO CO SO
+    geography_type: county
+    fips: '017'
+    geography_name: El Dorado County
+    match_method: auto
+  CA0090100:
+    agency_name: PLACERVILLE PD
+    geography_type: place
+    fips: '57540'
+    geography_name: Placerville city
+    match_method: auto
+  CA009013A:
+    agency_name: EL DORADO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0090200:
+    agency_name: SOUTH LAKE TAHOE PD
+    geography_type: place
+    fips: '73108'
+    geography_name: South Lake Tahoe city
+    match_method: auto
+  CA0100000:
+    agency_name: FRESNO CO SO
+    geography_type: county
+    fips: 019
+    geography_name: Fresno County
+    match_method: auto
+  CA0100100:
+    agency_name: CLOVIS PD
+    geography_type: place
+    fips: '14218'
+    geography_name: Clovis city
+    match_method: auto
+  CA0100200:
+    agency_name: COALINGA PD
+    geography_type: place
+    fips: '14274'
+    geography_name: Coalinga city
+    match_method: auto
+  CA010023A:
+    agency_name: FRESNO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0100300:
+    agency_name: FIREBAUGH PD
+    geography_type: place
+    fips: '24134'
+    geography_name: Firebaugh city
+    match_method: auto
+  CA0100400:
+    agency_name: FOWLER PD
+    geography_type: place
+    fips: '25436'
+    geography_name: Fowler city
+    match_method: auto
+  CA0100500:
+    agency_name: FRESNO PD
+    geography_type: place
+    fips: '27000'
+    geography_name: Fresno city
+    match_method: auto
+  CA0100600:
+    agency_name: HURON PD
+    geography_type: place
+    fips: '36084'
+    geography_name: Huron city
+    match_method: auto
+  CA0100700:
+    agency_name: KERMAN PD
+    geography_type: place
+    fips: '38226'
+    geography_name: Kerman city
+    match_method: auto
+  CA0100800:
+    agency_name: KINGSBURG PD
+    geography_type: place
+    fips: '38562'
+    geography_name: Kingsburg city
+    match_method: auto
+  CA0100900:
+    agency_name: MENDOTA PD
+    geography_type: place
+    fips: '46828'
+    geography_name: Mendota city
+    match_method: auto
+  CA0101000:
+    agency_name: ORANGE COVE PD
+    geography_type: place
+    fips: '54008'
+    geography_name: Orange Cove city
+    match_method: auto
+  CA0101100:
+    agency_name: PARLIER PD
+    geography_type: place
+    fips: '55856'
+    geography_name: Parlier city
+    match_method: auto
+  CA0101200:
+    agency_name: REEDLEY PD
+    geography_type: place
+    fips: '60242'
+    geography_name: Reedley city
+    match_method: auto
+  CA0101300:
+    agency_name: SANGER PD
+    geography_type: place
+    fips: '67056'
+    geography_name: Sanger city
+    match_method: auto
+  CA0101500:
+    agency_name: SELMA PD
+    geography_type: place
+    fips: '70882'
+    geography_name: Selma city
+    match_method: auto
+  CA0101700:
+    agency_name: STATE CTR COMM COLLEGE
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0102400:
+    agency_name: FRESNO YOSEMITE AIRPORT
+    geography_type: skip
+    skip_reason: airport
+    match_method: auto
+  CA0103500:
+    agency_name: CLOVIS USD PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0109700:
+    agency_name: CSU FRESNO PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0110000:
+    agency_name: GLENN CO SO
+    geography_type: county
+    fips: '021'
+    geography_name: Glenn County
+    match_method: auto
+  CA0110100:
+    agency_name: ORLAND PD
+    geography_type: place
+    fips: '54274'
+    geography_name: Orland city
+    match_method: auto
+  CA0120000:
+    agency_name: HUMBOLDT CO SO
+    geography_type: county
+    fips: '023'
+    geography_name: Humboldt County
+    match_method: auto
+  CA0120100:
+    agency_name: ARCATA PD
+    geography_type: place
+    fips: '02476'
+    geography_name: Arcata city
+    match_method: auto
+  CA012013A:
+    agency_name: HUMBOLDT CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0120300:
+    agency_name: EUREKA PD
+    geography_type: place
+    fips: '23042'
+    geography_name: Eureka city
+    match_method: auto
+  CA0120400:
+    agency_name: FERNDALE PD
+    geography_type: place
+    fips: '23910'
+    geography_name: Ferndale city
+    match_method: auto
+  CA0120500:
+    agency_name: FORTUNA PD
+    geography_type: place
+    fips: '25296'
+    geography_name: Fortuna city
+    match_method: auto
+  CA0120700:
+    agency_name: RIO DELL PD
+    geography_type: place
+    fips: '60900'
+    geography_name: Rio Dell city
+    match_method: auto
+  CA0120800:
+    agency_name: HUMBOLDT STATE UNIVERSITY PD
+    geography_type: place
+    fips: null
+    geography_name: Humboldt State University
+    match_method: unmatched
+  CA0130000:
+    agency_name: IMPERIAL CO SO
+    geography_type: county
+    fips: '025'
+    geography_name: Imperial County
+    match_method: auto
+  CA0130100:
+    agency_name: BRAWLEY PD
+    geography_type: place
+    fips: 08058
+    geography_name: Brawley city
+    match_method: auto
+  CA013013A:
+    agency_name: IMPERIAL CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0130200:
+    agency_name: CALEXICO PD
+    geography_type: place
+    fips: 09710
+    geography_name: Calexico city
+    match_method: auto
+  CA0130300:
+    agency_name: CALIPATRIA PD
+    geography_type: place
+    fips: 09878
+    geography_name: Calipatria city
+    match_method: auto
+  CA0130400:
+    agency_name: EL CENTRO PD
+    geography_type: place
+    fips: '21782'
+    geography_name: El Centro city
+    match_method: auto
+  CA0130600:
+    agency_name: IMPERIAL PD
+    geography_type: place
+    fips: '36280'
+    geography_name: Imperial city
+    match_method: auto
+  CA0130700:
+    agency_name: WESTMORLAND PD
+    geography_type: place
+    fips: '84606'
+    geography_name: Westmorland city
+    match_method: auto
+  CA0140000:
+    agency_name: INYO CO SO
+    geography_type: county
+    fips: '027'
+    geography_name: Inyo County
+    match_method: auto
+  CA0140100:
+    agency_name: BISHOP PD
+    geography_type: place
+    fips: 06798
+    geography_name: Bishop city
+    match_method: auto
+  CA0150000:
+    agency_name: KERN CO SO
+    geography_type: county
+    fips: 029
+    geography_name: Kern County
+    match_method: auto
+  CA0150100:
+    agency_name: ARVIN PD
+    geography_type: place
+    fips: 02924
+    geography_name: Arvin city
+    match_method: auto
+  CA015013A:
+    agency_name: KERN CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0150200:
+    agency_name: BAKERSFIELD PD
+    geography_type: place
+    fips: '03526'
+    geography_name: Bakersfield city
+    match_method: auto
+  CA0150300:
+    agency_name: DELANO PD
+    geography_type: place
+    fips: '18394'
+    geography_name: Delano city
+    match_method: auto
+  CA0150500:
+    agency_name: MCFARLAND PD
+    geography_type: place
+    fips: '44826'
+    geography_name: McFarland city
+    match_method: auto
+  CA0150600:
+    agency_name: RIDGECREST PD
+    geography_type: place
+    fips: '60704'
+    geography_name: Ridgecrest city
+    match_method: auto
+  CA0150700:
+    agency_name: SHAFTER PD
+    geography_type: place
+    fips: '71106'
+    geography_name: Shafter city
+    match_method: auto
+  CA0150800:
+    agency_name: TAFT PD
+    geography_type: place
+    fips: '77574'
+    geography_name: Taft city
+    match_method: auto
+  CA0150900:
+    agency_name: TEHACHAPI PD
+    geography_type: place
+    fips: '78092'
+    geography_name: Tehachapi city
+    match_method: auto
+  CA0151000:
+    agency_name: WASCO PD
+    geography_type: place
+    fips: '83542'
+    geography_name: Wasco city
+    match_method: auto
+  CA0151100:
+    agency_name: CALIFORNIA CITY PD
+    geography_type: place
+    fips: 09780
+    geography_name: California City city
+    match_method: auto
+  CA0151200:
+    agency_name: ST UNIV PD-BAKERSFIELD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0151400:
+    agency_name: STALLION SPRINGS PD
+    geography_type: place
+    fips: '73868'
+    geography_name: Stallion Springs CDP
+    match_method: auto
+  CA0151500:
+    agency_name: BEAR VALLEY POLICE DEPT
+    geography_type: place
+    fips: '04734'
+    geography_name: Bear Valley Springs CDP
+    match_method: auto
+  CA0151900:
+    agency_name: KERN COUNTY DISTRICT PARKS PD
+    geography_type: skip
+    skip_reason: park
+    match_method: auto
+  CA0152100:
+    agency_name: KERN HIGH SCHOOL DIST PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0152700:
+    agency_name: KERN CO DEPT OF AIRPORTS
+    geography_type: skip
+    skip_reason: airport
+    match_method: auto
+  CA0160000:
+    agency_name: KINGS CO SO
+    geography_type: county
+    fips: '031'
+    geography_name: Kings County
+    match_method: auto
+  CA0160100:
+    agency_name: CORCORAN PD
+    geography_type: place
+    fips: '16224'
+    geography_name: Corcoran city
+    match_method: auto
+  CA016013A:
+    agency_name: KINGS CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0160200:
+    agency_name: HANFORD PD
+    geography_type: place
+    fips: '31960'
+    geography_name: Hanford city
+    match_method: auto
+  CA0160300:
+    agency_name: LEMOORE PD
+    geography_type: place
+    fips: '41152'
+    geography_name: Lemoore city
+    match_method: auto
+  CA0160800:
+    agency_name: AVENAL PD
+    geography_type: place
+    fips: '03302'
+    geography_name: Avenal city
+    match_method: auto
+  CA0170000:
+    agency_name: LAKE CO SO
+    geography_type: county
+    fips: '033'
+    geography_name: Lake County
+    match_method: auto
+  CA0170100:
+    agency_name: LAKEPORT PD
+    geography_type: place
+    fips: '39710'
+    geography_name: Lakeport city
+    match_method: auto
+  CA017013A:
+    agency_name: LAKE CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0170200:
+    agency_name: CLEARLAKE PD
+    geography_type: place
+    fips: '13945'
+    geography_name: Clearlake city
+    match_method: auto
+  CA0180000:
+    agency_name: LASSEN CO SO
+    geography_type: county
+    fips: '035'
+    geography_name: Lassen County
+    match_method: auto
+  CA0180001:
+    agency_name: LASSEN CO SO
+    geography_type: county
+    fips: '035'
+    geography_name: Lassen County
+    match_method: auto
+  CA0180100:
+    agency_name: SUSANVILLE PD
+    geography_type: place
+    fips: '77364'
+    geography_name: Susanville city
+    match_method: auto
+  CA0190000:
+    agency_name: LOS ANGELES CO SD
+    geography_type: county
+    fips: '037'
+    geography_name: Los Angeles County
+    match_method: auto
+  CA0190100:
+    agency_name: ALHAMBRA PD
+    geography_type: place
+    fips: 00884
+    geography_name: Alhambra city
+    match_method: auto
+  CA019013A:
+    agency_name: LOS ANGELES CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0190200:
+    agency_name: ARCADIA PD
+    geography_type: place
+    fips: '02462'
+    geography_name: Arcadia city
+    match_method: auto
+  CA0190500:
+    agency_name: AZUSA PD
+    geography_type: place
+    fips: 03386
+    geography_name: Azusa city
+    match_method: auto
+  CA0190600:
+    agency_name: BALDWIN PARK PD
+    geography_type: place
+    fips: '03666'
+    geography_name: Baldwin Park city
+    match_method: auto
+  CA0190700:
+    agency_name: BELL PD
+    geography_type: place
+    fips: 04870
+    geography_name: Bell city
+    match_method: auto
+  CA0190900:
+    agency_name: BELL GARDENS PD
+    geography_type: place
+    fips: 04996
+    geography_name: Bell Gardens city
+    match_method: auto
+  CA0190B00:
+    agency_name: LAUSD PD-GRAND
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0190C00:
+    agency_name: EL CAMINO COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0190J00:
+    agency_name: LA DEPT OF AIRPORT
+    geography_type: skip
+    skip_reason: airport
+    match_method: auto
+  CA0190N00:
+    agency_name: BUR-GLEN-PASA AIRPORT
+    geography_type: skip
+    skip_reason: airport
+    match_method: auto
+  CA0190R00:
+    agency_name: PASADENA COMM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0191000:
+    agency_name: BEVERLY HILLS PD
+    geography_type: place
+    fips: 06308
+    geography_name: Beverly Hills city
+    match_method: auto
+  CA0191200:
+    agency_name: BURBANK PD
+    geography_type: place
+    fips: 08968
+    geography_name: Burbank CDP
+    match_method: auto
+  CA0191300:
+    agency_name: CLAREMONT PD
+    geography_type: place
+    fips: '13756'
+    geography_name: Claremont city
+    match_method: auto
+  CA0191600:
+    agency_name: COVINA PD
+    geography_type: place
+    fips: '16742'
+    geography_name: Covina city
+    match_method: auto
+  CA0191800:
+    agency_name: CULVER CITY PD
+    geography_type: place
+    fips: '17568'
+    geography_name: Culver City city
+    match_method: auto
+  CA0191P00:
+    agency_name: CERRITOS COMM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0192000:
+    agency_name: DOWNEY PD
+    geography_type: place
+    fips: '19766'
+    geography_name: Downey city
+    match_method: auto
+  CA0192200:
+    agency_name: EL MONTE PD
+    geography_type: place
+    fips: '22230'
+    geography_name: El Monte city
+    match_method: auto
+  CA0192300:
+    agency_name: EL SEGUNDO PD
+    geography_type: place
+    fips: '22412'
+    geography_name: El Segundo city
+    match_method: auto
+  CA0192400:
+    agency_name: GARDENA PD
+    geography_type: place
+    fips: '28168'
+    geography_name: Gardena city
+    match_method: auto
+  CA0192500:
+    agency_name: GLENDALE PD
+    geography_type: place
+    fips: '30000'
+    geography_name: Glendale city
+    match_method: auto
+  CA0192600:
+    agency_name: GLENDORA PD
+    geography_type: place
+    fips: '30014'
+    geography_name: Glendora city
+    match_method: auto
+  CA0192800:
+    agency_name: HAWTHORNE PD
+    geography_type: place
+    fips: '32548'
+    geography_name: Hawthorne city
+    match_method: auto
+  CA0192900:
+    agency_name: HERMOSA BEACH PD
+    geography_type: place
+    fips: '33364'
+    geography_name: Hermosa Beach city
+    match_method: auto
+  CA0192C00:
+    agency_name: LA CITY PARK RANGERS
+    geography_type: skip
+    skip_reason: park
+    match_method: auto
+  CA0193100:
+    agency_name: HUNTINGTON PARK PD
+    geography_type: place
+    fips: '36056'
+    geography_name: Huntington Park city
+    match_method: auto
+  CA0193300:
+    agency_name: INGLEWOOD PD
+    geography_type: place
+    fips: '36546'
+    geography_name: Inglewood city
+    match_method: auto
+  CA0193400:
+    agency_name: IRWINDALE PD
+    geography_type: place
+    fips: '36826'
+    geography_name: Irwindale city
+    match_method: auto
+  CA0193700:
+    agency_name: HACIENDA LA PUENTE SCHOOL DIST
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0193800:
+    agency_name: LA VERNE PD
+    geography_type: place
+    fips: '40830'
+    geography_name: La Verne city
+    match_method: auto
+  CA0193F00:
+    agency_name: COMPTON USD PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0193I00:
+    agency_name: GLENDALE COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0194100:
+    agency_name: LONG BEACH PD
+    geography_type: place
+    fips: '43000'
+    geography_name: Long Beach city
+    match_method: auto
+  CA0194200:
+    agency_name: LAPD
+    geography_type: place
+    fips: '44000'
+    geography_name: Los Angeles city
+    match_method: auto
+  CA0194400:
+    agency_name: MANHATTAN BEACH PD
+    geography_type: place
+    fips: '45400'
+    geography_name: Manhattan Beach city
+    match_method: auto
+  CA0194600:
+    agency_name: MONROVIA PD
+    geography_type: place
+    fips: '48648'
+    geography_name: Monrovia city
+    match_method: auto
+  CA0194700:
+    agency_name: MONTEBELLO PD
+    geography_type: place
+    fips: '48816'
+    geography_name: Montebello city
+    match_method: auto
+  CA0194800:
+    agency_name: MONTEREY PARK PD
+    geography_type: place
+    fips: '48914'
+    geography_name: Monterey Park city
+    match_method: auto
+  CA0195100:
+    agency_name: PALOS VERDES ESTATES PD
+    geography_type: place
+    fips: '55380'
+    geography_name: Palos Verdes Estates city
+    match_method: auto
+  CA0195300:
+    agency_name: PASADENA PD
+    geography_type: place
+    fips: '56000'
+    geography_name: Pasadena city
+    match_method: auto
+  CA0195500:
+    agency_name: POMONA PD
+    geography_type: place
+    fips: '58072'
+    geography_name: Pomona city
+    match_method: auto
+  CA0195600:
+    agency_name: REDONDO BEACH PD
+    geography_type: place
+    fips: '60018'
+    geography_name: Redondo Beach city
+    match_method: auto
+  CA0196100:
+    agency_name: SAN FERNANDO PD
+    geography_type: place
+    fips: '66140'
+    geography_name: San Fernando city
+    match_method: auto
+  CA0196200:
+    agency_name: SAN GABRIEL PD
+    geography_type: place
+    fips: '67042'
+    geography_name: San Gabriel city
+    match_method: auto
+  CA0196300:
+    agency_name: SAN MARINO PD
+    geography_type: place
+    fips: '68224'
+    geography_name: San Marino city
+    match_method: auto
+  CA0196500:
+    agency_name: SANTA MONICA PD
+    geography_type: place
+    fips: '70000'
+    geography_name: Santa Monica city
+    match_method: auto
+  CA0196600:
+    agency_name: SIERRA MADRE PD
+    geography_type: place
+    fips: '71806'
+    geography_name: Sierra Madre city
+    match_method: auto
+  CA0196700:
+    agency_name: SIGNAL HILL PD
+    geography_type: place
+    fips: '71876'
+    geography_name: Signal Hill city
+    match_method: auto
+  CA0196900:
+    agency_name: SOUTH GATE PD
+    geography_type: place
+    fips: '73080'
+    geography_name: South Gate city
+    match_method: auto
+  CA0197000:
+    agency_name: SOUTH PASADENA PD
+    geography_type: place
+    fips: '73220'
+    geography_name: South Pasadena city
+    match_method: auto
+  CA0197200:
+    agency_name: TORRANCE PD
+    geography_type: place
+    fips: '80000'
+    geography_name: Torrance city
+    match_method: auto
+  CA0197300:
+    agency_name: VERNON PD
+    geography_type: place
+    fips: '82422'
+    geography_name: Vernon city
+    match_method: auto
+  CA0197500:
+    agency_name: WEST COVINA PD
+    geography_type: place
+    fips: '84200'
+    geography_name: West Covina city
+    match_method: auto
+  CA0197600:
+    agency_name: WHITTIER PD
+    geography_type: place
+    fips: '85292'
+    geography_name: Whittier city
+    match_method: auto
+  CA0197800:
+    agency_name: ST UNIV PD-POMONA
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0198100:
+    agency_name: CSU-DOMINGUEZ HILLS
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0198200:
+    agency_name: STATE UNIV PD-LONG BEACH
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0198300:
+    agency_name: ST UNIV PD-LOS ANGELES
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0198400:
+    agency_name: ST UNIV PD-NORTHRIDGE
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0198800:
+    agency_name: LA PORT POLICE
+    geography_type: place
+    fips: null
+    geography_name: La Port Police
+    match_method: unmatched
+  CA0199700:
+    agency_name: UC-LOS ANGELES
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA019A800:
+    agency_name: SANTA MONICA COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA019B800:
+    agency_name: MONTEBELLO SCHOOL POLICE DEPAR
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA019B900:
+    agency_name: EL RANCHO USD PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA019C300:
+    agency_name: COMPTON COMMUNITY COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0200000:
+    agency_name: MADERA CO SO
+    geography_type: county
+    fips: 039
+    geography_name: Madera County
+    match_method: auto
+  CA0200100:
+    agency_name: CHOWCHILLA PD
+    geography_type: place
+    fips: '13294'
+    geography_name: Chowchilla city
+    match_method: auto
+  CA020013A:
+    agency_name: MADERA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0200200:
+    agency_name: MADERA PD
+    geography_type: place
+    fips: '45022'
+    geography_name: Madera city
+    match_method: auto
+  CA0210000:
+    agency_name: MARIN CO SO
+    geography_type: county
+    fips: '041'
+    geography_name: Marin County
+    match_method: auto
+  CA0210100:
+    agency_name: BELVEDERE PD
+    geography_type: place
+    fips: '05164'
+    geography_name: Belvedere city
+    match_method: auto
+  CA021013A:
+    agency_name: MARIN CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0210300:
+    agency_name: FAIRFAX PD
+    geography_type: place
+    fips: '23168'
+    geography_name: Fairfax town
+    match_method: auto
+  CA0210500:
+    agency_name: MILL VALLEY PD
+    geography_type: place
+    fips: '47710'
+    geography_name: Mill Valley city
+    match_method: auto
+  CA0210600:
+    agency_name: NOVATO PD
+    geography_type: place
+    fips: '52582'
+    geography_name: Novato city
+    match_method: auto
+  CA0210700:
+    agency_name: ROSS PD
+    geography_type: place
+    fips: '62980'
+    geography_name: Ross town
+    match_method: auto
+  CA0210900:
+    agency_name: SAN RAFAEL PD
+    geography_type: place
+    fips: '68364'
+    geography_name: San Rafael city
+    match_method: auto
+  CA0211000:
+    agency_name: SAUSALITO PD
+    geography_type: place
+    fips: '70364'
+    geography_name: Sausalito city
+    match_method: auto
+  CA0211100:
+    agency_name: TIBURON PD
+    geography_type: place
+    fips: '78666'
+    geography_name: Tiburon town
+    match_method: auto
+  CA0211300:
+    agency_name: MARIN COMM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0211700:
+    agency_name: CENTRAL MARIN POLICE AUTHORITY
+    geography_type: skip
+    skip_reason: special
+    match_method: auto
+  CA0211800:
+    agency_name: MARIN COUNTY WATER DISTRICT
+    geography_type: skip
+    skip_reason: water_district
+    match_method: auto
+  CA021XR01:
+    agency_name: MARIN CO WATER DIST RANGERS
+    geography_type: skip
+    skip_reason: water_district
+    match_method: auto
+  CA0220000:
+    agency_name: MARIPOSA CO SO
+    geography_type: county
+    fips: '043'
+    geography_name: Mariposa County
+    match_method: auto
+  CA0230000:
+    agency_name: MENDOCINO CO SO
+    geography_type: county
+    fips: '045'
+    geography_name: Mendocino County
+    match_method: auto
+  CA0230100:
+    agency_name: FORT BRAGG PD
+    geography_type: place
+    fips: '25058'
+    geography_name: Fort Bragg city
+    match_method: auto
+  CA023013A:
+    agency_name: MENDOCINO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0230300:
+    agency_name: UKIAH PD
+    geography_type: place
+    fips: '81134'
+    geography_name: Ukiah city
+    match_method: auto
+  CA0230400:
+    agency_name: WILLITS PD
+    geography_type: place
+    fips: '85600'
+    geography_name: Willits city
+    match_method: auto
+  CA0240000:
+    agency_name: MERCED CO SO
+    geography_type: county
+    fips: '047'
+    geography_name: Merced County
+    match_method: auto
+  CA0240100:
+    agency_name: ATWATER PD
+    geography_type: place
+    fips: '03162'
+    geography_name: Atwater city
+    match_method: auto
+  CA024013A:
+    agency_name: MERCED CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0240200:
+    agency_name: DOS PALOS PD
+    geography_type: place
+    fips: '19612'
+    geography_name: Dos Palos city
+    match_method: auto
+  CA0240300:
+    agency_name: GUSTINE POLICE DEPT
+    geography_type: place
+    fips: '31568'
+    geography_name: Gustine city
+    match_method: auto
+  CA0240400:
+    agency_name: LIVINGSTON PD
+    geography_type: place
+    fips: '42006'
+    geography_name: Livingston city
+    match_method: auto
+  CA0240500:
+    agency_name: LOS BANOS PD
+    geography_type: place
+    fips: '44028'
+    geography_name: Los Banos city
+    match_method: auto
+  CA0240600:
+    agency_name: MERCED PD
+    geography_type: place
+    fips: '46898'
+    geography_name: Merced city
+    match_method: auto
+  CA0241200:
+    agency_name: UNIVERSITY CAL MERCED PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0250000:
+    agency_name: MODOC CO SO
+    geography_type: county
+    fips: 049
+    geography_name: Modoc County
+    match_method: auto
+  CA0250100:
+    agency_name: ALTURAS PD
+    geography_type: place
+    fips: '01444'
+    geography_name: Alturas city
+    match_method: auto
+  CA0260000:
+    agency_name: MONO CO SO
+    geography_type: county
+    fips: '051'
+    geography_name: Mono County
+    match_method: auto
+  CA0260100:
+    agency_name: MAMMOTH LAKES PD
+    geography_type: place
+    fips: '45358'
+    geography_name: Mammoth Lakes town
+    match_method: auto
+  CA0270000:
+    agency_name: MONTEREY CO SO
+    geography_type: county
+    fips: '053'
+    geography_name: Monterey County
+    match_method: auto
+  CA0270100:
+    agency_name: CARMEL PD
+    geography_type: place
+    fips: null
+    geography_name: Carmel
+    match_method: unmatched
+  CA027013A:
+    agency_name: MONTEREY CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0270200:
+    agency_name: DEL REY OAKS PD
+    geography_type: place
+    fips: '18688'
+    geography_name: Del Rey Oaks city
+    match_method: auto
+  CA0270300:
+    agency_name: GONZALES PD
+    geography_type: place
+    fips: '30392'
+    geography_name: Gonzales city
+    match_method: auto
+  CA0270400:
+    agency_name: GREENFIELD PD
+    geography_type: place
+    fips: '30994'
+    geography_name: Greenfield city
+    match_method: auto
+  CA0270500:
+    agency_name: KING CITY PD
+    geography_type: place
+    fips: '38520'
+    geography_name: King City city
+    match_method: auto
+  CA0270600:
+    agency_name: MONTEREY PD
+    geography_type: place
+    fips: '48872'
+    geography_name: Monterey city
+    match_method: auto
+  CA0270700:
+    agency_name: PACIFIC GROVE PD
+    geography_type: place
+    fips: '54848'
+    geography_name: Pacific Grove city
+    match_method: auto
+  CA0270800:
+    agency_name: SALINAS PD
+    geography_type: place
+    fips: '64224'
+    geography_name: Salinas city
+    match_method: auto
+  CA0270900:
+    agency_name: SAND CITY PD
+    geography_type: place
+    fips: '65112'
+    geography_name: Sand City city
+    match_method: auto
+  CA0271000:
+    agency_name: SEASIDE PD
+    geography_type: place
+    fips: '70742'
+    geography_name: Seaside city
+    match_method: auto
+  CA0271100:
+    agency_name: SOLEDAD PD
+    geography_type: place
+    fips: '72520'
+    geography_name: Soledad city
+    match_method: auto
+  CA0271200:
+    agency_name: MARINA PD
+    geography_type: place
+    fips: '45778'
+    geography_name: Marina city
+    match_method: auto
+  CA0271900:
+    agency_name: CSU MONTEREY BAY PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0280000:
+    agency_name: NAPA CO SO
+    geography_type: county
+    fips: '055'
+    geography_name: Napa County
+    match_method: auto
+  CA0280100:
+    agency_name: CALISTOGA PD
+    geography_type: place
+    fips: 09892
+    geography_name: Calistoga city
+    match_method: auto
+  CA0280200:
+    agency_name: NAPA PD
+    geography_type: place
+    fips: '50258'
+    geography_name: Napa city
+    match_method: auto
+  CA0280300:
+    agency_name: ST. HELENA PD
+    geography_type: place
+    fips: '64140'
+    geography_name: St. Helena city
+    match_method: auto
+  CA0280900:
+    agency_name: NAPA VALLEY COLLEGE PD - DISPA
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0290000:
+    agency_name: NEVADA CO SO
+    geography_type: county
+    fips: '057'
+    geography_name: Nevada County
+    match_method: auto
+  CA0290100:
+    agency_name: GRASS VALLEY PD
+    geography_type: place
+    fips: '30798'
+    geography_name: Grass Valley city
+    match_method: auto
+  CA029013A:
+    agency_name: NEVADA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0290200:
+    agency_name: NEVADA CITY PD
+    geography_type: place
+    fips: '50874'
+    geography_name: Nevada City city
+    match_method: auto
+  CA0290800:
+    agency_name: TRUCKEE POLICE DEPT
+    geography_type: place
+    fips: '80588'
+    geography_name: Truckee town
+    match_method: auto
+  CA0300000:
+    agency_name: ORANGE CO SO
+    geography_type: county
+    fips: 059
+    geography_name: Orange County
+    match_method: auto
+  CA0300100:
+    agency_name: ANAHEIM PD
+    geography_type: place
+    fips: '02000'
+    geography_name: Anaheim city
+    match_method: auto
+  CA030013A:
+    agency_name: ORANGE CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0300200:
+    agency_name: BREA PD
+    geography_type: place
+    fips: 08100
+    geography_name: Brea city
+    match_method: auto
+  CA0300300:
+    agency_name: BUENA PARK PD
+    geography_type: place
+    fips: 08786
+    geography_name: Buena Park city
+    match_method: auto
+  CA0300400:
+    agency_name: COSTA MESA PD
+    geography_type: place
+    fips: '16532'
+    geography_name: Costa Mesa city
+    match_method: auto
+  CA0300500:
+    agency_name: CYPRESS PD
+    geography_type: place
+    fips: '17750'
+    geography_name: Cypress city
+    match_method: auto
+  CA0300600:
+    agency_name: LA PALMA PD
+    geography_type: place
+    fips: '40256'
+    geography_name: La Palma city
+    match_method: auto
+  CA0300700:
+    agency_name: FOUNTAIN VALLEY PD
+    geography_type: place
+    fips: '25380'
+    geography_name: Fountain Valley city
+    match_method: auto
+  CA0300800:
+    agency_name: FULLERTON PD
+    geography_type: place
+    fips: '28000'
+    geography_name: Fullerton city
+    match_method: auto
+  CA0300900:
+    agency_name: GARDEN GROVE PD
+    geography_type: place
+    fips: '29000'
+    geography_name: Garden Grove city
+    match_method: auto
+  CA0301000:
+    agency_name: HUNTINGTON BEACH PD
+    geography_type: place
+    fips: '36000'
+    geography_name: Huntington Beach city
+    match_method: auto
+  CA0301100:
+    agency_name: LAGUNA BEACH PD
+    geography_type: place
+    fips: '39178'
+    geography_name: Laguna Beach city
+    match_method: auto
+  CA0301200:
+    agency_name: LA HABRA PD
+    geography_type: place
+    fips: '39290'
+    geography_name: La Habra city
+    match_method: auto
+  CA0301300:
+    agency_name: LOS ALAMITOS PD
+    geography_type: place
+    fips: '43224'
+    geography_name: Los Alamitos city
+    match_method: auto
+  CA0301400:
+    agency_name: NEWPORT BEACH PD
+    geography_type: place
+    fips: '51182'
+    geography_name: Newport Beach city
+    match_method: auto
+  CA0301500:
+    agency_name: ORANGE PD
+    geography_type: place
+    fips: '53980'
+    geography_name: Orange city
+    match_method: auto
+  CA0301600:
+    agency_name: PLACENTIA PD
+    geography_type: place
+    fips: '57526'
+    geography_name: Placentia city
+    match_method: auto
+  CA0301900:
+    agency_name: SANTA ANA PD
+    geography_type: place
+    fips: '69000'
+    geography_name: Santa Ana city
+    match_method: auto
+  CA0302000:
+    agency_name: SEAL BEACH PD
+    geography_type: place
+    fips: '70686'
+    geography_name: Seal Beach city
+    match_method: auto
+  CA0302200:
+    agency_name: TUSTIN PD
+    geography_type: place
+    fips: '80854'
+    geography_name: Tustin city
+    match_method: auto
+  CA0302400:
+    agency_name: WESTMINSTER PD
+    geography_type: place
+    fips: '84550'
+    geography_name: Westminster city
+    match_method: auto
+  CA0302600:
+    agency_name: IRVINE PD
+    geography_type: place
+    fips: '36770'
+    geography_name: Irvine city
+    match_method: auto
+  CA0302700:
+    agency_name: CA ST UNIV PD-FULLERTON
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0304600:
+    agency_name: SNTA ANA UNF SCHL DST PD
+    geography_type: place
+    fips: null
+    geography_name: Snta Ana Unf Schl Dst
+    match_method: unmatched
+  CA0309600:
+    agency_name: IRVINE VALLEY COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0309700:
+    agency_name: UC-IRVINE PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA030A100:
+    agency_name: SADDLEBACK COMM COLL DIST PD
+    geography_type: place
+    fips: null
+    geography_name: Saddleback Comm Coll Dist
+    match_method: unmatched
+  CA0310000:
+    agency_name: PLACER CO SO - COMM
+    geography_type: county
+    fips: '061'
+    geography_name: Placer County
+    match_method: auto
+  CA0310100:
+    agency_name: AUBURN PD
+    geography_type: place
+    fips: '03204'
+    geography_name: Auburn city
+    match_method: auto
+  CA031013A:
+    agency_name: PLACER CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0310300:
+    agency_name: LINCOLN PD
+    geography_type: place
+    fips: '41474'
+    geography_name: Lincoln city
+    match_method: auto
+  CA0310400:
+    agency_name: ROCKLIN PD
+    geography_type: place
+    fips: '62364'
+    geography_name: Rocklin city
+    match_method: auto
+  CA0310500:
+    agency_name: ROSEVILLE PD
+    geography_type: place
+    fips: '62938'
+    geography_name: Roseville city
+    match_method: auto
+  CA0320000:
+    agency_name: PLUMAS CO SO
+    geography_type: county
+    fips: '063'
+    geography_name: Plumas County
+    match_method: auto
+  CA0330000:
+    agency_name: RIVERSIDE CO SO
+    geography_type: county
+    fips: '065'
+    geography_name: Riverside County
+    match_method: auto
+  CA0330100:
+    agency_name: BANNING PD
+    geography_type: place
+    fips: 03820
+    geography_name: Banning city
+    match_method: auto
+  CA033013A:
+    agency_name: RIVERSIDE CA DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0330200:
+    agency_name: BEAUMONT PD-COMM
+    geography_type: place
+    fips: 04758
+    geography_name: Beaumont city
+    match_method: auto
+  CA0330300:
+    agency_name: BLYTHE PD-COMMUNICATION
+    geography_type: place
+    fips: 07218
+    geography_name: Blythe city
+    match_method: auto
+  CA0330600:
+    agency_name: DESERT HOT SPRINGS PD
+    geography_type: place
+    fips: '18996'
+    geography_name: Desert Hot Springs city
+    match_method: auto
+  CA0330800:
+    agency_name: HEMET PD
+    geography_type: place
+    fips: '33182'
+    geography_name: Hemet city
+    match_method: auto
+  CA0330900:
+    agency_name: INDIO PD
+    geography_type: place
+    fips: '36448'
+    geography_name: Indio city
+    match_method: auto
+  CA0331100:
+    agency_name: PALM SPRINGS PD
+    geography_type: place
+    fips: '55254'
+    geography_name: Palm Springs city
+    match_method: auto
+  CA0331300:
+    agency_name: RIVERSIDE PD
+    geography_type: place
+    fips: '62000'
+    geography_name: Riverside city
+    match_method: auto
+  CA0331500:
+    agency_name: CORONA PD
+    geography_type: place
+    fips: '16350'
+    geography_name: Corona city
+    match_method: auto
+  CA0332300:
+    agency_name: RIVERSIDE CO WELFARE
+    geography_type: skip
+    skip_reason: welfare
+    match_method: auto
+  CA0332500:
+    agency_name: CATHEDRAL CITY PD
+    geography_type: place
+    fips: '12048'
+    geography_name: Cathedral City city
+    match_method: auto
+  CA0334200:
+    agency_name: MURRIETA PD
+    geography_type: place
+    fips: '50076'
+    geography_name: Murrieta city
+    match_method: auto
+  CA0334400:
+    agency_name: RIVERSIDE COMM COLL PD
+    geography_type: place
+    fips: null
+    geography_name: Riverside Comm Coll
+    match_method: unmatched
+  CA0334900:
+    agency_name: MENIFEE POLICE DEPARTMENT
+    geography_type: place
+    fips: '46842'
+    geography_name: Menifee city
+    match_method: auto
+  CA0335000:
+    agency_name: VAL VERDE USD PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0339700:
+    agency_name: UNIV OF CAL-RIVERSIDE PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0340000:
+    agency_name: SACRAMENTO CO SHERIFF'S DEPT
+    geography_type: county
+    fips: '067'
+    geography_name: Sacramento County
+    match_method: auto
+  CA0340100:
+    agency_name: FOLSOM PD
+    geography_type: place
+    fips: '24638'
+    geography_name: Folsom city
+    match_method: auto
+  CA034013A:
+    agency_name: SACRAMENTO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0340200:
+    agency_name: GALT PD
+    geography_type: place
+    fips: '28112'
+    geography_name: Galt city
+    match_method: auto
+  CA0340400:
+    agency_name: SACRAMENTO PD
+    geography_type: place
+    fips: '64000'
+    geography_name: Sacramento city
+    match_method: auto
+  CA0340800:
+    agency_name: ST UNIV PD-SACRAMENTO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0340C00:
+    agency_name: SACRAMENTO CO DEPT PARKS
+    geography_type: skip
+    skip_reason: park
+    match_method: auto
+  CA0340H00:
+    agency_name: ELK GROVE PD
+    geography_type: place
+    fips: '22020'
+    geography_name: Elk Grove city
+    match_method: auto
+  CA0341400:
+    agency_name: TWIN RIVERS DISTRICT POLICE DE
+    geography_type: place
+    fips: null
+    geography_name: Twin Rivers District Police De
+    match_method: unmatched
+  CA0342100:
+    agency_name: SAC CO DEPT OF HUMAN ASST
+    geography_type: skip
+    skip_reason: welfare
+    match_method: auto
+  CA0345100:
+    agency_name: FULTON-EL CAMINO REC & PARK PD
+    geography_type: place
+    fips: null
+    geography_name: Fulton-El Camino Rec & Park
+    match_method: unmatched
+  CA0345400:
+    agency_name: LOS RIOS COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0349600:
+    agency_name: CITRUS HEIGHTS PD
+    geography_type: place
+    fips: '13588'
+    geography_name: Citrus Heights city
+    match_method: auto
+  CA0349902:
+    agency_name: CHP-HQ A/C, STAFF
+    geography_type: state
+    fips: '06'
+    geography_name: California
+    match_method: auto
+  CA0350000:
+    agency_name: SAN BENITO CO SO
+    geography_type: county
+    fips: 069
+    geography_name: San Benito County
+    match_method: auto
+  CA0350100:
+    agency_name: HOLLISTER PD
+    geography_type: place
+    fips: '34120'
+    geography_name: Hollister city
+    match_method: auto
+  CA0360000:
+    agency_name: SAN BERNARDINO CO SO
+    geography_type: county
+    fips: '071'
+    geography_name: San Bernardino County
+    match_method: auto
+  CA0360100:
+    agency_name: BARSTOW PD
+    geography_type: place
+    fips: '04030'
+    geography_name: Barstow city
+    match_method: auto
+  CA0360200:
+    agency_name: CHINO PD
+    geography_type: place
+    fips: '13210'
+    geography_name: Chino city
+    match_method: auto
+  CA036023A:
+    agency_name: SAN BERNARDINO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0360300:
+    agency_name: COLTON PD
+    geography_type: place
+    fips: '14890'
+    geography_name: Colton city
+    match_method: auto
+  CA0360400:
+    agency_name: FONTANA PD
+    geography_type: place
+    fips: '24680'
+    geography_name: Fontana city
+    match_method: auto
+  CA0360500:
+    agency_name: MONTCLAIR PD
+    geography_type: place
+    fips: '48788'
+    geography_name: Montclair city
+    match_method: auto
+  CA0360700:
+    agency_name: ONTARIO PD
+    geography_type: place
+    fips: '53896'
+    geography_name: Ontario city
+    match_method: auto
+  CA0360800:
+    agency_name: REDLANDS PD
+    geography_type: place
+    fips: '59962'
+    geography_name: Redlands city
+    match_method: auto
+  CA0360900:
+    agency_name: RIALTO PD
+    geography_type: place
+    fips: '60466'
+    geography_name: Rialto city
+    match_method: auto
+  CA0361000:
+    agency_name: SAN BERNARDINO PD
+    geography_type: place
+    fips: '65000'
+    geography_name: San Bernardino city
+    match_method: auto
+  CA0361100:
+    agency_name: UPLAND PD
+    geography_type: place
+    fips: '81344'
+    geography_name: Upland city
+    match_method: auto
+  CA0361400:
+    agency_name: CSU SAN BERNARDINO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0361900:
+    agency_name: SAN BERNARDINO CO WELFAR
+    geography_type: skip
+    skip_reason: welfare
+    match_method: auto
+  CA0362300:
+    agency_name: SAN BERDO UNIF SCHOOL
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0362600:
+    agency_name: CHAFFEY COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0363900:
+    agency_name: SAN BERNARDINO COM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0364200:
+    agency_name: HESPERIA SCHOOL DISTRICT PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0364900:
+    agency_name: SNOWLINE JOINT USD PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0365000:
+    agency_name: FONTANA UNIF SCH DIST PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0365800:
+    agency_name: VICTOR VALLEY COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA036A100:
+    agency_name: APPLE VALLEY DISTRICT PD
+    geography_type: place
+    fips: '02364'
+    geography_name: Apple Valley town
+    match_method: auto
+  CA036XR01:
+    agency_name: HESPERIA PARK RANGERS
+    geography_type: skip
+    skip_reason: park
+    match_method: auto
+  CA0370000:
+    agency_name: SAN DIEGO CO SO
+    geography_type: county
+    fips: '073'
+    geography_name: San Diego County
+    match_method: auto
+  CA0370100:
+    agency_name: CARLSBAD PD
+    geography_type: place
+    fips: '11194'
+    geography_name: Carlsbad city
+    match_method: auto
+  CA0370200:
+    agency_name: CHULA VISTA PD
+    geography_type: place
+    fips: '13392'
+    geography_name: Chula Vista city
+    match_method: auto
+  CA037023A:
+    agency_name: SAN DIEGO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0370300:
+    agency_name: CORONADO PD
+    geography_type: place
+    fips: '16378'
+    geography_name: Coronado city
+    match_method: auto
+  CA0370500:
+    agency_name: EL CAJON PD
+    geography_type: place
+    fips: '21712'
+    geography_name: El Cajon city
+    match_method: auto
+  CA0370600:
+    agency_name: ESCONDIDO PD
+    geography_type: place
+    fips: '22804'
+    geography_name: Escondido city
+    match_method: auto
+  CA0370800:
+    agency_name: LA MESA PD
+    geography_type: place
+    fips: '40004'
+    geography_name: La Mesa city
+    match_method: auto
+  CA0370900:
+    agency_name: NATIONAL CITY PD
+    geography_type: place
+    fips: '50398'
+    geography_name: National City city
+    match_method: auto
+  CA0371000:
+    agency_name: OCEANSIDE PD
+    geography_type: place
+    fips: '53322'
+    geography_name: Oceanside city
+    match_method: auto
+  CA0371100:
+    agency_name: SAN DIEGO PD
+    geography_type: place
+    fips: '66000'
+    geography_name: San Diego city
+    match_method: auto
+  CA0371400:
+    agency_name: ST UNIV PD-SAN DIEGO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0371500:
+    agency_name: SAN DIEGO HARBOR PD
+    geography_type: place
+    fips: null
+    geography_name: San Diego Harbor
+    match_method: unmatched
+  CA0371800:
+    agency_name: SOUTHWESTERN COLLEGE POLICE DE
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0372100:
+    agency_name: SAN DIEGO CITY SCHOOLS PD
+    geography_type: place
+    fips: null
+    geography_name: San Diego City Schools
+    match_method: unmatched
+  CA0372800:
+    agency_name: SAN DIEGO COMM COLL PD
+    geography_type: place
+    fips: null
+    geography_name: San Diego Comm Coll
+    match_method: unmatched
+  CA0373200:
+    agency_name: CSU SAN MARCOS PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0379700:
+    agency_name: UC-SAN DIEGO PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA037A600:
+    agency_name: MIRA COSTA COMMUNITY COLL PD
+    geography_type: place
+    fips: null
+    geography_name: Mira Costa Community Coll
+    match_method: unmatched
+  CA037A700:
+    agency_name: PALOMAR COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0380000:
+    agency_name: SAN FRANCISCO CO SO
+    geography_type: county
+    fips: '075'
+    geography_name: San Francisco County
+    match_method: auto
+  CA0380100:
+    agency_name: SAN FRANCISCO PD - DOC
+    geography_type: place
+    fips: '67000'
+    geography_name: San Francisco city
+    match_method: auto
+  CA038013A:
+    agency_name: SAN FRANCISCO CO DA - HOJ
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0380300:
+    agency_name: ST UNIV PD-SAN FRANCISCO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0381700:
+    agency_name: SF COMM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0389700:
+    agency_name: UC-SAN FRANCISCO PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0390000:
+    agency_name: SAN JOAQUIN CO SO
+    geography_type: county
+    fips: '077'
+    geography_name: San Joaquin County
+    match_method: auto
+  CA0390100:
+    agency_name: ESCALON PD
+    geography_type: place
+    fips: '22790'
+    geography_name: Escalon city
+    match_method: auto
+  CA0390200:
+    agency_name: LODI PD
+    geography_type: place
+    fips: '42202'
+    geography_name: Lodi city
+    match_method: auto
+  CA039023A:
+    agency_name: SAN JOAQUIN CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0390300:
+    agency_name: MANTECA PD
+    geography_type: place
+    fips: '45484'
+    geography_name: Manteca city
+    match_method: auto
+  CA0390400:
+    agency_name: RIPON PD
+    geography_type: place
+    fips: '61026'
+    geography_name: Ripon city
+    match_method: auto
+  CA0390500:
+    agency_name: STOCKTON PD
+    geography_type: place
+    fips: '75000'
+    geography_name: Stockton city
+    match_method: auto
+  CA0390600:
+    agency_name: TRACY PD
+    geography_type: place
+    fips: '80238'
+    geography_name: Tracy city
+    match_method: auto
+  CA0390800:
+    agency_name: SJOAQUIN DELTA COLLEGEPD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0391100:
+    agency_name: STOCKTON PORT DISTRICT PD
+    geography_type: place
+    fips: null
+    geography_name: Stockton Port District
+    match_method: unmatched
+  CA0391500:
+    agency_name: STOCKTON SCHOOL DIST PD
+    geography_type: skip
+    skip_reason: school_district
+    match_method: auto
+  CA0392400:
+    agency_name: LATHROP PD
+    geography_type: place
+    fips: '40704'
+    geography_name: Lathrop city
+    match_method: auto
+  CA0400000:
+    agency_name: SAN LUIS OBISPO CO SO
+    geography_type: county
+    fips: 079
+    geography_name: San Luis Obispo County
+    match_method: auto
+  CA0400100:
+    agency_name: ARROYO GRANDE PD
+    geography_type: place
+    fips: 02868
+    geography_name: Arroyo Grande city
+    match_method: auto
+  CA040013A:
+    agency_name: SAN LUIS OBISPO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0400200:
+    agency_name: GROVER BEACH PD
+    geography_type: place
+    fips: '31393'
+    geography_name: Grover Beach city
+    match_method: auto
+  CA0400300:
+    agency_name: MORRO BAY PD
+    geography_type: place
+    fips: '49362'
+    geography_name: Morro Bay city
+    match_method: auto
+  CA0400400:
+    agency_name: PASO ROBLES PD
+    geography_type: place
+    fips: null
+    geography_name: Paso Robles
+    match_method: unmatched
+  CA0400500:
+    agency_name: PISMO BEACH PD
+    geography_type: place
+    fips: '57414'
+    geography_name: Pismo Beach city
+    match_method: auto
+  CA0400600:
+    agency_name: SAN LUIS OBISPO PD
+    geography_type: place
+    fips: '68154'
+    geography_name: San Luis Obispo city
+    match_method: auto
+  CA0400700:
+    agency_name: CAL POLY STATE UNIV PD-SLO
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0400800:
+    agency_name: ATASCADERO PD
+    geography_type: place
+    fips: '03064'
+    geography_name: Atascadero city
+    match_method: auto
+  CA0401900:
+    agency_name: CUESTA COLLEGE POLICE DEPARTME
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA040XR01:
+    agency_name: SAN LUIS OBISPO HARBOR PATROL
+    geography_type: skip
+    skip_reason: harbor
+    match_method: auto
+  CA0410000:
+    agency_name: SAN MATEO CO SO
+    geography_type: county
+    fips: 081
+    geography_name: San Mateo County
+    match_method: auto
+  CA0410100:
+    agency_name: 'ATHERTON PD #1'
+    geography_type: place
+    fips: 03092
+    geography_name: Atherton town
+    match_method: auto
+  CA0410200:
+    agency_name: BELMONT PD
+    geography_type: place
+    fips: 05108
+    geography_name: Belmont city
+    match_method: auto
+  CA041023A:
+    agency_name: SAN MATEO CO. DA INV.
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0410300:
+    agency_name: BRISBANE PD
+    geography_type: place
+    fips: 08310
+    geography_name: Brisbane city
+    match_method: auto
+  CA0410400:
+    agency_name: BURLINGAME PD-COMM
+    geography_type: place
+    fips: 09066
+    geography_name: Burlingame city
+    match_method: auto
+  CA0410500:
+    agency_name: COLMA PD
+    geography_type: place
+    fips: '14736'
+    geography_name: Colma town
+    match_method: auto
+  CA0410600:
+    agency_name: DALY CITY PD
+    geography_type: place
+    fips: '17918'
+    geography_name: Daly City city
+    match_method: auto
+  CA0410800:
+    agency_name: HILLSBOROUGH PD
+    geography_type: place
+    fips: '33798'
+    geography_name: Hillsborough town
+    match_method: auto
+  CA0410900:
+    agency_name: MENLO PARK PD
+    geography_type: place
+    fips: '46870'
+    geography_name: Menlo Park city
+    match_method: auto
+  CA0411100:
+    agency_name: PACIFICA PD
+    geography_type: place
+    fips: '54806'
+    geography_name: Pacifica city
+    match_method: auto
+  CA0411300:
+    agency_name: REDWOOD CITY PD
+    geography_type: place
+    fips: '60102'
+    geography_name: Redwood City city
+    match_method: auto
+  CA0411400:
+    agency_name: SAN BRUNO PD
+    geography_type: place
+    fips: '65028'
+    geography_name: San Bruno city
+    match_method: auto
+  CA0411600:
+    agency_name: SAN MATEO PD
+    geography_type: place
+    fips: '68252'
+    geography_name: San Mateo city
+    match_method: auto
+  CA0411700:
+    agency_name: S. SAN FRANCISCO PD
+    geography_type: place
+    fips: null
+    geography_name: S. San Francisco
+    match_method: unmatched
+  CA0411900:
+    agency_name: BROADMOOR PD
+    geography_type: place
+    fips: 08338
+    geography_name: Broadmoor CDP
+    match_method: auto
+  CA0412000:
+    agency_name: FOSTER CITY PD
+    geography_type: place
+    fips: '25338'
+    geography_name: Foster City city
+    match_method: auto
+  CA0412700:
+    agency_name: EAST PALO ALTO PD
+    geography_type: place
+    fips: '20956'
+    geography_name: East Palo Alto city
+    match_method: auto
+  CA0420000:
+    agency_name: SANTA BARBARA CO SO
+    geography_type: county
+    fips: 083
+    geography_name: Santa Barbara County
+    match_method: auto
+  CA0420100:
+    agency_name: GUADALUPE PD
+    geography_type: place
+    fips: '31414'
+    geography_name: Guadalupe city
+    match_method: auto
+  CA042013A:
+    agency_name: SANTA BARBARA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0420200:
+    agency_name: LOMPOC PD
+    geography_type: place
+    fips: '42524'
+    geography_name: Lompoc city
+    match_method: auto
+  CA0420300:
+    agency_name: SANTA BARBARA PD
+    geography_type: place
+    fips: '69070'
+    geography_name: Santa Barbara city
+    match_method: auto
+  CA0420400:
+    agency_name: SANTA MARIA PD
+    geography_type: place
+    fips: '69196'
+    geography_name: Santa Maria city
+    match_method: auto
+  CA0420600:
+    agency_name: SANTA BARBARA HARBOR PD
+    geography_type: place
+    fips: null
+    geography_name: Santa Barbara Harbor
+    match_method: unmatched
+  CA0421100:
+    agency_name: ALLAN HANCOCK COLLG PD
+    geography_type: place
+    fips: null
+    geography_name: Allan Hancock Collg
+    match_method: unmatched
+  CA0421200:
+    agency_name: S BARBARA CTY AIRPORT PD
+    geography_type: skip
+    skip_reason: airport
+    match_method: auto
+  CA0429700:
+    agency_name: UC-SANTA BARBARA PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0430000:
+    agency_name: SANTA CLARA CO SO
+    geography_type: county
+    fips: 085
+    geography_name: Santa Clara County
+    match_method: auto
+  CA043013A:
+    agency_name: SANTA CLARA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0430200:
+    agency_name: CAMPBELL PD
+    geography_type: place
+    fips: '10345'
+    geography_name: Campbell city
+    match_method: auto
+  CA0430400:
+    agency_name: GILROY PD
+    geography_type: place
+    fips: '29504'
+    geography_name: Gilroy city
+    match_method: auto
+  CA0430500:
+    agency_name: LOS ALTOS PD
+    geography_type: place
+    fips: '43280'
+    geography_name: Los Altos city
+    match_method: auto
+  CA0430700:
+    agency_name: LOS GATOS PD
+    geography_type: place
+    fips: '44112'
+    geography_name: Los Gatos town
+    match_method: auto
+  CA0430800:
+    agency_name: MILPITAS PD
+    geography_type: place
+    fips: '47766'
+    geography_name: Milpitas city
+    match_method: auto
+  CA0431000:
+    agency_name: MORGAN HILL PD
+    geography_type: place
+    fips: '49278'
+    geography_name: Morgan Hill city
+    match_method: auto
+  CA0431100:
+    agency_name: MOUNTAIN VIEW PD
+    geography_type: place
+    fips: '49670'
+    geography_name: Mountain View city
+    match_method: auto
+  CA0431200:
+    agency_name: PALO ALTO PD
+    geography_type: place
+    fips: '55282'
+    geography_name: Palo Alto city
+    match_method: auto
+  CA0431300:
+    agency_name: SAN JOSE PD
+    geography_type: place
+    fips: '68000'
+    geography_name: San Jose city
+    match_method: auto
+  CA0431400:
+    agency_name: SANTA CLARA PD
+    geography_type: place
+    fips: '69084'
+    geography_name: Santa Clara city
+    match_method: auto
+  CA0431600:
+    agency_name: SUNNYVALE DPS
+    geography_type: place
+    fips: '77000'
+    geography_name: Sunnyvale city
+    match_method: auto
+  CA0431700:
+    agency_name: SAN JOSE STATE UNIV PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0432000:
+    agency_name: SANTA CLARA CO FIRE - ARSON
+    geography_type: place
+    fips: null
+    geography_name: Santa Clara Co Fire - Arson
+    match_method: unmatched
+  CA0432700:
+    agency_name: FOOTHILL-DEANZA COLL PD
+    geography_type: place
+    fips: null
+    geography_name: Foothill-Deanza Coll
+    match_method: unmatched
+  CA0433400:
+    agency_name: SAN JOSE EVERGREEN CCD PD
+    geography_type: place
+    fips: null
+    geography_name: San Jose Evergreen Ccd
+    match_method: unmatched
+  CA0433700:
+    agency_name: W VALLEY MISSION COM COL PD
+    geography_type: place
+    fips: null
+    geography_name: W Valley Mission Com Col
+    match_method: unmatched
+  CA0440000:
+    agency_name: SANTA CRUZ CO SO
+    geography_type: county
+    fips: 087
+    geography_name: Santa Cruz County
+    match_method: auto
+  CA0440100:
+    agency_name: CAPITOLA PD
+    geography_type: place
+    fips: '11040'
+    geography_name: Capitola city
+    match_method: auto
+  CA044013A:
+    agency_name: SANTA CRUZ CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0440200:
+    agency_name: SANTA CRUZ PD
+    geography_type: place
+    fips: '69112'
+    geography_name: Santa Cruz city
+    match_method: auto
+  CA0440300:
+    agency_name: WATSONVILLE PD
+    geography_type: place
+    fips: '83668'
+    geography_name: Watsonville city
+    match_method: auto
+  CA0440310:
+    agency_name: WATSONVILLE PD
+    geography_type: place
+    fips: '83668'
+    geography_name: Watsonville city
+    match_method: auto
+  CA0440400:
+    agency_name: SCOTTS VALLEY PD
+    geography_type: place
+    fips: '70588'
+    geography_name: Scotts Valley city
+    match_method: auto
+  CA0441100:
+    agency_name: SANTA CRUZ HARBOR PATROL
+    geography_type: skip
+    skip_reason: harbor
+    match_method: auto
+  CA0449700:
+    agency_name: UC-SANTA CRUZ
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0450000:
+    agency_name: SHASTA CO SO
+    geography_type: county
+    fips: 089
+    geography_name: Shasta County
+    match_method: auto
+  CA0450100:
+    agency_name: ANDERSON PD
+    geography_type: place
+    fips: '02042'
+    geography_name: Anderson city
+    match_method: auto
+  CA0450200:
+    agency_name: REDDING PD
+    geography_type: place
+    fips: '59920'
+    geography_name: Redding city
+    match_method: auto
+  CA045023A:
+    agency_name: SHASTA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0459100:
+    agency_name: SHASTA CO MARSHAL
+    geography_type: place
+    fips: null
+    geography_name: Shasta Co Marshal
+    match_method: unmatched
+  CA0460000:
+    agency_name: SIERRA CO SO
+    geography_type: county
+    fips: 091
+    geography_name: Sierra County
+    match_method: auto
+  CA0470000:
+    agency_name: SISKIYOU CO SO
+    geography_type: county
+    fips: 093
+    geography_name: Siskiyou County
+    match_method: auto
+  CA0470030:
+    agency_name: LAKE SHASTINA PD
+    geography_type: place
+    fips: '39728'
+    geography_name: Lake Shastina CDP
+    match_method: auto
+  CA047013A:
+    agency_name: SISKIYOU COUNTY DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0470300:
+    agency_name: ETNA PD
+    geography_type: place
+    fips: '22972'
+    geography_name: Etna city
+    match_method: auto
+  CA0470600:
+    agency_name: MT. SHASTA PD
+    geography_type: place
+    fips: null
+    geography_name: Mt. Shasta
+    match_method: unmatched
+  CA0470700:
+    agency_name: TULELAKE PD
+    geography_type: place
+    fips: '80686'
+    geography_name: Tulelake city
+    match_method: auto
+  CA0470800:
+    agency_name: WEED PD
+    geography_type: place
+    fips: '83850'
+    geography_name: Weed city
+    match_method: auto
+  CA0470900:
+    agency_name: YREKA PD
+    geography_type: place
+    fips: '86944'
+    geography_name: Yreka city
+    match_method: auto
+  CA0480000:
+    agency_name: SOLANO CO SO
+    geography_type: county
+    fips: 095
+    geography_name: Solano County
+    match_method: auto
+  CA0480100:
+    agency_name: BENICIA PD
+    geography_type: place
+    fips: 05290
+    geography_name: Benicia city
+    match_method: auto
+  CA048013A:
+    agency_name: SOLANO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0480200:
+    agency_name: DIXON PD
+    geography_type: place
+    fips: '19402'
+    geography_name: Dixon city
+    match_method: auto
+  CA0480300:
+    agency_name: FAIRFIELD PD
+    geography_type: place
+    fips: '23182'
+    geography_name: Fairfield city
+    match_method: auto
+  CA0480400:
+    agency_name: RIO VISTA PD
+    geography_type: place
+    fips: '60984'
+    geography_name: Rio Vista city
+    match_method: auto
+  CA0480500:
+    agency_name: SUISUN CITY PD
+    geography_type: place
+    fips: '75630'
+    geography_name: Suisun City city
+    match_method: auto
+  CA0480600:
+    agency_name: VACAVILLE PD
+    geography_type: place
+    fips: '81554'
+    geography_name: Vacaville city
+    match_method: auto
+  CA0480700:
+    agency_name: VALLEJO PD
+    geography_type: place
+    fips: '81666'
+    geography_name: Vallejo city
+    match_method: auto
+  CA0481300:
+    agency_name: SOLANO COMM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0481500:
+    agency_name: CALIFORNIA MARITIME ACADEMY PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0490000:
+    agency_name: SONOMA SHERIFF
+    geography_type: county
+    fips: 097
+    geography_name: Sonoma County
+    match_method: auto
+  CA0490100:
+    agency_name: CLOVERDALE PD
+    geography_type: place
+    fips: '14190'
+    geography_name: Cloverdale city
+    match_method: auto
+  CA049013A:
+    agency_name: SONOMA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0490200:
+    agency_name: COTATI PD
+    geography_type: place
+    fips: '16560'
+    geography_name: Cotati city
+    match_method: auto
+  CA0490300:
+    agency_name: HEALDSBURG PD
+    geography_type: place
+    fips: '33056'
+    geography_name: Healdsburg city
+    match_method: auto
+  CA0490400:
+    agency_name: ROHNERT PARK PD
+    geography_type: place
+    fips: '62546'
+    geography_name: Rohnert Park city
+    match_method: auto
+  CA0490500:
+    agency_name: SANTA ROSA PD
+    geography_type: place
+    fips: '70098'
+    geography_name: Santa Rosa city
+    match_method: auto
+  CA0490600:
+    agency_name: SEBASTOPOL PD
+    geography_type: place
+    fips: '70770'
+    geography_name: Sebastopol city
+    match_method: auto
+  CA0490700:
+    agency_name: SONOMA PD
+    geography_type: place
+    fips: '72646'
+    geography_name: Sonoma city
+    match_method: auto
+  CA0490800:
+    agency_name: PETALUMA PD
+    geography_type: place
+    fips: '56784'
+    geography_name: Petaluma city
+    match_method: auto
+  CA0490900:
+    agency_name: SONOMA STATE UNIVERSITY PD
+    geography_type: place
+    fips: '72654'
+    geography_name: Sonoma State University CDP
+    match_method: auto
+  CA0491300:
+    agency_name: WINDSOR POLICE DEPARTMENT
+    geography_type: place
+    fips: '85922'
+    geography_name: Windsor town
+    match_method: auto
+  CA0491400:
+    agency_name: SONOMA CO JR CLG DIST PD
+    geography_type: place
+    fips: null
+    geography_name: Sonoma Co Jr Clg Dist
+    match_method: unmatched
+  CA0500000:
+    agency_name: STANISLAUS CO SO
+    geography_type: county
+    fips: 099
+    geography_name: Stanislaus County
+    match_method: auto
+  CA0500100:
+    agency_name: CERES PD
+    geography_type: place
+    fips: '12524'
+    geography_name: Ceres city
+    match_method: auto
+  CA050013A:
+    agency_name: STANISLAUS CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0500200:
+    agency_name: MODESTO PD
+    geography_type: place
+    fips: '48354'
+    geography_name: Modesto city
+    match_method: auto
+  CA0500300:
+    agency_name: NEWMAN PD
+    geography_type: place
+    fips: '51140'
+    geography_name: Newman city
+    match_method: auto
+  CA0500400:
+    agency_name: OAKDALE PD
+    geography_type: place
+    fips: '52694'
+    geography_name: Oakdale city
+    match_method: auto
+  CA0500700:
+    agency_name: TURLOCK PD
+    geography_type: place
+    fips: '80812'
+    geography_name: Turlock city
+    match_method: auto
+  CA0501000:
+    agency_name: ST UNIV PD-STANISLAUS
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0510000:
+    agency_name: SUTTER CO SO
+    geography_type: county
+    fips: '101'
+    geography_name: Sutter County
+    match_method: auto
+  CA051013A:
+    agency_name: SUTTER CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0510200:
+    agency_name: YUBA CITY PD
+    geography_type: place
+    fips: '86972'
+    geography_name: Yuba City city
+    match_method: auto
+  CA0520000:
+    agency_name: TEHAMA CO SHERIFF'S DEPT
+    geography_type: county
+    fips: '103'
+    geography_name: Tehama County
+    match_method: auto
+  CA0520100:
+    agency_name: CORNING PD
+    geography_type: place
+    fips: '16322'
+    geography_name: Corning city
+    match_method: auto
+  CA052013A:
+    agency_name: TEHAMA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0520200:
+    agency_name: RED BLUFF PD
+    geography_type: place
+    fips: '59892'
+    geography_name: Red Bluff city
+    match_method: auto
+  CA0530000:
+    agency_name: TRINITY CO SHERIFF
+    geography_type: county
+    fips: '105'
+    geography_name: Trinity County
+    match_method: auto
+  CA0540000:
+    agency_name: TULARE CO SO
+    geography_type: county
+    fips: '107'
+    geography_name: Tulare County
+    match_method: auto
+  CA0540100:
+    agency_name: DINUBA PD
+    geography_type: place
+    fips: '19318'
+    geography_name: Dinuba city
+    match_method: auto
+  CA0540200:
+    agency_name: EXETER PD
+    geography_type: place
+    fips: '23126'
+    geography_name: Exeter city
+    match_method: auto
+  CA054023A:
+    agency_name: TULARE CO DA-VISALIA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0540300:
+    agency_name: FARMERSVILLE POLICE DEPT
+    geography_type: place
+    fips: '23616'
+    geography_name: Farmersville city
+    match_method: auto
+  CA0540400:
+    agency_name: LINDSAY DEPARTMENT OF PUBLIC S
+    geography_type: place
+    fips: '41712'
+    geography_name: Lindsay city
+    match_method: auto
+  CA0540500:
+    agency_name: PORTERVILLE PD
+    geography_type: place
+    fips: '58240'
+    geography_name: Porterville city
+    match_method: auto
+  CA0540600:
+    agency_name: TULARE PD
+    geography_type: place
+    fips: '80644'
+    geography_name: Tulare city
+    match_method: auto
+  CA0540700:
+    agency_name: VISALIA POLICE DEPT
+    geography_type: place
+    fips: '82954'
+    geography_name: Visalia city
+    match_method: auto
+  CA0540800:
+    agency_name: WOODLAKE PD
+    geography_type: place
+    fips: '86300'
+    geography_name: Woodlake city
+    match_method: auto
+  CA0541100:
+    agency_name: COLLEGE OF THE SEQUOIAS PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0550000:
+    agency_name: TUOLUMNE CO SO
+    geography_type: county
+    fips: '109'
+    geography_name: Tuolumne County
+    match_method: auto
+  CA0550100:
+    agency_name: SONORA PD
+    geography_type: place
+    fips: '72674'
+    geography_name: Sonora city
+    match_method: auto
+  CA055013A:
+    agency_name: TUOLUMNE CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0560000:
+    agency_name: VENTURA CO SO
+    geography_type: county
+    fips: '111'
+    geography_name: Ventura County
+    match_method: auto
+  CA056023A:
+    agency_name: VENTURA CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0560400:
+    agency_name: OXNARD PD
+    geography_type: place
+    fips: '54652'
+    geography_name: Oxnard city
+    match_method: auto
+  CA0560500:
+    agency_name: PORT HUENEME PD
+    geography_type: place
+    fips: '58296'
+    geography_name: Port Hueneme city
+    match_method: auto
+  CA0560600:
+    agency_name: SANTA PAULA PD
+    geography_type: place
+    fips: '70042'
+    geography_name: Santa Paula city
+    match_method: auto
+  CA0560800:
+    agency_name: VENTURA PD
+    geography_type: place
+    fips: null
+    geography_name: Ventura
+    match_method: unmatched
+  CA0560900:
+    agency_name: SIMI VALLEY PD
+    geography_type: place
+    fips: '72016'
+    geography_name: Simi Valley city
+    match_method: auto
+  CA0562200:
+    agency_name: CSU CHANNEL ISLANDS PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0562400:
+    agency_name: VENTURA COUNTY COM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA056800X:
+    agency_name: VENTURA COUNTY COM COLLEGE PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto
+  CA0570000:
+    agency_name: YOLO CO SO
+    geography_type: county
+    fips: '113'
+    geography_name: Yolo County
+    match_method: auto
+  CA0570100:
+    agency_name: DAVIS PD
+    geography_type: place
+    fips: '18100'
+    geography_name: Davis city
+    match_method: auto
+  CA0570200:
+    agency_name: WINTERS PD
+    geography_type: place
+    fips: '86034'
+    geography_name: Winters city
+    match_method: auto
+  CA0570300:
+    agency_name: WOODLAND PD
+    geography_type: place
+    fips: '86328'
+    geography_name: Woodland city
+    match_method: auto
+  CA057033A:
+    agency_name: YOLO CO DA
+    geography_type: skip
+    skip_reason: county_da
+    match_method: auto
+  CA0570400:
+    agency_name: W. SACRAMENTO PD
+    geography_type: place
+    fips: '84816'
+    geography_name: West Sacramento city
+    match_method: auto
+  CA0579700:
+    agency_name: UC-DAVIS PD
+    geography_type: skip
+    skip_reason: university
+    match_method: auto
+  CA0580000:
+    agency_name: YUBA CO SO
+    geography_type: county
+    fips: '115'
+    geography_name: Yuba County
+    match_method: auto
+  CA0580100:
+    agency_name: MARYSVILLE PD
+    geography_type: place
+    fips: '46170'
+    geography_name: Marysville city
+    match_method: auto
+  CA0580200:
+    agency_name: WHEATLAND PD
+    geography_type: place
+    fips: '85012'
+    geography_name: Wheatland city
+    match_method: auto
+  CA0580600:
+    agency_name: YUBA COM COLLEGE DISTRICT PD
+    geography_type: skip
+    skip_reason: college
+    match_method: auto

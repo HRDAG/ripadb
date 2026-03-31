@@ -14,6 +14,9 @@ dependencies = [
     "jinja2",
     "tabulate>=0.9.0",
     "markdown>=3.5",
+    "census",
+    "us",
+    "python-dotenv",
 ]
 
 [tool.hatch.build.targets.wheel]

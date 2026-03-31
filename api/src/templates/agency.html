@@ -16,9 +16,15 @@
     <div class="agency-meta">
         <span class="mono">{{ agency.agency_ori }}</span>
         {% if agency.county %}<span>{{ agency.county }} County</span>{% endif %}
-        <span>{{ agency.first_year }}-{{ agency.last_year }}</span>
+        <span>{{ agency.first_year }}&ndash;{{ agency.last_year }}</span>
         <span>{{ agency.total_person_stops|commas }} total person-stops</span>
     </div>
+    {% if jurisdiction %}
+    <div class="agency-jurisdiction">
+        <span>Jurisdiction: {{ jurisdiction.geography_name }}</span>
+        <span>Jurisdiction population (2023 ACS): {{ jurisdiction.total_pop|commas }}</span>
+    </div>
+    {% endif %}
 </div>
 
 <div class="tabs">

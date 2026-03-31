@@ -7,6 +7,7 @@
 DROP MATERIALIZED VIEW IF EXISTS mv_agency_year_age CASCADE;
 DROP MATERIALIZED VIEW IF EXISTS mv_agency_year_gender CASCADE;
 DROP MATERIALIZED VIEW IF EXISTS mv_agency_year_race CASCADE;
+DROP TABLE IF EXISTS jurisdiction_demographics CASCADE;
 DROP TABLE IF EXISTS agencies CASCADE;
 DROP TABLE IF EXISTS stops CASCADE;
 DROP TABLE IF EXISTS rae_labels CASCADE;
@@ -400,6 +401,25 @@ WHERE agency_ori IS NOT NULL
 GROUP BY agency_ori;
 
 CREATE INDEX idx_agencies_name ON agencies USING gin (agency_name gin_trgm_ops);
+
+-- ============================================================
+-- Jurisdiction demographics (census population by race)
+-- Keyed by (agency_ori, source, rae_code) to support multiple
+-- demographic sources (residential, daytime, driving-age, etc.)
+-- rae_code 0 = total population; 1-8 = race codes per rae_labels;
+-- rae_code 4 (MENA) has population=0, pct=NULL (no Census equivalent).
+-- ============================================================
+CREATE TABLE jurisdiction_demographics (
+    agency_ori TEXT NOT NULL REFERENCES agencies(agency_ori),
+    source TEXT NOT NULL,
+    rae_code SMALLINT NOT NULL,
+    population BIGINT NOT NULL,
+    pct NUMERIC(5,2),
+    geography_name TEXT,
+    PRIMARY KEY (agency_ori, source, rae_code)
+);
+
+CREATE INDEX idx_jd_agency ON jurisdiction_demographics (agency_ori);
 
 -- ============================================================
 -- Materialized view: agency × year × race
