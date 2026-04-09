@@ -7,7 +7,7 @@ at `/ripa`.
 ## Prerequisites on the remote server
 
 - PostgreSQL installed with a `ripadb` database
-- `uv` installed (the service file expects `/usr/local/bin/uv`)
+- Python 3.11+ with `python3 -m venv` available (e.g. `apt install python3-venv`)
 - nginx configured to reverse proxy to `127.0.0.1:8001`
 - SSH access configured (e.g. `~/.ssh/config` entry for `hrdag0`)
 
@@ -54,12 +54,13 @@ From the local machine, run:
 make deploy
 ```
 
-This does three things:
+This does four things:
 
 1. `git pull` on `hrdag0` (as root, then chowns to `ripadb`)
 2. Streams `pg_dump` from local Postgres into `pg_restore` on `hrdag0` (no
    intermediate file)
-3. Restarts the `ripadb-api` systemd service
+3. Reinstalls Python dependencies into the virtualenv at `/opt/ripadb/.venv`
+4. Restarts the `ripadb-api` systemd service
 
 To override defaults:
 

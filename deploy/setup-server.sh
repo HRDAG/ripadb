@@ -38,10 +38,11 @@ EOF
 chmod 640 /etc/ripadb/env
 chown root:ripadb /etc/ripadb/env
 
-echo "==> Installing uv (if not present)..."
-if ! command -v uv &>/dev/null; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
+echo "==> Creating Python virtualenv..."
+python3 -m venv "$INSTALL_DIR/.venv"
+"$INSTALL_DIR/.venv/bin/pip" install --quiet --upgrade pip
+"$INSTALL_DIR/.venv/bin/pip" install --quiet -r "$INSTALL_DIR/deploy/requirements.txt"
+chown -R ripadb:ripadb "$INSTALL_DIR/.venv"
 
 echo "==> Installing systemd service..."
 ln -sf "$INSTALL_DIR/deploy/ripadb-api.service" /etc/systemd/system/
