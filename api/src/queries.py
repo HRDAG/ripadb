@@ -185,6 +185,74 @@ def get_agency_demographics_age(ori: str, year: int | None = None):
     ]
 
 
+def _jd_table_ready(conn):
+    """Check if jurisdiction_demographics table exists with expected schema."""
+    row = conn.execute("""
+        SELECT 1 FROM information_schema.columns
+        WHERE table_name = 'jurisdiction_demographics'
+          AND column_name = 'geography_name'
+    """).fetchone()
+    return row is not None
+
+
+def get_agency_demographics_census(ori: str,
+                                    source: str = "acs5_2023_residential"):
+    """Get census demographics for an agency's jurisdiction.
+
+    Returns list of dicts with code, label, population, pct — or None
+    if no demographics are available for this agency.
+    """
+    with get_conn() as conn:
+        if not _jd_table_ready(conn):
+            return None
+
+        rows = conn.execute("""
+            SELECT jd.rae_code, rl.label, jd.population, jd.pct
+            FROM jurisdiction_demographics jd
+            LEFT JOIN rae_labels rl ON jd.rae_code = rl.code
+            WHERE jd.agency_ori = %s AND jd.source = %s AND jd.rae_code > 0
+            ORDER BY jd.population DESC
+        """, (ori, source)).fetchall()
+
+    if not rows:
+        return None
+
+    return [
+        {
+            "code": r[0],
+            "label": r[1] or "Middle Eastern/South Asian",
+            "population": int(r[2]),
+            "pct": round(float(r[3]), 1) if r[3] is not None else None,
+        }
+        for r in rows
+    ]
+
+
+def get_agency_jurisdiction(ori: str, source: str = "acs5_2023_residential"):
+    """Get jurisdiction name and total population for an agency.
+
+    Returns dict with geography_name, total_pop, source — or None.
+    """
+    with get_conn() as conn:
+        if not _jd_table_ready(conn):
+            return None
+
+        row = conn.execute("""
+            SELECT jd.population, jd.geography_name
+            FROM jurisdiction_demographics jd
+            WHERE jd.agency_ori = %s AND jd.source = %s AND jd.rae_code = 0
+        """, (ori, source)).fetchone()
+
+    if not row:
+        return None
+
+    return {
+        "total_pop": int(row[0]),
+        "geography_name": row[1],
+        "source": source,
+    }
+
+
 STOP_TYPE_VIEWS = {
     "all": "mv_agency_year_race",
     "equip": "mv_agency_year_race_equip",

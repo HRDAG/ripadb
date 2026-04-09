@@ -81,6 +81,7 @@ async def agency_detail(request: Request, ori: str):
 
     years = queries.get_agency_years(ori)
     stops_by_year = queries.get_agency_stops_by_year(ori)
+    jurisdiction = queries.get_agency_jurisdiction(ori)
 
     return templates.TemplateResponse("agency.html", {
         "request": request,
@@ -88,6 +89,7 @@ async def agency_detail(request: Request, ori: str):
         "ori": ori,
         "years": years,
         "stops_by_year": stops_by_year,
+        "jurisdiction": jurisdiction,
     })
 
 
@@ -121,6 +123,22 @@ async def agency_demographics(
     gender = queries.get_agency_demographics_gender(ori, yr)
     age = queries.get_agency_demographics_age(ori, yr)
     years = queries.get_agency_years(ori)
+    census = queries.get_agency_demographics_census(ori)
+
+    # Merge census population % into race data by code
+    if census:
+        census_by_code = {c["code"]: c for c in census}
+        for r in race:
+            c = census_by_code.get(r["code"])
+            r["pop_pct"] = c["pct"] if c else None
+            r["stop_pop_ratio"] = (
+                round(float(r["pct"]) / c["pct"], 1)
+                if c and c["pct"] and c["pct"] > 0 else None
+            )
+    else:
+        for r in race:
+            r["pop_pct"] = None
+            r["stop_pop_ratio"] = None
 
     return templates.TemplateResponse("partials/agency_tabs.html", {
         "request": request,
@@ -131,6 +149,7 @@ async def agency_demographics(
         "years": years,
         "selected_year": yr,
         "ori": ori,
+        "has_census": census is not None,
     })
 
 
@@ -145,6 +164,22 @@ async def agency_disparities(
         stop_type = "all"
     disparities = queries.get_agency_disparities(ori, yr, stop_type)
     years = queries.get_agency_years(ori)
+    census = queries.get_agency_demographics_census(ori)
+
+    # Merge census population % into disparities by race code
+    if census:
+        census_by_code = {c["code"]: c for c in census}
+        for d in disparities:
+            c = census_by_code.get(d["code"])
+            d["pop_pct"] = c["pct"] if c else None
+            d["stop_pop_ratio"] = (
+                round(float(d["pct_share"]) / c["pct"], 1)
+                if c and c["pct"] and c["pct"] > 0 else None
+            )
+    else:
+        for d in disparities:
+            d["pop_pct"] = None
+            d["stop_pop_ratio"] = None
 
     return templates.TemplateResponse("partials/agency_tabs.html", {
         "request": request,
@@ -155,6 +190,7 @@ async def agency_disparities(
         "stop_type": stop_type,
         "stop_types": queries.STOP_TYPE_LABELS,
         "ori": ori,
+        "has_census": census is not None,
     })
 
 

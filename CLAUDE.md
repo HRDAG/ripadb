@@ -71,16 +71,18 @@ individual/              # per-dataset import and cleaning
 │   └── clean/           # normalize and validate data
 ├── RIPA-Berkeley/       # (planned) city-specific RIPA data
 ├── RIPA-San-Francisco/  # (planned) city-specific RIPA data
-├── census/              # (planned) census demographics
+├── census/
+│   └── fetch/           # ACS 5-Year B03002 demographics via Census API
 ├── arrests/             # (planned) arrest records
 ├── use-of-force/        # (planned) UoF records
 ├── court/               # (planned) court outcome data
 └── CAD/                 # (planned) CAD logs via PRA
 database/                # Load cleaned Parquet → Postgres, materialized views
-├── Makefile             # `make load`, `make refresh`, `make clean`
+├── Makefile             # `make load`, `make refresh`, `make load-demographics`
 ├── src/
 │   ├── schema.sql       # DDL: tables, indexes, materialized views
-│   └── load.py          # Parquet → Postgres via polars + psycopg COPY
+│   ├── load.py          # Parquet → Postgres via polars + psycopg COPY
+│   └── load_demographics.py  # Load jurisdiction demographics independently
 └── hand/
     └── lookups.yaml     # Code→label maps (RAE_FULL, G_FULL, etc.)
 api/                     # FastAPI app (API + htmx UI) — agency explorer
@@ -100,7 +102,12 @@ api/                     # FastAPI app (API + htmx UI) — agency explorer
     ├── style.css
     ├── htmx.min.js      # Vendored htmx 2.0.4
     └── chart.umd.min.js # Vendored Chart.js 4.4.7
-match/                   # (planned) linking datasets together
+match/                   # linking datasets together
+└── ori-demographics/    # ORI → Census geography crosswalk + join
+    ├── hand/crosswalk.yaml  # Reviewed ORI→FIPS mapping
+    └── src/
+        ├── build_crosswalk.py   # Generate crosswalk from agencies table
+        └── join_demographics.py # Join crosswalk × ACS → demographics
 analysis/                # (planned) deeper analyses and writeups
 ```
 
@@ -262,6 +269,21 @@ involved in a single stop). Key structural differences by era:
   - Stop-type filter on disparities: "All stops" or "Equipment violations"
     (high-discretion pretextual stop indicator)
   Run `make -C api run` to start on http://localhost:8000
+- `individual/census/fetch/`: downloads ACS 5-Year B03002 (race/ethnicity)
+  for all CA places, counties, and state via Census API. Uses python-dotenv
+  for `CENSUS_API_KEY` from `.env`. Run `make -C individual/census/fetch`.
+- `match/ori-demographics/`: builds ORI→Census geography crosswalk
+  (city PD→place FIPS, sheriff→county FIPS, CHP→state, special→skip),
+  joins with ACS data to produce per-agency demographics Parquet.
+  Crosswalk in `hand/crosswalk.yaml` (395 agencies matched, ~160 skipped).
+  Run `make -C match/ori-demographics`.
+- `database/`: `jurisdiction_demographics` table loaded independently via
+  `make -C database load-demographics`. Keyed by (agency_ori, source,
+  rae_code). rae_code 0=total, 1-8=race codes, 4 (MENA)=no Census equiv.
+  Includes `geography_name` for display.
+- `api/`: Demographics and disparities tabs show Pop %, Stop/Pop ratio
+  (stop share / pop share). Agency header shows jurisdiction name and
+  population. Graceful degradation when demographics not loaded.
 - All scripts are idempotent; dependencies managed via `pyproject.toml` + `uv`
 
 ### Database connection
@@ -273,7 +295,7 @@ for remote deployment). Default: `dbname=ripadb` (libpq conninfo format).
 - Deploy to droplet (pg_dump/restore, systemd + nginx)
 - Additional stop-type filters (moving violations, reasonable suspicion, etc.)
 - Jurisdiction-specific RIPA data imports (Berkeley, San Francisco)
-- Census data for benchmark comparisons
+- Additional demographic sources (daytime population, driving-age, etc.)
 
 ## Tech stack
 
