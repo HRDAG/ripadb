@@ -33,7 +33,7 @@ sudo -u postgres psql -d "$DB_NAME" -c "ALTER DEFAULT PRIVILEGES IN SCHEMA publi
 echo "==> Setting up environment file..."
 mkdir -p /etc/ripadb
 cat > /etc/ripadb/env <<EOF
-DATABASE_URL=dbname=$DB_NAME
+DATABASE_URL="dbname=$DB_NAME"
 EOF
 chmod 640 /etc/ripadb/env
 chown root:ripadb /etc/ripadb/env
