@@ -12,10 +12,13 @@ ExecStart=/var/lib/ripadb/.local/bin/uv run --frozen uvicorn src.app:app --host 
 Restart=on-failure
 RestartSec=5
 
+StandardOutput=append:/var/log/ripadb/ripadb-server.log
+StandardError=append:/var/log/ripadb/ripadb-server.log
+
 # Hardening
 NoNewPrivileges=true
 ProtectHome=tmpfs
-ReadWritePaths=/var/lib/ripadb
+ReadWritePaths=/var/lib/ripadb /var/log/ripadb
 ProtectSystem=strict
 PrivateTmp=true
 ReadOnlyPaths=/opt/ripadb
