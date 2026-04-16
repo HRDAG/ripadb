@@ -8,13 +8,14 @@ User=ripadb
 Group=ripadb
 WorkingDirectory=/opt/ripadb/api
 EnvironmentFile=/etc/ripadb/env
-ExecStart=/opt/ripadb/.venv/bin/uvicorn src.app:app --host 127.0.0.1 --port 8001
+ExecStart=/var/lib/ripadb/.local/bin/uv run uvicorn src.app:app --host 127.0.0.1 --port 8001
 Restart=on-failure
 RestartSec=5
 
 # Hardening
 NoNewPrivileges=true
-ProtectHome=true
+ProtectHome=tmpfs
+ReadWritePaths=/var/lib/ripadb
 ProtectSystem=strict
 PrivateTmp=true
 ReadOnlyPaths=/opt/ripadb

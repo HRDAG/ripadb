@@ -5,11 +5,17 @@ set -euo pipefail
 
 REPO_URL="${1:?Usage: $0 <git-repo-url>}"
 INSTALL_DIR=/opt/ripadb
+HOME_DIR=/var/lib/ripadb
 DB_NAME=ripadb
 
 echo "==> Creating ripadb system user..."
 if ! id ripadb &>/dev/null; then
-    useradd -r -s /usr/sbin/nologin -d "$INSTALL_DIR" ripadb
+    useradd -r -s /usr/sbin/nologin -d "$HOME_DIR" -m ripadb
+else
+    # Update home dir if user already exists with old home
+    usermod -d "$HOME_DIR" ripadb
+    mkdir -p "$HOME_DIR"
+    chown ripadb:ripadb "$HOME_DIR"
 fi
 
 echo "==> Cloning repo to $INSTALL_DIR..."
@@ -38,11 +44,8 @@ EOF
 chmod 640 /etc/ripadb/env
 chown root:ripadb /etc/ripadb/env
 
-echo "==> Creating Python virtualenv..."
-python3 -m venv "$INSTALL_DIR/.venv"
-"$INSTALL_DIR/.venv/bin/pip" install --quiet --upgrade pip
-"$INSTALL_DIR/.venv/bin/pip" install --quiet -r "$INSTALL_DIR/deploy/requirements.txt"
-chown -R ripadb:ripadb "$INSTALL_DIR/.venv"
+echo "==> Installing uv for ripadb user..."
+sudo -u ripadb env HOME="$HOME_DIR" sh -c 'curl -LsSf https://astral.sh/uv/install.sh | sh'
 
 echo "==> Installing systemd service..."
 ln -sf "$INSTALL_DIR/deploy/ripadb-api.service" /etc/systemd/system/

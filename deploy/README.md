@@ -7,7 +7,7 @@ at `/ripa`.
 ## Prerequisites on the remote server
 
 - PostgreSQL installed with a `ripadb` database
-- Python 3.11+ with `python3 -m venv` available (e.g. `apt install python3-venv`)
+- `uv` installed for the `ripadb` user (setup script handles this)
 - nginx configured to reverse proxy to `127.0.0.1:8001`
 - SSH access configured (e.g. `~/.ssh/config` entry for `hrdag0`)
 
@@ -30,15 +30,16 @@ ssh hrdag0 sudo bash /tmp/setup-server.sh <repo-url>
 
 This script:
 
-1. Creates a `ripadb` system user (no login shell, home at `/opt/ripadb`)
+1. Creates a `ripadb` system user (no login shell, home at `/var/lib/ripadb`)
 2. Clones the repo to `/opt/ripadb`
 3. Creates a `ripadb` Postgres role with read-only access to the database
 4. Writes `/etc/ripadb/env` with `DATABASE_URL` (readable only by `ripadb`)
-5. Installs and enables the systemd service
+5. Installs `uv` for the `ripadb` user
+6. Installs and enables the systemd service
 
 ### What the setup configures
 
-- **System user**: `ripadb` (no shell, no home directory login)
+- **System user**: `ripadb` (no shell, home at `/var/lib/ripadb`)
 - **Code location**: `/opt/ripadb` (owned by `ripadb:ripadb`)
 - **Database access**: Postgres role `ripadb` with SELECT-only grants via
   peer auth (the Unix user `ripadb` authenticates as Postgres role `ripadb`)
@@ -54,13 +55,12 @@ From the local machine, run:
 make deploy
 ```
 
-This does four things:
+This does three things:
 
 1. `git pull` on `hrdag0` (as root, then chowns to `ripadb`)
 2. Streams `pg_dump` from local Postgres into `pg_restore` on `hrdag0` (no
    intermediate file)
-3. Reinstalls Python dependencies into the virtualenv at `/opt/ripadb/.venv`
-4. Restarts the `ripadb-api` systemd service
+3. Restarts the `ripadb-api` systemd service (`uv run` resolves deps on start)
 
 To override defaults:
 
