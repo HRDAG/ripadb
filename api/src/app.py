@@ -58,8 +58,7 @@ templates.env.filters["commas"] = format_number
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     agencies = queries.search_agencies(limit=50)
-    return templates.TemplateResponse("index.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "index.html", {
         "agencies": agencies,
     })
 
@@ -67,8 +66,7 @@ async def index(request: Request):
 @app.get("/search", response_class=HTMLResponse)
 async def search(request: Request, q: str = ""):
     agencies = queries.search_agencies(q=q, limit=50)
-    return templates.TemplateResponse("partials/agency_list.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "partials/agency_list.html", {
         "agencies": agencies,
     })
 
@@ -83,8 +81,7 @@ async def agency_detail(request: Request, ori: str):
     stops_by_year = queries.get_agency_stops_by_year(ori)
     jurisdiction = queries.get_agency_jurisdiction(ori)
 
-    return templates.TemplateResponse("agency.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "agency.html", {
         "agency": agency,
         "ori": ori,
         "years": years,
@@ -96,8 +93,7 @@ async def agency_detail(request: Request, ori: str):
 @app.get("/agency/{ori}/overview", response_class=HTMLResponse)
 async def agency_overview(request: Request, ori: str):
     stops_by_year = queries.get_agency_stops_by_year(ori)
-    return templates.TemplateResponse("partials/agency_overview.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "partials/agency_overview.html", {
         "ori": ori,
         "stops_by_year": stops_by_year,
     })
@@ -140,8 +136,7 @@ async def agency_demographics(
             r["pop_pct"] = None
             r["stop_pop_ratio"] = None
 
-    return templates.TemplateResponse("partials/agency_tabs.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "partials/agency_tabs.html", {
         "tab": "demographics",
         "race": race,
         "gender": gender,
@@ -181,8 +176,7 @@ async def agency_disparities(
             d["pop_pct"] = None
             d["stop_pop_ratio"] = None
 
-    return templates.TemplateResponse("partials/agency_tabs.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "partials/agency_tabs.html", {
         "tab": "disparities",
         "disparities": disparities,
         "years": years,
@@ -198,8 +192,7 @@ async def agency_disparities(
 
 @app.get("/articles", response_class=HTMLResponse)
 async def article_list(request: Request):
-    return templates.TemplateResponse("articles.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "articles.html", {
         "articles": request.app.state.articles,
     })
 
@@ -216,8 +209,7 @@ async def article_detail(request: Request, slug: str):
         return HTMLResponse("<h1>Article not built</h1>", status_code=404)
 
     content = html_path.read_text()
-    return templates.TemplateResponse("article.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "article.html", {
         "article": article,
         "content": content,
     })
