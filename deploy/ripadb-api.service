@@ -8,7 +8,7 @@ User=ripadb
 Group=ripadb
 WorkingDirectory=/opt/ripadb/api
 EnvironmentFile=/etc/ripadb/env
-ExecStart=/var/lib/ripadb/.local/bin/uv run uvicorn src.app:app --host 127.0.0.1 --port 8001
+ExecStart=/var/lib/ripadb/.local/bin/uv run --frozen uvicorn src.app:app --host 127.0.0.1 --port 8001
 Restart=on-failure
 RestartSec=5
 
