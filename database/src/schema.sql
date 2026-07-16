@@ -422,6 +422,25 @@ CREATE TABLE jurisdiction_demographics (
 CREATE INDEX idx_jd_agency ON jurisdiction_demographics (agency_ori);
 
 -- ============================================================
+-- Materialized view: agency × year
+-- True distinct-stop counts. The per-demographic views below also
+-- compute COUNT(DISTINCT doj_record_id), but per group -- a stop
+-- involving people of two perceived races appears in both race rows,
+-- so summing those double-counts multi-race stops (issue #14).
+-- ============================================================
+CREATE MATERIALIZED VIEW mv_agency_year AS
+SELECT
+    agency_ori,
+    data_year,
+    COUNT(*) AS n_person_stops,
+    COUNT(DISTINCT doj_record_id) AS n_stops
+FROM stops
+WHERE agency_ori IS NOT NULL
+GROUP BY agency_ori, data_year;
+
+CREATE INDEX idx_mv_ay_agency ON mv_agency_year (agency_ori);
+
+-- ============================================================
 -- Materialized view: agency × year × race
 -- ============================================================
 CREATE MATERIALIZED VIEW mv_agency_year_race AS

@@ -63,11 +63,9 @@ def get_agency_stops_by_year(ori: str):
     """Get stop counts per year for an agency. Returns list of dicts."""
     with get_conn() as conn:
         rows = conn.execute("""
-            SELECT data_year, SUM(n_person_stops) AS n_person_stops,
-                   SUM(n_stops) AS n_stops
-            FROM mv_agency_year_race
+            SELECT data_year, n_person_stops, n_stops
+            FROM mv_agency_year
             WHERE agency_ori = %s
-            GROUP BY data_year
             ORDER BY data_year
         """, (ori,)).fetchall()
 
