@@ -301,7 +301,9 @@ def get_agency_disparities(ori: str, year: int | None = None,
 
     total_stops = sum(r[2] for r in rows)
 
-    results = []
+    # Raw (unrounded) rates per race; ratios are taken from these, and
+    # rounding happens only at display time.
+    raw = []
     for r in rows:
         n_stops = int(r[2])
         n_searched = int(r[3])
@@ -309,24 +311,31 @@ def get_agency_disparities(ori: str, year: int | None = None,
         n_arrested = int(r[5])
         n_contraband = int(r[6])
 
-        results.append({
+        raw.append({
             "code": r[0],
             "label": r[1],
             "n_stops": n_stops,
-            "pct_share": round(n_stops / total_stops * 100, 1) if total_stops > 0 else 0,
-            "search_rate": round(n_searched / n_stops * 100, 1) if n_stops > 0 else 0,
-            "hit_rate": round(n_contraband / n_searched * 100, 1) if n_searched > 0 else None,
-            "force_rate": round(n_force / n_stops * 100, 1) if n_stops > 0 else 0,
-            "arrest_rate": round(n_arrested / n_stops * 100, 1) if n_stops > 0 else 0,
+            "search_rate": n_searched / n_stops if n_stops > 0 else 0,
+            "hit_rate": n_contraband / n_searched if n_searched > 0 else None,
+            "force_rate": n_force / n_stops if n_stops > 0 else 0,
+            "arrest_rate": n_arrested / n_stops if n_stops > 0 else 0,
         })
 
-    # Compute disparity ratios vs White (code=7)
-    white = next((r for r in results if r["code"] == 7), None)
-    for r in results:
-        r["search_disp"] = _ratio(r["search_rate"], white["search_rate"] if white else None)
-        r["hit_disp"] = _ratio(r["hit_rate"], white["hit_rate"] if white else None)
-        r["force_disp"] = _ratio(r["force_rate"], white["force_rate"] if white else None)
-        r["arrest_disp"] = _ratio(r["arrest_rate"], white["arrest_rate"] if white else None)
+    # Disparity ratios vs White (code=7), from raw rates
+    white = next((r for r in raw if r["code"] == 7), None)
+    results = []
+    for r in raw:
+        row = {
+            "code": r["code"],
+            "label": r["label"],
+            "n_stops": r["n_stops"],
+            "pct_share": round(r["n_stops"] / total_stops * 100, 1) if total_stops > 0 else 0,
+        }
+        for key in ("search", "hit", "force", "arrest"):
+            rate = r[f"{key}_rate"]
+            row[f"{key}_rate"] = round(rate * 100, 1) if rate is not None else None
+            row[f"{key}_disp"] = _ratio(rate, white[f"{key}_rate"] if white else None)
+        results.append(row)
 
     return results
 
