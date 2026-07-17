@@ -11,7 +11,7 @@ individual:
 
 deploy:
 	@echo "==> Pulling latest code on $(REMOTE_HOST)..."
-	ssh $(REMOTE_HOST) "sudo git -C $(REMOTE_DIR) pull && sudo chown -R ripadb:ripadb $(REMOTE_DIR)"
+	ssh $(REMOTE_HOST) "git -C $(REMOTE_DIR) pull"
 	@echo "==> Streaming database to $(REMOTE_HOST)..."
 	pg_dump -Fc $(DB_NAME) | ssh $(REMOTE_HOST) "pg_restore --clean --if-exists -d $(DB_NAME)"
 	@echo "==> Restarting API on $(REMOTE_HOST)..."

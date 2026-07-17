@@ -63,11 +63,9 @@ def get_agency_stops_by_year(ori: str):
     """Get stop counts per year for an agency. Returns list of dicts."""
     with get_conn() as conn:
         rows = conn.execute("""
-            SELECT data_year, SUM(n_person_stops) AS n_person_stops,
-                   SUM(n_stops) AS n_stops
-            FROM mv_agency_year_race
+            SELECT data_year, n_person_stops, n_stops
+            FROM mv_agency_year
             WHERE agency_ori = %s
-            GROUP BY data_year
             ORDER BY data_year
         """, (ori,)).fetchall()
 
@@ -101,13 +99,14 @@ def get_agency_demographics_race(ori: str, year: int | None = None):
                 ORDER BY SUM(r.n_person_stops) DESC
             """, (ori,)).fetchall()
 
-    total = sum(r[2] for r in rows)
+    total = int(sum(r[2] for r in rows))
     return [
         {
             "code": r[0],
             "label": r[1],
             "n_person_stops": int(r[2]),
             "pct": round(int(r[2]) / total * 100, 1) if total > 0 else 0,
+            "share": int(r[2]) / total if total > 0 else None,
         }
         for r in rows
     ]
@@ -199,7 +198,8 @@ def get_agency_demographics_census(ori: str,
                                     source: str = "acs5_2023_residential"):
     """Get census demographics for an agency's jurisdiction.
 
-    Returns list of dicts with code, label, population, pct — or None
+    Returns list of dicts with code, label, population, pct (rounded, for
+    display), and share (raw fraction, for ratio computation) — or None
     if no demographics are available for this agency.
     """
     with get_conn() as conn:
@@ -207,8 +207,12 @@ def get_agency_demographics_census(ori: str,
             return None
 
         rows = conn.execute("""
-            SELECT jd.rae_code, rl.label, jd.population, jd.pct
+            SELECT jd.rae_code, rl.label, jd.population, jd.pct,
+                   tot.population AS total_pop
             FROM jurisdiction_demographics jd
+            LEFT JOIN jurisdiction_demographics tot
+              ON tot.agency_ori = jd.agency_ori
+             AND tot.source = jd.source AND tot.rae_code = 0
             LEFT JOIN rae_labels rl ON jd.rae_code = rl.code
             WHERE jd.agency_ori = %s AND jd.source = %s AND jd.rae_code > 0
             ORDER BY jd.population DESC
@@ -223,6 +227,7 @@ def get_agency_demographics_census(ori: str,
             "label": r[1] or "Middle Eastern/South Asian",
             "population": int(r[2]),
             "pct": round(float(r[3]), 1) if r[3] is not None else None,
+            "share": int(r[2]) / int(r[4]) if r[4] else None,
         }
         for r in rows
     ]
@@ -301,9 +306,11 @@ def get_agency_disparities(ori: str, year: int | None = None,
                 ORDER BY SUM(r.n_person_stops) DESC
             """, (ori,)).fetchall()
 
-    total_stops = sum(r[2] for r in rows)
+    total_stops = int(sum(r[2] for r in rows))
 
-    results = []
+    # Raw (unrounded) rates per race; ratios are taken from these, and
+    # rounding happens only at display time.
+    raw = []
     for r in rows:
         n_stops = int(r[2])
         n_searched = int(r[3])
@@ -311,24 +318,32 @@ def get_agency_disparities(ori: str, year: int | None = None,
         n_arrested = int(r[5])
         n_contraband = int(r[6])
 
-        results.append({
+        raw.append({
             "code": r[0],
             "label": r[1],
             "n_stops": n_stops,
-            "pct_share": round(n_stops / total_stops * 100, 1) if total_stops > 0 else 0,
-            "search_rate": round(n_searched / n_stops * 100, 1) if n_stops > 0 else 0,
-            "hit_rate": round(n_contraband / n_searched * 100, 1) if n_searched > 0 else None,
-            "force_rate": round(n_force / n_stops * 100, 1) if n_stops > 0 else 0,
-            "arrest_rate": round(n_arrested / n_stops * 100, 1) if n_stops > 0 else 0,
+            "search_rate": n_searched / n_stops if n_stops > 0 else 0,
+            "hit_rate": n_contraband / n_searched if n_searched > 0 else None,
+            "force_rate": n_force / n_stops if n_stops > 0 else 0,
+            "arrest_rate": n_arrested / n_stops if n_stops > 0 else 0,
         })
 
-    # Compute disparity ratios vs White (code=7)
-    white = next((r for r in results if r["code"] == 7), None)
-    for r in results:
-        r["search_disp"] = _ratio(r["search_rate"], white["search_rate"] if white else None)
-        r["hit_disp"] = _ratio(r["hit_rate"], white["hit_rate"] if white else None)
-        r["force_disp"] = _ratio(r["force_rate"], white["force_rate"] if white else None)
-        r["arrest_disp"] = _ratio(r["arrest_rate"], white["arrest_rate"] if white else None)
+    # Disparity ratios vs White (code=7), from raw rates
+    white = next((r for r in raw if r["code"] == 7), None)
+    results = []
+    for r in raw:
+        row = {
+            "code": r["code"],
+            "label": r["label"],
+            "n_stops": r["n_stops"],
+            "pct_share": round(r["n_stops"] / total_stops * 100, 1) if total_stops > 0 else 0,
+            "share": r["n_stops"] / total_stops if total_stops > 0 else None,
+        }
+        for key in ("search", "hit", "force", "arrest"):
+            rate = r[f"{key}_rate"]
+            row[f"{key}_rate"] = round(rate * 100, 1) if rate is not None else None
+            row[f"{key}_disp"] = _ratio(rate, white[f"{key}_rate"] if white else None)
+        results.append(row)
 
     return results
 

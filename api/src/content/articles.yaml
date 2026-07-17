@@ -3,7 +3,23 @@ articles:
     title: "About the RIPA Stop Data"
     date: "2026-02-20"
     summary: >
-      A guide to the RIPA dataset: what it contains, how demographics
-      are recorded, variable definitions, schema changes, limitations,
-      and how to work with the data.
+      A guide to the RIPA dataset: what it contains, how it is collected,
+      how demographics are recorded, and its limitations.
     file: about-the-data.md
+
+  - slug: variables-and-schema
+    title: "Variable groups and schema changes"
+    date: "2026-07-16"
+    summary: >
+      A detailed reference for the 235 columns in the dataset: variable
+      groups, code tables, schema changes across years, and how columns
+      are reconciled across eras.
+    file: variables-and-schema.md
+
+  - slug: about-the-site
+    title: "About this site"
+    date: "2026-07-16"
+    summary: >
+      Who builds and publishes this site, where the data comes from, and
+      where to find the open-source pipeline.
+    file: about-the-site.md
