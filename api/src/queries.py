@@ -99,13 +99,14 @@ def get_agency_demographics_race(ori: str, year: int | None = None):
                 ORDER BY SUM(r.n_person_stops) DESC
             """, (ori,)).fetchall()
 
-    total = sum(r[2] for r in rows)
+    total = int(sum(r[2] for r in rows))
     return [
         {
             "code": r[0],
             "label": r[1],
             "n_person_stops": int(r[2]),
             "pct": round(int(r[2]) / total * 100, 1) if total > 0 else 0,
+            "share": int(r[2]) / total if total > 0 else None,
         }
         for r in rows
     ]
@@ -197,7 +198,8 @@ def get_agency_demographics_census(ori: str,
                                     source: str = "acs5_2023_residential"):
     """Get census demographics for an agency's jurisdiction.
 
-    Returns list of dicts with code, label, population, pct — or None
+    Returns list of dicts with code, label, population, pct (rounded, for
+    display), and share (raw fraction, for ratio computation) — or None
     if no demographics are available for this agency.
     """
     with get_conn() as conn:
@@ -205,8 +207,12 @@ def get_agency_demographics_census(ori: str,
             return None
 
         rows = conn.execute("""
-            SELECT jd.rae_code, rl.label, jd.population, jd.pct
+            SELECT jd.rae_code, rl.label, jd.population, jd.pct,
+                   tot.population AS total_pop
             FROM jurisdiction_demographics jd
+            LEFT JOIN jurisdiction_demographics tot
+              ON tot.agency_ori = jd.agency_ori
+             AND tot.source = jd.source AND tot.rae_code = 0
             LEFT JOIN rae_labels rl ON jd.rae_code = rl.code
             WHERE jd.agency_ori = %s AND jd.source = %s AND jd.rae_code > 0
             ORDER BY jd.population DESC
@@ -221,6 +227,7 @@ def get_agency_demographics_census(ori: str,
             "label": r[1] or "Middle Eastern/South Asian",
             "population": int(r[2]),
             "pct": round(float(r[3]), 1) if r[3] is not None else None,
+            "share": int(r[2]) / int(r[4]) if r[4] else None,
         }
         for r in rows
     ]
@@ -299,7 +306,7 @@ def get_agency_disparities(ori: str, year: int | None = None,
                 ORDER BY SUM(r.n_person_stops) DESC
             """, (ori,)).fetchall()
 
-    total_stops = sum(r[2] for r in rows)
+    total_stops = int(sum(r[2] for r in rows))
 
     # Raw (unrounded) rates per race; ratios are taken from these, and
     # rounding happens only at display time.
@@ -330,6 +337,7 @@ def get_agency_disparities(ori: str, year: int | None = None,
             "label": r["label"],
             "n_stops": r["n_stops"],
             "pct_share": round(r["n_stops"] / total_stops * 100, 1) if total_stops > 0 else 0,
+            "share": r["n_stops"] / total_stops if total_stops > 0 else None,
         }
         for key in ("search", "hit", "force", "arrest"):
             rate = r[f"{key}_rate"]

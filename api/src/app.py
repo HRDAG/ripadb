@@ -128,8 +128,8 @@ async def agency_demographics(
             c = census_by_code.get(r["code"])
             r["pop_pct"] = c["pct"] if c else None
             r["stop_pop_ratio"] = (
-                round(float(r["pct"]) / c["pct"], 1)
-                if c and c["pct"] and c["pct"] > 0 else None
+                round(r["share"] / c["share"], 1)
+                if c and c["share"] and r["share"] is not None else None
             )
     else:
         for r in race:
@@ -168,8 +168,8 @@ async def agency_disparities(
             c = census_by_code.get(d["code"])
             d["pop_pct"] = c["pct"] if c else None
             d["stop_pop_ratio"] = (
-                round(float(d["pct_share"]) / c["pct"], 1)
-                if c and c["pct"] and c["pct"] > 0 else None
+                round(d["share"] / c["share"], 1)
+                if c and c["share"] and d["share"] is not None else None
             )
     else:
         for d in disparities:
