@@ -9,6 +9,7 @@
 <div class="search-box">
     <input type="search"
            name="q"
+           value="{{ q or '' }}"
            placeholder="Search by agency name or ORI..."
            hx-get="{{ root_path }}/search"
            hx-trigger="input changed delay:300ms, search"

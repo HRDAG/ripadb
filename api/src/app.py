@@ -55,44 +55,86 @@ templates.env.filters["commas"] = format_number
 
 # -- HTML routes --
 
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    agencies = queries.search_agencies(limit=50)
-    return templates.TemplateResponse(request, "index.html", {
+PAGE_SIZE = 50
+
+
+def _agency_list_context(q: str, page: int):
+    total = queries.count_agencies(q=q)
+    pages = max(1, -(-total // PAGE_SIZE))
+    page = max(1, min(page, pages))
+    agencies = queries.search_agencies(
+        q=q, limit=PAGE_SIZE, offset=(page - 1) * PAGE_SIZE)
+    return {
         "agencies": agencies,
-    })
+        "q": q,
+        "total": total,
+        "page": page,
+        "pages": pages,
+        "start": (page - 1) * PAGE_SIZE + 1 if total else 0,
+        "end": min(page * PAGE_SIZE, total),
+    }
+
+
+def _parse_page(page: str) -> int:
+    try:
+        return max(1, int(page))
+    except ValueError:
+        return 1
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request, q: str = "", page: str = "1"):
+    ctx = _agency_list_context(q, _parse_page(page))
+    return templates.TemplateResponse(request, "index.html", ctx)
 
 
 @app.get("/search", response_class=HTMLResponse)
-async def search(request: Request, q: str = ""):
-    agencies = queries.search_agencies(q=q, limit=50)
-    return templates.TemplateResponse(request, "partials/agency_list.html", {
-        "agencies": agencies,
+async def search(request: Request, q: str = "", page: str = "1"):
+    ctx = _agency_list_context(q, _parse_page(page))
+    if not _is_htmx(request):
+        return templates.TemplateResponse(request, "index.html", ctx)
+    return templates.TemplateResponse(request, "partials/agency_list.html", ctx)
+
+
+def _is_htmx(request: Request) -> bool:
+    """True for htmx partial requests (but not history restores, which
+    expect a full page)."""
+    return (
+        request.headers.get("hx-request") == "true"
+        and request.headers.get("hx-history-restore-request") != "true"
+    )
+
+
+def _full_page(request: Request, ori: str, tab: str, ctx: dict):
+    """Render the full agency page with the given tab active."""
+    agency = queries.get_agency(ori)
+    if not agency:
+        return HTMLResponse("<h1>Agency not found</h1>", status_code=404)
+
+    return templates.TemplateResponse(request, "agency.html", {
+        "agency": agency,
+        "ori": ori,
+        "tab": tab,
+        "jurisdiction": queries.get_agency_jurisdiction(ori),
+        **ctx,
     })
 
 
 @app.get("/agency/{ori}", response_class=HTMLResponse)
 async def agency_detail(request: Request, ori: str):
-    agency = queries.get_agency(ori)
-    if not agency:
-        return HTMLResponse("<h1>Agency not found</h1>", status_code=404)
-
-    years = queries.get_agency_years(ori)
     stops_by_year = queries.get_agency_stops_by_year(ori)
-    jurisdiction = queries.get_agency_jurisdiction(ori)
-
-    return templates.TemplateResponse(request, "agency.html", {
-        "agency": agency,
-        "ori": ori,
-        "years": years,
+    return _full_page(request, ori, "overview", {
         "stops_by_year": stops_by_year,
-        "jurisdiction": jurisdiction,
     })
 
 
 @app.get("/agency/{ori}/overview", response_class=HTMLResponse)
 async def agency_overview(request: Request, ori: str):
     stops_by_year = queries.get_agency_stops_by_year(ori)
+    if not _is_htmx(request):
+        return _full_page(request, ori, "overview", {
+            "stops_by_year": stops_by_year,
+        })
     return templates.TemplateResponse(request, "partials/agency_overview.html", {
         "ori": ori,
         "stops_by_year": stops_by_year,
@@ -109,15 +151,30 @@ def _parse_year(year: str | None) -> int | None:
         return None
 
 
+def _parse_year_range(year_from: str, year_to: str, year: str):
+    """Parse a year range; a legacy single `year` param maps to from=to.
+    A reversed range is swapped."""
+    yf, yt = _parse_year(year_from), _parse_year(year_to)
+    if yf is None and yt is None:
+        yr = _parse_year(year)
+        if yr is not None:
+            yf = yt = yr
+    if yf is not None and yt is not None and yf > yt:
+        yf, yt = yt, yf
+    return yf, yt
+
+
 @app.get("/agency/{ori}/demographics", response_class=HTMLResponse)
 async def agency_demographics(
     request: Request, ori: str,
+    year_from: str = Query(default=""),
+    year_to: str = Query(default=""),
     year: str = Query(default=""),
 ):
-    yr = _parse_year(year)
-    race = queries.get_agency_demographics_race(ori, yr)
-    gender = queries.get_agency_demographics_gender(ori, yr)
-    age = queries.get_agency_demographics_age(ori, yr)
+    yf, yt = _parse_year_range(year_from, year_to, year)
+    race = queries.get_agency_demographics_race(ori, yf, yt)
+    gender = queries.get_agency_demographics_gender(ori, yf, yt)
+    age = queries.get_agency_demographics_age(ori, yf, yt)
     years = queries.get_agency_years(ori)
     census = queries.get_agency_demographics_census(ori)
 
@@ -136,28 +193,34 @@ async def agency_demographics(
             r["pop_pct"] = None
             r["stop_pop_ratio"] = None
 
-    return templates.TemplateResponse(request, "partials/agency_tabs.html", {
+    ctx = {
         "tab": "demographics",
         "race": race,
         "gender": gender,
         "age": age,
         "years": years,
-        "selected_year": yr,
+        "year_from": yf,
+        "year_to": yt,
         "ori": ori,
         "has_census": census is not None,
-    })
+    }
+    if not _is_htmx(request):
+        return _full_page(request, ori, "demographics", ctx)
+    return templates.TemplateResponse(request, "partials/agency_tabs.html", ctx)
 
 
 @app.get("/agency/{ori}/disparities", response_class=HTMLResponse)
 async def agency_disparities(
     request: Request, ori: str,
+    year_from: str = Query(default=""),
+    year_to: str = Query(default=""),
     year: str = Query(default=""),
     stop_type: str = Query(default="all"),
 ):
-    yr = _parse_year(year)
+    yf, yt = _parse_year_range(year_from, year_to, year)
     if stop_type not in queries.STOP_TYPE_VIEWS:
         stop_type = "all"
-    disparities = queries.get_agency_disparities(ori, yr, stop_type)
+    disparities = queries.get_agency_disparities(ori, yf, yt, stop_type)
     years = queries.get_agency_years(ori)
     census = queries.get_agency_demographics_census(ori)
 
@@ -176,16 +239,20 @@ async def agency_disparities(
             d["pop_pct"] = None
             d["stop_pop_ratio"] = None
 
-    return templates.TemplateResponse(request, "partials/agency_tabs.html", {
+    ctx = {
         "tab": "disparities",
         "disparities": disparities,
         "years": years,
-        "selected_year": yr,
+        "year_from": yf,
+        "year_to": yt,
         "stop_type": stop_type,
         "stop_types": queries.STOP_TYPE_LABELS,
         "ori": ori,
         "has_census": census is not None,
-    })
+    }
+    if not _is_htmx(request):
+        return _full_page(request, ori, "disparities", ctx)
+    return templates.TemplateResponse(request, "partials/agency_tabs.html", ctx)
 
 
 # -- Article routes --

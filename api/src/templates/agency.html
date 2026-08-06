@@ -28,25 +28,32 @@
 </div>
 
 <div class="tabs">
-    <button class="tab active"
+    <button class="tab {% if tab == 'overview' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/overview"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="{{ root_path }}/agency/{{ agency.agency_ori }}"
             onclick="showTab(this)">Overview</button>
-    <button class="tab"
+    <button class="tab {% if tab == 'demographics' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/demographics"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="true"
             onclick="showTab(this)">Demographics</button>
-    <button class="tab"
+    <button class="tab {% if tab == 'disparities' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/disparities"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="true"
             onclick="showTab(this)">Disparities</button>
 </div>
 
 <div id="tab-content">
+    {% if tab == 'overview' %}
     {% include "partials/agency_overview.html" %}
+    {% else %}
+    {% include "partials/agency_tabs.html" %}
+    {% endif %}
 </div>
 {% endblock %}
 

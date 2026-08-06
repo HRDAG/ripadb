@@ -1,25 +1,43 @@
 articles:
   - slug: about-the-data
-    title: "About the RIPA Stop Data"
+    title: "What is RIPA? Where does this data come from?"
     date: "2026-02-20"
     summary: >
-      A guide to the RIPA dataset: what it contains, how it is collected,
-      how demographics are recorded, and its limitations.
+      What is the Racial and Identity Profiling Act of 2015 (RIPA), where does
+      the stop data on this site come from and who collects it, what are the
+      known limitations?
     file: about-the-data.md
+
+  - slug: methodology
+    title: "Methodology: How the Metrics Are Defined"
+    date: "2026-08-01"
+    summary: >
+      Exact definitions behind every metric on the site — race categories,
+      what counts as a search, force, or arrest, disparity ratios, and
+      benchmark caveats — with links to the code that computes them.
+    file: methodology.md
+
+  - slug: hit-rate
+    title: "The Hit Rate"
+    date: "2026-08-01"
+    summary: >
+      What the search hit rate measures, why it is a key disparity metric,
+      where the outcome test comes from, and its criticisms and limitations.
+    file: hit-rate.md
 
   - slug: variables-and-schema
     title: "Variable groups and schema changes"
     date: "2026-07-16"
     summary: >
-      A detailed reference for the 235 columns in the dataset: variable
-      groups, code tables, schema changes across years, and how columns
-      are reconciled across eras.
+      A deep dive reference for the 235 columns in the cleaned and processed
+      statewide stops dataset -- variable groups, code tables, schema changes
+      across years, and how columns are reconciled across eras.
     file: variables-and-schema.md
 
   - slug: about-the-site
     title: "About this site"
     date: "2026-07-16"
     summary: >
-      Who builds and publishes this site, where the data comes from, and
-      where to find the open-source pipeline.
+      Who builds and publishes this site and where to find the open-source
+      data processing pipeline.
     file: about-the-site.md

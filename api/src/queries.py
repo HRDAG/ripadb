@@ -3,7 +3,20 @@
 from .db import get_conn
 
 
-def search_agencies(q: str = "", limit: int = 50):
+def count_agencies(q: str = ""):
+    """Count agencies matching a search query."""
+    with get_conn() as conn:
+        if q:
+            row = conn.execute("""
+                SELECT COUNT(*) FROM agencies
+                WHERE agency_name ILIKE %s OR agency_ori ILIKE %s
+            """, (f"%{q}%", f"%{q}%")).fetchone()
+        else:
+            row = conn.execute("SELECT COUNT(*) FROM agencies").fetchone()
+    return int(row[0])
+
+
+def search_agencies(q: str = "", limit: int = 50, offset: int = 0):
     """Search agencies by name or ORI. Returns list of dicts."""
     with get_conn() as conn:
         if q:
@@ -13,16 +26,16 @@ def search_agencies(q: str = "", limit: int = 50):
                 FROM agencies a
                 WHERE a.agency_name ILIKE %s OR a.agency_ori ILIKE %s
                 ORDER BY a.total_person_stops DESC
-                LIMIT %s
-            """, (f"%{q}%", f"%{q}%", limit)).fetchall()
+                LIMIT %s OFFSET %s
+            """, (f"%{q}%", f"%{q}%", limit, offset)).fetchall()
         else:
             rows = conn.execute("""
                 SELECT agency_ori, agency_name, county,
                        first_year, last_year, total_person_stops
                 FROM agencies
                 ORDER BY total_person_stops DESC
-                LIMIT %s
-            """, (limit,)).fetchall()
+                LIMIT %s OFFSET %s
+            """, (limit, offset)).fetchall()
 
     return [
         {
@@ -75,29 +88,33 @@ def get_agency_stops_by_year(ori: str):
     ]
 
 
-def get_agency_demographics_race(ori: str, year: int | None = None):
-    """Race breakdown for an agency. Optionally filtered by year."""
+def _year_cond(alias: str, year_from: int | None, year_to: int | None):
+    """Build a SQL condition + params restricting data_year to a range."""
+    cond = ""
+    params = []
+    if year_from is not None:
+        cond += f" AND {alias}.data_year >= %s"
+        params.append(year_from)
+    if year_to is not None:
+        cond += f" AND {alias}.data_year <= %s"
+        params.append(year_to)
+    return cond, params
+
+
+def get_agency_demographics_race(ori: str, year_from: int | None = None,
+                                 year_to: int | None = None):
+    """Race breakdown for an agency. Optionally filtered by year range."""
+    cond, params = _year_cond("r", year_from, year_to)
     with get_conn() as conn:
-        if year:
-            rows = conn.execute("""
-                SELECT r.race_code, rl.label,
-                       SUM(r.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_race r
-                JOIN rae_labels rl ON r.race_code = rl.code
-                WHERE r.agency_ori = %s AND r.data_year = %s
-                GROUP BY r.race_code, rl.label
-                ORDER BY SUM(r.n_person_stops) DESC
-            """, (ori, year)).fetchall()
-        else:
-            rows = conn.execute("""
-                SELECT r.race_code, rl.label,
-                       SUM(r.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_race r
-                JOIN rae_labels rl ON r.race_code = rl.code
-                WHERE r.agency_ori = %s
-                GROUP BY r.race_code, rl.label
-                ORDER BY SUM(r.n_person_stops) DESC
-            """, (ori,)).fetchall()
+        rows = conn.execute(f"""
+            SELECT r.race_code, rl.label,
+                   SUM(r.n_person_stops) AS n_person_stops
+            FROM mv_agency_year_race r
+            JOIN rae_labels rl ON r.race_code = rl.code
+            WHERE r.agency_ori = %s{cond}
+            GROUP BY r.race_code, rl.label
+            ORDER BY SUM(r.n_person_stops) DESC
+        """, (ori, *params)).fetchall()
 
     total = int(sum(r[2] for r in rows))
     return [
@@ -112,29 +129,20 @@ def get_agency_demographics_race(ori: str, year: int | None = None):
     ]
 
 
-def get_agency_demographics_gender(ori: str, year: int | None = None):
+def get_agency_demographics_gender(ori: str, year_from: int | None = None,
+                                   year_to: int | None = None):
     """Gender breakdown for an agency."""
+    cond, params = _year_cond("g", year_from, year_to)
     with get_conn() as conn:
-        if year:
-            rows = conn.execute("""
-                SELECT g.gender_code, gl.label,
-                       SUM(g.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_gender g
-                JOIN gender_labels gl ON g.gender_code = gl.code
-                WHERE g.agency_ori = %s AND g.data_year = %s
-                GROUP BY g.gender_code, gl.label
-                ORDER BY SUM(g.n_person_stops) DESC
-            """, (ori, year)).fetchall()
-        else:
-            rows = conn.execute("""
-                SELECT g.gender_code, gl.label,
-                       SUM(g.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_gender g
-                JOIN gender_labels gl ON g.gender_code = gl.code
-                WHERE g.agency_ori = %s
-                GROUP BY g.gender_code, gl.label
-                ORDER BY SUM(g.n_person_stops) DESC
-            """, (ori,)).fetchall()
+        rows = conn.execute(f"""
+            SELECT g.gender_code, gl.label,
+                   SUM(g.n_person_stops) AS n_person_stops
+            FROM mv_agency_year_gender g
+            JOIN gender_labels gl ON g.gender_code = gl.code
+            WHERE g.agency_ori = %s{cond}
+            GROUP BY g.gender_code, gl.label
+            ORDER BY SUM(g.n_person_stops) DESC
+        """, (ori, *params)).fetchall()
 
     total = sum(r[2] for r in rows)
     return [
@@ -148,29 +156,20 @@ def get_agency_demographics_gender(ori: str, year: int | None = None):
     ]
 
 
-def get_agency_demographics_age(ori: str, year: int | None = None):
+def get_agency_demographics_age(ori: str, year_from: int | None = None,
+                                year_to: int | None = None):
     """Age group breakdown for an agency."""
+    cond, params = _year_cond("a", year_from, year_to)
     with get_conn() as conn:
-        if year:
-            rows = conn.execute("""
-                SELECT a.age_group, al.label,
-                       SUM(a.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_age a
-                JOIN age_group_labels al ON a.age_group = al.code
-                WHERE a.agency_ori = %s AND a.data_year = %s
-                GROUP BY a.age_group, al.label
-                ORDER BY a.age_group
-            """, (ori, year)).fetchall()
-        else:
-            rows = conn.execute("""
-                SELECT a.age_group, al.label,
-                       SUM(a.n_person_stops) AS n_person_stops
-                FROM mv_agency_year_age a
-                JOIN age_group_labels al ON a.age_group = al.code
-                WHERE a.agency_ori = %s
-                GROUP BY a.age_group, al.label
-                ORDER BY a.age_group
-            """, (ori,)).fetchall()
+        rows = conn.execute(f"""
+            SELECT a.age_group, al.label,
+                   SUM(a.n_person_stops) AS n_person_stops
+            FROM mv_agency_year_age a
+            JOIN age_group_labels al ON a.age_group = al.code
+            WHERE a.agency_ori = %s{cond}
+            GROUP BY a.age_group, al.label
+            ORDER BY a.age_group
+        """, (ori, *params)).fetchall()
 
     total = sum(r[2] for r in rows)
     return [
@@ -269,42 +268,28 @@ STOP_TYPE_LABELS = {
 }
 
 
-def get_agency_disparities(ori: str, year: int | None = None,
+def get_agency_disparities(ori: str, year_from: int | None = None,
+                           year_to: int | None = None,
                            stop_type: str = "all"):
     """Disparity table: race × outcome rates with ratios vs White."""
     view = STOP_TYPE_VIEWS.get(stop_type, "mv_agency_year_race")
+    cond, params = _year_cond("r", year_from, year_to)
 
     with get_conn() as conn:
-        if year:
-            rows = conn.execute(f"""
-                SELECT r.race_code, rl.label,
-                       SUM(r.n_person_stops) AS n_person_stops,
-                       SUM(r.n_searched) AS n_searched,
-                       SUM(r.n_force_used) AS n_force_used,
-                       SUM(r.n_arrested) AS n_arrested,
-                       SUM(r.n_contraband_found) AS n_contraband_found,
-                       SUM(r.n_no_contraband) AS n_no_contraband
-                FROM {view} r
-                JOIN rae_labels rl ON r.race_code = rl.code
-                WHERE r.agency_ori = %s AND r.data_year = %s
-                GROUP BY r.race_code, rl.label
-                ORDER BY SUM(r.n_person_stops) DESC
-            """, (ori, year)).fetchall()
-        else:
-            rows = conn.execute(f"""
-                SELECT r.race_code, rl.label,
-                       SUM(r.n_person_stops) AS n_person_stops,
-                       SUM(r.n_searched) AS n_searched,
-                       SUM(r.n_force_used) AS n_force_used,
-                       SUM(r.n_arrested) AS n_arrested,
-                       SUM(r.n_contraband_found) AS n_contraband_found,
-                       SUM(r.n_no_contraband) AS n_no_contraband
-                FROM {view} r
-                JOIN rae_labels rl ON r.race_code = rl.code
-                WHERE r.agency_ori = %s
-                GROUP BY r.race_code, rl.label
-                ORDER BY SUM(r.n_person_stops) DESC
-            """, (ori,)).fetchall()
+        rows = conn.execute(f"""
+            SELECT r.race_code, rl.label,
+                   SUM(r.n_person_stops) AS n_person_stops,
+                   SUM(r.n_searched) AS n_searched,
+                   SUM(r.n_force_used) AS n_force_used,
+                   SUM(r.n_arrested) AS n_arrested,
+                   SUM(r.n_contraband_found) AS n_contraband_found,
+                   SUM(r.n_no_contraband) AS n_no_contraband
+            FROM {view} r
+            JOIN rae_labels rl ON r.race_code = rl.code
+            WHERE r.agency_ori = %s{cond}
+            GROUP BY r.race_code, rl.label
+            ORDER BY SUM(r.n_person_stops) DESC
+        """, (ori, *params)).fetchall()
 
     total_stops = int(sum(r[2] for r in rows))
 

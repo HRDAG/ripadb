@@ -1,14 +1,28 @@
 {% if tab == "demographics" %}
 <div class="tab-panel">
     <div class="year-filter">
-        <label>Year:</label>
+        <label>Years:</label>
         <select hx-get="{{ root_path }}/agency/{{ ori }}/demographics"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
-                name="year">
-            <option value="" {% if not selected_year %}selected{% endif %}>All years</option>
+                hx-include="[name='year_to']"
+                hx-push-url="true"
+                name="year_from">
+            <option value="" {% if not year_from %}selected{% endif %}>Earliest</option>
             {% for y in years %}
-            <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+            <option value="{{ y }}" {% if year_from == y %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+        <label>to</label>
+        <select hx-get="{{ root_path }}/agency/{{ ori }}/demographics"
+                hx-target="#tab-content"
+                hx-swap="innerHTML"
+                hx-include="[name='year_from']"
+                hx-push-url="true"
+                name="year_to">
+            <option value="" {% if not year_to %}selected{% endif %}>Latest</option>
+            {% for y in years %}
+            <option value="{{ y }}" {% if year_to == y %}selected{% endif %}>{{ y }}</option>
             {% endfor %}
         </select>
     </div>
@@ -100,20 +114,34 @@
             {% endfor %}
         </tbody>
     </table>
+    <p class="note">Age groups are not equal-width bins (e.g. 15&ndash;17 spans 3 years while 25&ndash;34 spans 10), so shares are not directly comparable across groups without accounting for bin width and population age structure.</p>
 </div>
 
 {% elif tab == "disparities" %}
 <div class="tab-panel">
     <div class="year-filter">
-        <label>Year:</label>
+        <label>Years:</label>
         <select hx-get="{{ root_path }}/agency/{{ ori }}/disparities"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
-                hx-include="[name='stop_type']"
-                name="year">
-            <option value="" {% if not selected_year %}selected{% endif %}>All years</option>
+                hx-include="[name='year_to'],[name='stop_type']"
+                hx-push-url="true"
+                name="year_from">
+            <option value="" {% if not year_from %}selected{% endif %}>Earliest</option>
             {% for y in years %}
-            <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+            <option value="{{ y }}" {% if year_from == y %}selected{% endif %}>{{ y }}</option>
+            {% endfor %}
+        </select>
+        <label>to</label>
+        <select hx-get="{{ root_path }}/agency/{{ ori }}/disparities"
+                hx-target="#tab-content"
+                hx-swap="innerHTML"
+                hx-include="[name='year_from'],[name='stop_type']"
+                hx-push-url="true"
+                name="year_to">
+            <option value="" {% if not year_to %}selected{% endif %}>Latest</option>
+            {% for y in years %}
+            <option value="{{ y }}" {% if year_to == y %}selected{% endif %}>{{ y }}</option>
             {% endfor %}
         </select>
 
@@ -121,7 +149,8 @@
         <select hx-get="{{ root_path }}/agency/{{ ori }}/disparities"
                 hx-target="#tab-content"
                 hx-swap="innerHTML"
-                hx-include="[name='year']"
+                hx-include="[name='year_from'],[name='year_to']"
+                hx-push-url="true"
                 name="stop_type">
             {% for key, label in stop_types.items() %}
             <option value="{{ key }}" {% if stop_type == key %}selected{% endif %}>{{ label }}</option>
@@ -133,7 +162,7 @@
     {% if stop_type == 'equip' %}
     <p class="note">Equipment violations (e.g. broken taillight, tinted windows) are high-discretion stops often used as a pretext for investigation. Disparities here may indicate pretextual policing patterns.</p>
     {% endif %}
-    <p class="note">{% if has_census %}<strong>Stop/Pop</strong> = stop share &divide; population share (compares who is stopped to who lives there). {% endif %}<strong>Disp.</strong> columns = rate &divide; White rate (compares how groups are treated once stopped). Hit rate = contraband found / searches conducted.</p>
+    <p class="note">{% if has_census %}<strong>Stop/Pop</strong> = stop share &divide; population share (compares who is stopped to who lives there). {% endif %}<strong>Disp.</strong> columns = rate &divide; White rate (compares how groups are treated once stopped). Hit rate = contraband found / searches conducted &mdash; note it reads in the <em>opposite</em> direction: a hit-rate disparity <em>below</em> 1.0 is the potential sign of bias. See <a href="{{ root_path }}/articles/methodology">how these metrics are defined</a>.</p>
 
     {% if disparities %}
     <div class="table-scroll">
@@ -147,7 +176,7 @@
                 {% if has_census %}<th class="num">Stop/Pop</th>{% endif %}
                 <th class="num">Search<br>Rate</th>
                 <th class="num">Disp.</th>
-                <th class="num">Hit<br>Rate</th>
+                <th class="num">Hit<br>Rate <a class="help-link" href="{{ root_path }}/articles/hit-rate" title="What is the hit rate?">[?]</a></th>
                 <th class="num">Disp.</th>
                 <th class="num">Force<br>Rate</th>
                 <th class="num">Disp.</th>

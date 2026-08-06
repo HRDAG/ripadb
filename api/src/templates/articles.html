@@ -8,8 +8,10 @@
 <div class="article-list">
 {% for article in articles %}
     <a href="{{ root_path }}/articles/{{ article.slug }}" class="article-item">
-        <h2>{{ article.title }}</h2>
-        <p class="article-meta">{{ article.date }}</p>
+        <div class="article-item-head">
+            <h2>{{ article.title }}</h2>
+            <span class="article-meta">{{ article.date }}</span>
+        </div>
         <p class="article-summary">{{ article.summary }}</p>
     </a>
 {% endfor %}
