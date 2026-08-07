@@ -25,6 +25,15 @@ articles:
       where the outcome test comes from, and its criticisms and limitations.
     file: hit-rate.md
 
+  - slug: population-benchmarks
+    title: "Population Benchmarks"
+    date: "2026-08-06"
+    summary: >
+      What the Stop/Pop ratio compares stops against, why residential
+      population is a weak denominator, who criticizes it, what the RIPA
+      Board uses, and what better benchmarks would look like.
+    file: population-benchmarks.md
+
   - slug: variables-and-schema
     title: "Variable groups and schema changes"
     date: "2026-07-16"
