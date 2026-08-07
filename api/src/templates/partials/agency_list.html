@@ -1,4 +1,5 @@
 {% if agencies %}
+<p class="result-count">Showing {{ start }}&ndash;{{ end }} of {{ total }} agencies{% if q %} matching &ldquo;{{ q }}&rdquo;{% endif %}</p>
 <table class="agency-table">
     <thead>
         <tr>
@@ -21,6 +22,25 @@
         {% endfor %}
     </tbody>
 </table>
+{% if pages > 1 %}
+<nav class="pagination">
+    {% if page > 1 %}
+    <a href="{{ root_path }}/search?q={{ q|urlencode }}&page={{ page - 1 }}"
+       hx-get="{{ root_path }}/search?q={{ q|urlencode }}&page={{ page - 1 }}"
+       hx-target="#agency-results" hx-swap="innerHTML" hx-push-url="true">&larr; Previous</a>
+    {% else %}
+    <span class="disabled">&larr; Previous</span>
+    {% endif %}
+    <span class="page-info">Page {{ page }} of {{ pages }}</span>
+    {% if page < pages %}
+    <a href="{{ root_path }}/search?q={{ q|urlencode }}&page={{ page + 1 }}"
+       hx-get="{{ root_path }}/search?q={{ q|urlencode }}&page={{ page + 1 }}"
+       hx-target="#agency-results" hx-swap="innerHTML" hx-push-url="true">Next &rarr;</a>
+    {% else %}
+    <span class="disabled">Next &rarr;</span>
+    {% endif %}
+</nav>
+{% endif %}
 {% else %}
 <p class="no-results">No agencies found.</p>
 {% endif %}

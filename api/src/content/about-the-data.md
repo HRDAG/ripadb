@@ -22,6 +22,13 @@ findings and policy recommendations.
 This dataset covers **2018--2024** and contains approximately **26.3 million
 person-stop records** from **555 law enforcement agencies** across California.
 
+This page describes the data itself --- where it comes from, how it is
+collected, and what it does and does not contain. For how this site turns that
+data into the numbers you see on each agency page --- race categories, what
+counts as a search, force, or arrest, how disparity ratios and population
+benchmarks are computed --- see [Methodology: How the Metrics Are
+Defined](methodology).
+
 ## Data collection
 
 ### How agencies report
@@ -43,12 +50,7 @@ reporting based on their size:
 | 3 | 334--666 officers | January 1, 2021 | April 1, 2022 | ~10 |
 | 4 | 1--333 officers | January 1, 2022 | April 1, 2023 | ~500 |
 
-The 2018 data covers only July through December and only the largest agencies.
-The 2019 data adds Wave 2. Wave 3 joined in 2021, and by 2022 all agencies
-were reporting. Comparisons across years must account for this expanding
-coverage.
-
-### Instances of data fabrication or intentional misreporting
+### Instances of data fabrication or misreporting
 
 In 2022, the Los Angeles Office of the Inspector General (OIG) published [an
 investigation into the LA Sheriff's
@@ -75,19 +77,65 @@ covered in the [SF Standard](https://sfstandard.com/2024/10/10/cop-investigated-
 
 ### Other known data quality issues
 
-The 2018 report included a
-[note](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2022-12/Final%202018_RIPA%20Dataset%20Read%20Me_Open%20Justice%20Supporting%20Documentation.pdf)
-that "a relatively small amount of data with errors that should have been
-identified and corrected reached completed status." These errors included:
+Each year's data release comes with a README documenting "known errors" ---
+records that failed the DOJ's logic checks but were never corrected by the
+agency and entered the dataset anyway. The 2024 README notes that roughly
+**1% of reported records have errors and are not resubmitted by the
+reporting deadline**. Rather than transcribing every year's list, here are
+the recurring categories, with the range of affected records per year, and
+links to each README:
+[2018](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202018%20Final.pdf),
+[2019](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202019%20Final.pdf),
+[2020](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202020%20Final.pdf),
+[2021](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2023-03/RIPA%20Dataset%20Read%20Me%202021%20Final.pdf),
+[2022](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA%20Dataset%20Read%20Me%202022.pdf),
+[2023](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-05/RIPA%20Dataset%20Read%20Me%202023.pdf),
+[2024](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2025-12/ripa-stop-dataset-readme-2024.pdf).
 
-- 28,148 records in the 2018 data were coded as "consensual encounter resulting
-  in search" but did not indicate a search occurred
-- 5,404 cases where officers listed "incident to arrest" as the basis for
-  search, and no arrest was indicated.
+**Contradictory reason/action combinations.** The two largest recurring
+errors are stops coded "consensual encounter resulting in search" with no
+search recorded (28,148 records in 2018 --- likely officers misunderstanding
+the form --- falling to 5,011 in 2019 and between 1 and 34 per year since),
+and searches justified as "incident to arrest" where no arrest was recorded
+(5,404 in 2018; 13,649 in 2019; 12,251 in 2020; 11,144 in 2021; this check
+no longer appears in the 2022--2024 READMEs).
 
-The
-[readme](https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2022-12/Final%202018_RIPA%20Dataset%20Read%20Me_Open%20Justice%20Supporting%20Documentation.pdf)
-reports additional errors in the 2018 data affecting small numbers of records.
+**Missing required subfields.** Every year includes records where a reason
+for stop was given but its required subcategory was not: reasonable-suspicion
+subcategories missing (from 2 records in 2018 up to 1,642 in 2019), traffic
+violation type or offense code missing (roughly 15--65 records per year).
+
+**Search and seizure inconsistencies.** Searches with no basis-for-search
+recorded (2--424 per year), basis-for-search completed with no search
+indicated, and property-seizure fields that contradict the actions-taken
+flags (single digits to ~600 records per year).
+
+**Missing or impossible values.** Small numbers of records each year are
+missing race (1--3), gender (1--4), actions taken (up to 99 in 2022; 677
+non-force and 1,279 force-action records in 2024), or result of stop (300
+in 2024); others report impossible ages (0, 120, 445, -120, 1336, 9999) or
+K-12 students perceived to be older than 22.
+
+Beyond these record-level errors, the READMEs document several
+**systematic, agency-level problems**:
+
+- **CHP's missing transgender records (2020)**: a transmission bug caused
+  "nearly all individuals perceived to be transgender" to be excluded from
+  CHP's successfully submitted 2020 data (over 1,000 records). CHP fixed the
+  issue starting with 2021 data.
+- **Missing December 31, 2022 records**: 4,066 corrected records from the
+  last day of 2022 (0.09% of that year's records) failed to load into the
+  DOJ's analysis table and are excluded from the 2022 data file and the 2024
+  Board Report; the DOJ publishes them as a separate supplement file on
+  OpenJustice.
+- **Placeholder citation codes**: several agencies --- including the LA
+  County Sheriff, LAPD, and CHP in early years, and six agencies in 2023 ---
+  submitted only a single generic value (65002) for the citation offense
+  code field, making citation offense detail unusable for those agencies.
+- **Community caretaking stops are not separately identifiable**: there is
+  no "community caretaking" reason for stop; officers are instructed to
+  select "reasonable suspicion" plus a special offense code (99990), and the
+  READMEs caution that many officers may not have used the code.
 
 ### Important limitations - what's not collected
 
@@ -141,6 +189,7 @@ changes](variables-and-schema).
 
 ## Additional resources
 
+- **Metric definitions**: [Methodology: How the Metrics Are Defined](methodology)
 - **Variable-level documentation**: [Variable groups and schema changes](variables-and-schema)
 - **RIPA Board**: [About the RIPA Board](https://oag.ca.gov/ab953/board)
 - **RIPA Board annual reports**: [Attorney General's AB 953 page](https://oag.ca.gov/ab953/board/reports)

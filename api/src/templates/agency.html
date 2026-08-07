@@ -22,31 +22,38 @@
     {% if jurisdiction %}
     <div class="agency-jurisdiction">
         <span>Jurisdiction: {{ jurisdiction.geography_name }}</span>
-        <span>Jurisdiction population (2023 ACS): {{ jurisdiction.total_pop|commas }}</span>
+        <span>Jurisdiction population (2023 ACS): {{ jurisdiction.total_pop|commas }} <a class="help-link" href="{{ root_path }}/articles/population-benchmarks" title="Why compare stops to residential population?">[?]</a></span>
     </div>
     {% endif %}
 </div>
 
 <div class="tabs">
-    <button class="tab active"
+    <button class="tab {% if tab == 'overview' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/overview"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="{{ root_path }}/agency/{{ agency.agency_ori }}"
             onclick="showTab(this)">Overview</button>
-    <button class="tab"
+    <button class="tab {% if tab == 'demographics' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/demographics"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="true"
             onclick="showTab(this)">Demographics</button>
-    <button class="tab"
+    <button class="tab {% if tab == 'disparities' %}active{% endif %}"
             hx-get="{{ root_path }}/agency/{{ agency.agency_ori }}/disparities"
             hx-target="#tab-content"
             hx-swap="innerHTML"
+            hx-push-url="true"
             onclick="showTab(this)">Disparities</button>
 </div>
 
 <div id="tab-content">
+    {% if tab == 'overview' %}
     {% include "partials/agency_overview.html" %}
+    {% else %}
+    {% include "partials/agency_tabs.html" %}
+    {% endif %}
 </div>
 {% endblock %}
 
