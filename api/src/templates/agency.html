@@ -22,7 +22,7 @@
     {% if jurisdiction %}
     <div class="agency-jurisdiction">
         <span>Jurisdiction: {{ jurisdiction.geography_name }}</span>
-        <span>Jurisdiction population (2023 ACS): {{ jurisdiction.total_pop|commas }}</span>
+        <span>Jurisdiction population (2023 ACS): {{ jurisdiction.total_pop|commas }} <a class="help-link" href="{{ root_path }}/articles/population-benchmarks" title="Why compare stops to residential population?">[?]</a></span>
     </div>
     {% endif %}
 </div>

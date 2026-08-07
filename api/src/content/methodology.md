@@ -126,7 +126,8 @@ indicator of potentially pretextual enforcement.
 
 The Stop/Pop column divides a group's share of stops by its share of the
 jurisdiction's **residential population** (ACS 5-Year B03002, 2019--2023).
-Read it with care:
+Read it with care --- see [Population Benchmarks](population-benchmarks) for a
+detailed discussion of this choice, and its limitations:
 
 - **Residential population is a weak denominator** for traffic enforcement:
   the people driving through a jurisdiction are not the people living in it

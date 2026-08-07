@@ -35,7 +35,7 @@
                 <th class="num">Person-Stops</th>
                 <th class="num">Stop %</th>
                 {% if has_census %}<th class="num">Pop. %</th>{% endif %}
-                {% if has_census %}<th class="num">Stop/Pop</th>{% endif %}
+                {% if has_census %}<th class="num">Stop/Pop <a class="help-link" href="{{ root_path }}/articles/population-benchmarks" title="What does this compare stops to?">[?]</a></th>{% endif %}
                 <th>Distribution</th>
             </tr>
         </thead>
@@ -66,7 +66,7 @@
         <span class="legend-item"><span class="swatch stop-bar-bg"></span> Stop share</span>
         <span class="legend-item"><span class="swatch pop-bar-bg"></span> Population share</span>
     </div>
-    <p class="note">Stop/Pop = stop share &divide; population share. A value of 2.0x means a group is stopped at twice the rate expected from its share of the residential population. Population: ACS 5-Year Estimates (2019–2023). Middle Eastern/South Asian has no Census equivalent.</p>
+    <p class="note">Stop/Pop = stop share &divide; population share. A value of 2.0x means a group is stopped at twice the rate expected from its share of the residential population. Population: ACS 5-Year Estimates (2019–2023). Middle Eastern/South Asian has no Census equivalent. For more on the use of residential population as a benchmark for stops, see <a href="{{ root_path }}/articles/population-benchmarks">this article</a>.</p>
     {% elif not has_census %}
     <p class="note">Jurisdiction population data not available for this agency type.</p>
     {% endif %}
@@ -173,7 +173,7 @@
                 <th class="num">Stops</th>
                 <th class="num">Stop %</th>
                 {% if has_census %}<th class="num">Pop. %</th>{% endif %}
-                {% if has_census %}<th class="num">Stop/Pop</th>{% endif %}
+                {% if has_census %}<th class="num">Stop/Pop <a class="help-link" href="{{ root_path }}/articles/population-benchmarks" title="What does this compare stops to?">[?]</a></th>{% endif %}
                 <th class="num">Search<br>Rate</th>
                 <th class="num">Disp.</th>
                 <th class="num">Hit<br>Rate <a class="help-link" href="{{ root_path }}/articles/hit-rate" title="What is the hit rate?">[?]</a></th>

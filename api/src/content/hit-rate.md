@@ -149,9 +149,61 @@ discovery rates (20.30%) than non-discretionary searches (26.40%)" and that
 "[o]fficers reported the lowest discovery rates in consent searches of
 individuals perceived as Black (16.59%) and Native American (18.29%) and
 highest for individuals perceived as Pacific Islander (25.26%) and White
-(24.16%)" (p. 11; detailed analysis at pp. 63--64).
+(24.16%)" (p. 11; detailed analysis at pp. 63--64). Those 2024 figures
+exclude Terry frisks, a break from earlier years explained in the next
+section.
 
-## Criticisms and limitations
+## The 2024 break: frisks split out of the discovery rate
+
+Starting with the 2024 data, the RIPA form gives officers a separate box for a
+Terry frisk --- a pat-down of outer clothing for weapons --- rather than
+folding it into "search of person." That schema change forced a
+methodological break in the Board's own discovery-rate analyses, and it
+matters for reading any 2024 hit rate.
+
+The Board did not drop frisks from its search *counts*. Its
+actions-during-stop analyses use a combined "Search & Terry Frisk" measure,
+and appendix Table A38 gives a "Total Search Count" of 607,762 that includes
+frisk-only records --- the same denominator behind the statement that
+frisks were 14.59% "of all searches" (2026 report, p. 82). But in the
+discovery-rate analyses the Board takes frisks *out*, and says so:
+
+> In this section, the denominator is not all stops, as it is in most other
+> analyses in this report, but all searches. Also, as of the 2024 RIPA data
+> collection, officers are not required to record a basis for search in Terry
+> frisks, so this analysis only analyzes stops in which a search of person or
+> property occurred. ([2026
+> report](https://oag.ca.gov/system/files/media/ripa-board-report-2026.pdf),
+> p. 63, n. 76)
+
+The reason is partly mechanical --- a frisk has no recorded basis for search,
+so it cannot be sorted into "consent-only" or "non-discretionary" --- and
+partly substantive: a frisk is a different act with a different purpose
+(weapons, not evidence), and it turns up contraband at less than half the
+rate of a full search. Appendix Table A39 reports the two separately:
+
+| Perceived race/ethnicity | Search, no frisk | Frisk, no search |
+|--------------------------|-----------------:|-----------------:|
+| Asian | 23.51% | 8.22% |
+| Black | 28.38% | 13.05% |
+| Hispanic/Latine(x) | 25.47% | 13.37% |
+| Middle Eastern/South Asian | 21.81% | 6.66% |
+| Multiracial | 30.05% | 11.31% |
+| Native American | 25.18% | 5.59% |
+| Pacific Islander | 27.48% | 5.05% |
+| White | 29.69% | 9.58% |
+| **Statewide** | **27.23%** | **12.34%** |
+
+The Board also added a standalone section on frisk disparities in this report
+(2026 report, pp. 82--83), reporting frisk-only stops --- frisks with no
+accompanying search --- at 3.32% of stops of individuals perceived as Black
+against 1.04% for those perceived as White. Since a frisk requires only
+reasonable suspicion that a person is armed ---
+a lower bar than the probable cause or consent behind most searches --- who
+gets frisked is itself a discretion question, and the outcome-test logic
+applies to frisks on their own terms.
+
+## Limitations
 
 The hit rate is informative but not decisive, and it should be read with its
 known weaknesses in mind:
@@ -178,14 +230,17 @@ data.
 incident to arrest, inventory searches of impounded vehicles, and searches
 required by warrant or parole/probation conditions happen regardless of the
 officer's suspicion, and lumping them in with discretionary searches dilutes
-the signal. The RIPA Board itself makes this distinction, comparing
-"non-discretionary" searches against consent-only searches --- and has
-repeatedly found that consent-only searches of individuals perceived as
-Black had the lowest discovery rates of any group
+the signal. Terry frisks, separately identifiable from 2024 onward, are a
+fourth distinct type with their own much lower yield. The RIPA Board itself
+makes these distinctions, comparing "non-discretionary" searches against
+consent-only searches (with frisks excluded from both) --- and has repeatedly
+found that consent-only searches of individuals perceived as Black had the
+lowest discovery rates of any group
 ([2022 report](https://oag.ca.gov/system/files/media/ripa-board-report-2022.pdf),
 p. 11;
 [2026 report](https://oag.ca.gov/system/files/media/ripa-board-report-2026.pdf),
-p. 11).
+p. 11). The site-wide hit rate on this site makes none of these
+distinctions.
 
 **What counts as a "hit."** The measure treats all contraband equally: a
 small amount of marijuana and a firearm both count. Studies that weight finds
@@ -205,3 +260,14 @@ the RIPA contraband-or-evidence-discovered fields. All search types
 to the hit rate is the ratio of a group's hit rate to the White hit rate ---
 and unlike the other disparity columns, values *below* 1.0 are the potential
 sign of bias.
+
+For 2024, and unlike the Board's discovery-rate analyses, the denominator
+here **includes frisk-only records**. That keeps the metric comparable across
+years --- before 2024 a frisk was recorded as a search of the person, so
+every pre-2024 hit rate on this site already has frisks in it --- at the cost
+of departing from the Board's 2024 figures. The effect on levels is about a
+point (statewide 2024: 26.13% including frisks, 27.23% excluding them). The
+effect on the disparity ratios that the table actually highlights is smaller
+still: the Black/White ratio is 0.94 on the combined measure against 0.96 on
+the Board's search-only measure, and the Hispanic/White ratio is 0.86 either
+way. See [Methodology](methodology) for the exact field definitions.
