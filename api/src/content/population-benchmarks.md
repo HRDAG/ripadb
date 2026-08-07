@@ -64,12 +64,12 @@ the California Highway Patrol to the state as a whole. See the
 
 ## Criticisms
 
-The objection to residential-population benchmarking is old, well documented,
-and largely undisputed. Samuel Walker detailed objections to
-residential-population benchmarking in his 2001 article ["Searching for the
-Denominator: Problems with Police Traffic Stop Data and an Early Warning System
+Samuel Walker detailed objections to residential-population benchmarking in his
+2001 article ["Searching for the Denominator: Problems with Police Traffic Stop
+Data and an Early Warning System
 Solution"](https://www.ojp.gov/ncjrs/virtual-library/abstracts/searching-denominator-problems-police-traffic-stop-data-and-early)
-(*Justice Research and Policy* 3(1): 63--95, 2001). The core problems:
+(*Justice Research and Policy* 3(1): 63--95, 2001), and these problems have
+continued to be discussed in the literature. The core problems:
 
 **The people stopped are not the people who live there.** Drivers commute,
 travel, and pass through. Officers patrol highways and commercial corridors.
@@ -125,32 +125,27 @@ be Pacific Islander 57.53 percent more often than expected, given the
 population of the state," while "individuals perceived to be Multiracial were
 stopped 76.39 percent less often than expected, and individuals perceived to be
 Asian were stopped 51.86 percent less often than expected" (p. 30). Per-agency
-comparisons appear in the appendix tables, built exactly the way this site
-builds them --- city police against their place, sheriffs against their county,
-CHP against the state.
+comparisons appear in the appendix tables, built the same way this site builds
+them --- city police against their place, sheriffs against their county, CHP
+against the state.
 
-**It states the limitations explicitly.** Appendix D, Section D1 of the
-[2026 appendix](https://oag.ca.gov/system/files/media/ripa-appendix-2026.pdf)
-opens with a list that covers essentially every criticism above: commuter stops
-("individuals may be stopped outside of their residential area (e.g. commuting
-to work, tourists)"), differential exposure ("individuals from different groups
-may also engage in activities, such as driving, with different average
-frequencies"), the repeat-stop problem, census response bias, and the
-perceived-versus-self-reported race mismatch. That appendix is the best short
-statement of the problem published anywhere in the RIPA literature, and it is
-worth reading directly.
+**It states the limitations explicitly.** Appendix D, Section D1 of the [2026
+appendix](https://oag.ca.gov/system/files/media/ripa-appendix-2026.pdf) opens
+with a list echoing the criticisms above: commuter stops ("individuals may be
+stopped outside of their residential area (e.g. commuting to work, tourists)"),
+differential exposure ("individuals from different groups may also engage in
+activities, such as driving, with different average frequencies"), census
+response bias, and the perceived-versus-self-reported race mismatch. That
+appendix is the best short statement of the problem published anywhere in the
+RIPA literature, and it is worth reading directly.
 
-Two implementation details from that appendix are worth noting. First, for the
-2026 report the Board switched from the Census summary table B03002 --- which
-is what this site uses --- to ACS microdata via
-[IPUMS](https://usa.ipums.org/usa/), specifically so it could reconstruct a
-Middle Eastern/South Asian category that has no equivalent in the published
-Census tables, and so it could break population down by age and by intersecting
-identities ([this site is considering doing the
-same](https://github.com/HRDAG/ripadb/issues/23)). Second, because all
-California agencies were required to report in 2025, the Board no longer needs
-to weight the statewide benchmark to reflect only the areas covered by
-reporting agencies.
+An important detail from that appendix: for the 2026 report the Board switched
+from the Census summary table B03002 --- which is what this site uses --- to
+ACS microdata via [IPUMS](https://usa.ipums.org/usa/), specifically so it could
+reconstruct a Middle Eastern/South Asian category that has no equivalent in the
+published Census tables, and so it could break population down by age and by
+intersecting identities ([see issue
+23](https://github.com/HRDAG/ripadb/issues/23)).
 
 **It leans on methods that need no benchmark at all.** This is the more
 important point. From the beginning, the Board's plan was to rely primarily on
@@ -181,30 +176,29 @@ all. Only the Stop/Pop column does.
 ## Alternatives
 
 **Daytime population.** If the problem is that residents are not the population
-at risk, one fix is to adjust for who is actually present. Gelman, Fagan, and
-Kiss did this in their analysis of NYPD stop-and-frisk
-(["An Analysis of the New York City Police Department's 'Stop-and-Frisk' Policy
-in the Context of Claims of Racial
+at risk, one fix is to adjust for who is actually present.
+
+Gelman, Fagan, and Kiss did this in their analysis of NYPD stop-and-frisk (["An
+Analysis of the New York City Police Department's 'Stop-and-Frisk' Policy in
+the Context of Claims of Racial
 Bias"](https://sites.stat.columbia.edu/gelman/research/published/frisk9.pdf),
 *Journal of the American Statistical Association* 102(479): 813--823, 2007).
-Precincts with small residential populations but heavy commercial activity had
-their population estimates adjusted using the Census Bureau's "journey file,"
-which uses commute times and job classifications to estimate day and night
-populations of census tracts; tracts were aggregated to precincts, and stop rates
-were computed separately for daytime and nighttime intervals. It is a real
-improvement, and it is also a reminder of how much work a better denominator
-takes --- and their *primary* benchmark was not population at all, but the
-previous year's arrest rates by group, an alternative with its own serious
-problems (arrest rates are themselves an enforcement output, so benchmarking
-enforcement against enforcement can launder bias into the baseline).
+Their study used multiple benchmarks for robustness. This included a population
+benchmark, but adjusted to reflect differences between daytime populations and
+residential populations. Precincts with small residential populations but heavy
+commercial activity had their population estimates adjusted using the Census
+Bureau's "journey file," which uses commute times and job classifications to
+estimate day and night populations of census tracts; tracts were aggregated to
+precincts, and stop rates were computed separately for daytime and nighttime
+intervals.
 
-**Crash-involved drivers.** A promising road-user benchmark uses the population
-of drivers who were involved in, but not at fault for, two-vehicle collisions.
-The idea is that being struck by another driver is roughly independent of your
-own behavior, so not-at-fault drivers approximate a random sample of who is on
-the road. Geoffrey Alpert, Michael Smith, and Roger Dunham validated the
-approach in ["Toward a Better Benchmark: Assessing the Utility of Not-at-Fault
-Traffic Crash Data in Racial Profiling
+**Crash-involved drivers.** Another possible benchmark uses the population of
+drivers who were involved in, but not at fault for, two-vehicle collisions. The
+idea is that being struck by another driver is roughly independent of your own
+behavior, so not-at-fault drivers approximate a random sample of who is on the
+road. Geoffrey Alpert, Michael Smith, and Roger Dunham validated the approach
+in ["Toward a Better Benchmark: Assessing the Utility of Not-at-Fault Traffic
+Crash Data in Racial Profiling
 Research"](https://journals.sagepub.com/doi/10.3818/JRP.6.1.2004.43) (*Justice
 Research and Policy* 6(1): 43--69, 2004), comparing not-at-fault crash
 demographics against direct roadway observation at the same Miami-Dade
@@ -217,6 +211,5 @@ SafeTREC's [Transportation Injury Mapping System
 Asian, B - Black, H - Hispanic, O - Other, W - White") and an `AT_FAULT` flag
 ("Y - Yes, N - No"), with crashes geocoded to specific locations. In principle
 that allows a not-at-fault-driver benchmark to be built for any jurisdiction in
-the state and compared against RIPA traffic stops in the same place. No such
-benchmark is on this site today, but see [github issue
-24](https://github.com/HRDAG/ripadb/issues/24).
+the state and compared against RIPA traffic stops in the same place. See
+[github issue 24](https://github.com/HRDAG/ripadb/issues/24).
