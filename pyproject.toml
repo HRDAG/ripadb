@@ -17,6 +17,7 @@ dependencies = [
     "census",
     "us",
     "python-dotenv",
+    "astral>=3.2",
 ]
 
 [tool.hatch.build.targets.wheel]
