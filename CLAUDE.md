@@ -73,6 +73,8 @@ individual/              # per-dataset import and cleaning
 ├── RIPA-San-Francisco/  # (planned) city-specific RIPA data
 ├── census/
 │   └── fetch/           # ACS 5-Year B03002 demographics via Census API
+├── cjis-offense-codes/
+│   └── fetch/           # DOJ CJIS offense code → statute section table
 ├── arrests/             # (planned) arrest records
 ├── use-of-force/        # (planned) UoF records
 ├── court/               # (planned) court outcome data
@@ -103,12 +105,19 @@ api/                     # FastAPI app (API + htmx UI) — agency explorer
     ├── htmx.min.js      # Vendored htmx 2.0.4
     └── chart.umd.min.js # Vendored Chart.js 4.4.7
 match/                   # linking datasets together
-└── ori-demographics/    # ORI → Census geography crosswalk + join
-    ├── hand/crosswalk.yaml  # Reviewed ORI→FIPS mapping
+├── ori-demographics/    # ORI → Census geography crosswalk + join
+│   ├── hand/crosswalk.yaml  # Reviewed ORI→FIPS mapping
+│   └── src/
+│       ├── build_crosswalk.py   # Generate crosswalk from agencies table
+│       └── join_demographics.py # Join crosswalk × ACS → demographics
+└── stop-sun-times/      # Stop location → Census place → daily sun times
+    ├── hand/city_aliases.yaml   # LOC_CLOSEST_CITY overrides (LA neighborhoods etc.)
     └── src/
-        ├── build_crosswalk.py   # Generate crosswalk from agencies table
-        └── join_demographics.py # Join crosswalk × ACS → demographics
-analysis/                # (planned) deeper analyses and writeups
+        ├── build_city_crosswalk.py  # (city, source county) → place/county geoid
+        └── link_sun_times.py        # Per-stop dawn/sunrise/sunset/dusk + light
+analysis/                # deeper analyses and writeups
+└── veil-of-darkness/    # per-agency VoD logits + random-effects summary
+    └── hand/night_visible_violations.yaml  # lighting statutes to exclude
 ```
 
 The `individual/` directory uses a `{dataset}/` subdirectory for each data
@@ -284,6 +293,26 @@ involved in a single stop). Key structural differences by era:
 - `api/`: Demographics and disparities tabs show Pop %, Stop/Pop ratio
   (stop share / pop share). Agency header shows jurisdiction name and
   population. Graceful degradation when demographics not loaded.
+- `individual/census/gazetteer/` + `compute-sun-times/`: Census Gazetteer
+  internal points for CA places/counties; daily civil dawn, sunrise, sunset,
+  civil dusk (America/Los_Angeles local time) 2018-2024, USNO-validated.
+- `match/stop-sun-times/`: veil-of-darkness inputs. Resolves
+  LOC_CLOSEST_CITY (× source-file county) to a Census place, or county for
+  "UNINCORPORATED AREA-X" and fallbacks; `match_method` records how. Outputs
+  one row per stop (DOJ_RECORD_ID, 25.0M) per year with stop_minute,
+  *_minute sun times and `light` (day/twilight/dark). ~73% of stops are
+  place-level; ~27% county centroid (incl. >half of CHP stops), so
+  analyses needing precise timing should filter on match_method.
+- `individual/cjis-offense-codes/fetch/`: CA DOJ CJIS offense code table
+  (chsoff.csv from oag.ca.gov/law/code-tables) → `offense_codes.parquet`
+  (offense_code without leading zeros to match RIPA, statute_code e.g. VC,
+  statute_section, description, level, dates). Current table only: retired
+  codes (notably 54099, ~600k traffic stops) are unmatched.
+- `analysis/veil-of-darkness/`: driver traffic-violation stops in the
+  inter-twilight window (place-level locations, twilight dropped, lighting
+  violations VC §§24250-25999 + 21201(d) excluded); per-agency logit of
+  minority vs White on dark + time spline + year + place FE (top 30), and a
+  DerSimonian-Laird statewide summary. Output `vod_by_agency.csv`.
 - All scripts are idempotent; dependencies managed via `pyproject.toml` + `uv`
 
 ### Database connection

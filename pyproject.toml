@@ -18,6 +18,7 @@ dependencies = [
     "us",
     "python-dotenv",
     "astral>=3.2",
+    "statsmodels>=0.15.0",
 ]
 
 [tool.hatch.build.targets.wheel]

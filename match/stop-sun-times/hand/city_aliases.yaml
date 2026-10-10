@@ -1,0 +1,116 @@
+# LOC_CLOSEST_CITY values that don't match a Census place name.
+# Keys are matched after the same normalization as place names (case,
+# accents, punctuation, ST->SAINT, MT->MOUNT, MC X->MCX). Targets:
+#   place: <Census Gazetteer place NAME, with LSAD suffix>
+#   county: <county name without " County">
+#   none: true   -- deliberately unresolved (e.g. out of state)
+# Any target may add `agency_county: <county>` to apply only to stops from
+# that source file; a target may also be a list of such scoped targets.
+# Names not listed here and not matching a place fall back to the agency's
+# county (see src/build_city_crosswalk.py), so only names where a place is
+# clearly better than the county centroid are listed. Precision needed is
+# modest: 1 degree of longitude ~ 4 minutes of sunset time.
+aliases:
+  OUT OF STATE CITY: {none: true}
+
+  # Los Angeles city neighborhoods (USPS city names)
+  VAN NUYS: {place: Los Angeles city}
+  NORTH HOLLYWOOD: {place: Los Angeles city}
+  NORTHRIDGE: {place: Los Angeles city}
+  WILMINGTON: {place: Los Angeles city}
+  PACOIMA: {place: Los Angeles city}
+  CANOGA PARK: {place: Los Angeles city}
+  VENICE: {place: Los Angeles city}
+  SAN PEDRO: {place: Los Angeles city}
+  PANORAMA CITY: {place: Los Angeles city}
+  SUN VALLEY: {place: Los Angeles city}
+  NORTH HILLS: {place: Los Angeles city}
+  RESEDA: {place: Los Angeles city}
+  WOODLAND HILLS: {place: Los Angeles city}
+  SYLMAR: {place: Los Angeles city}
+  GRANADA HILLS: {place: Los Angeles city}
+  ENCINO: {place: Los Angeles city}
+  SHERMAN OAKS: {place: Los Angeles city}
+  VALLEY GLEN: {place: Los Angeles city}
+  CHATSWORTH: {place: Los Angeles city}
+  VALLEY VILLAGE: {place: Los Angeles city}
+  WINNETKA: {place: Los Angeles city}
+  SUNLAND: {place: Los Angeles city}
+  STUDIO CITY: {place: Los Angeles city}
+  TARZANA: {place: Los Angeles city}
+  HOLLYWOOD: {place: Los Angeles city}
+  WEST LOS ANGELES: {place: Los Angeles city}
+  HARBOR CITY: {place: Los Angeles city}
+  WEST HILLS: {place: Los Angeles city}
+  PACIFIC PALISADES: {place: Los Angeles city}
+  PLAYA DEL REY: {place: Los Angeles city}
+  TUJUNGA: {place: Los Angeles city}
+  EAGLE ROCK: {place: Los Angeles city}
+  CENTURY CITY: {place: Los Angeles city}
+  TOLUCA LAKE: {place: Los Angeles city}
+  PLAYA VISTA: {place: Los Angeles city}
+  LAKE BALBOA: {place: Los Angeles city}
+  PORTER RANCH: {place: Los Angeles city}
+  ARLETA: {place: Los Angeles city}
+  WESTCHESTER: {place: Los Angeles city}
+  LAKE VIEW TERRACE: {place: Los Angeles city}
+  UNIVERSAL CITY: {place: Los Angeles city}  # unincorporated enclave in LA
+
+  # San Diego city communities
+  LA JOLLA: {place: San Diego city}
+  SAN YSIDRO: {place: San Diego city}
+
+  # Santa Clarita communities
+  NEWHALL: {place: Santa Clarita city}
+  VALENCIA: {place: Santa Clarita city}
+  SAUGUS: {place: Santa Clarita city}
+  CANYON COUNTRY: {place: Santa Clarita city}
+
+  # Other renamed / colloquial city names
+  CITY OF INDUSTRY: {place: Industry city}
+  29 PALMS: {place: Twentynine Palms city}
+  ANGELS CAMP: {place: Angels city}
+  CARDIFF BY THE SEA: {place: Encinitas city}
+  NEWBURY PARK: {place: Thousand Oaks city}
+  BROADMOOR VLG: {place: Broadmoor CDP}
+  GREENBRAE: {place: Larkspur city}
+  AGOURA: {place: Agoura Hills city}
+  MIRA LOMA: {place: Jurupa Valley city}
+  CORONA DEL MAR: {place: Newport Beach city}
+  NEWPORT COAST: {place: Newport Beach city}
+  CAPISTRANO BEACH: {place: Dana Point city}
+
+  # Census places with a parenthetical official name
+  VENTURA: {place: San Buenaventura (Ventura) city}
+  SAN BUENAVENTURA: {place: San Buenaventura (Ventura) city}
+  PASO ROBLES: {place: El Paso de Robles (Paso Robles) city}
+  CARMEL: {place: Carmel-by-the-Sea city}
+
+  # Communities that are one half of a combined (hyphenated) Census CDP
+  LA CRESCENTA: {place: La Crescenta-Montrose CDP}
+  MONTROSE: {place: La Crescenta-Montrose CDP}
+  TAHOE CITY: {place: Sunnyside-Tahoe City CDP}
+  IDYLLWILD: {place: Idyllwild-Pine Cove CDP}
+  POPLAR: {place: Poplar-Cotton Center CDP}
+  HILMAR: {place: Hilmar-Irwin CDP}
+  CHALLENGE: {place: Challenge-Brownsville CDP}
+  BROWNSVILLE: {place: Challenge-Brownsville CDP}
+  LARKFIELD: {place: Larkfield-Wikiup CDP}
+  MARINWOOD: {place: Lucas Valley-Marinwood CDP}
+  CHILCOOT: {place: Chilcoot-Vinton CDP}
+  VINTON: {place: Chilcoot-Vinton CDP}
+  LAGUNITAS: {place: Lagunitas-Forest Knolls CDP}
+  FOREST KNOLLS: {place: Lagunitas-Forest Knolls CDP}
+  VIEW PARK: {place: View Park-Windsor Hills CDP}
+  WINDSOR HILLS: {place: View Park-Windsor Hills CDP}
+
+  # Names shared with a distant Census place; scoped to the agency county
+  # (source file) so that the other place's own stops are unaffected
+  MISSION HILLS:
+    - {place: Los Angeles city, agency_county: Los Angeles}
+  WESTWOOD:
+    - {place: Los Angeles city, agency_county: Los Angeles}
+  VICTOR:
+    - {place: Victorville city, agency_county: San Bernardino}
+  LUCERNE:
+    - {place: Lucerne Valley CDP, agency_county: San Bernardino}
